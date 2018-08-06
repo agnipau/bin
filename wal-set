@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+#
+# Hook script executed by pywal.
+
+# shellcheck source=/dev/null
+. "${HOME}/.cache/wal/colors.sh"
+
+# Apply colors to dunst.
+reload_dunst() {
+  killall -9 dunst
+  dunst \
+    -lb "${color0:-#000000}" \
+    -nb "${color0:-#000000}" \
+    -cb "${color1:-#ff0000}" \
+    -lf "${color7:-#ffffff}" \
+    -nf "${color7:-#ffffff}" \
+    -cf "${color0:-#000000}" \
+    -lfr "${color0:-#000000}" \
+    -nfr "${color0:-#000000}" \
+    -cfr "${color1:-#ff0000}" &
+}
+
+# Generate a theme for zathura.
+reload_zathura() {
+  cat <<EOF >"${HOME}/.cache/wal/colors-zathura"
+set default-bg "${color0:-#000000}"
+set default-fg "${color7:-#ffffff}"
+set completion-bg "${color0:-#000000}"
+set completion-fg "${color7:-#ffffff}"
+set completion-highlight-bg "${color1:-#ff0000}"
+set completion-highlight-fg "${color0:-#000000}"
+set statusbar-bg "${color1:-#ff0000}"
+set statusbar-fg "${color0:-#000000}"
+set inputbar-bg "${color0:-#000000}"
+set inputbar-fg "${color7:-#ffffff}"
+EOF
+}
+
+# Apply the colors to my OpenBox theme.
+reload_openbox() {
+  sed -i -e "s/bg.color:       #.*/bg.color:       ${color0:-#000000}/" \
+         -e "s/text.color:   #.*/text.color:   ${color7:-#ffffff}/" \
+         -e "s/image.color: #.*/image.color: ${color7:-#ffffff}/" \
+         "${HOME}/.themes/thicc/openbox-3/themerc"
+  openbox --reconfigure
+}
+
+# Fix transparency with fzf in terminal.
+fix_fzf_transparency() {
+  old_string="--color fg:7,bg:0,hl:1,fg+:232,bg+:1,hl+:255"
+  new_string="--color fg:7,hl:1,fg+:232,bg+:1,hl+:255"
+  sed -i -e "s/$old_string/$new_string/" \
+         "${HOME}/.cache/wal/colors.sh"
+}
+
+# Set radius to rofi and change the foreground color of the selected program.
+reload_rofi() {
+  sed -i -e "33i\ \ \ \ border-radius: 4;" \
+         "${HOME}/.cache/wal/colors-rofi-dark.rasi"
+  sed -i -e "s/selected-normal-foreground: @.*/selected-normal-foreground: @background;/" \
+         "${HOME}/.cache/wal/colors-rofi-dark.rasi"
+}
+
+# Set the value of color17 to $color0_lighter_150 for all the active terminals.
+add_colors_variants() {
+  . "${HOME}/.cache/wal/colors.sh"
+  for term in /dev/pts/[0-9]*; do
+    if [[ -w "$term" ]]; then
+      printf "\e]4;17;rgb:${color0_lighter_150:1:2}/${color0_lighter_150:3:2}/${color0_lighter_150:5:2}\e\\" > "$term"
+    fi
+  done
+}
+
+# Change some color values for pqiv in rifle's rifle.conf config file.
+reload_rifle() {
+  sed -i -e "s/--box-colors='#.*':'#.*'/--box-colors='${color7}':'${color0}'/" \
+         "${HOME}/.config/ranger/rifle.conf"
+}
+
+main() {
+  reload_dunst
+  reload_zathura
+  reload_openbox
+  fix_fzf_transparency
+  reload_rofi
+  "${HOME}/progetti/wal-telegram/wal-telegram"
+  "${HOME}/altri_progetti/wal-discord/wal-discord"
+  "${HOME}/bin/extend_pywal"
+  add_colors_variants
+  reload_rifle
+}
+
+main

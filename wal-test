@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#
+# Usually I download a bunch of photos from unsplash.com and then, with this
+# script, I test out all of them.
+
+clear
+
+if [[ -d "${HOME}/progetti/wallpapers/test" ]]; then
+  for wallpaper in ~/progetti/wallpapers/test/*; do
+    wal -c -q --backend wal -i "$wallpaper" -o "${HOME}/bin/wal-set" &>/dev/null
+    sed -i -e "s/st.opacity: .*/st.opacity: 255/" "${HOME}/.Xresources"
+    xrdb .Xresources
+    for pid in $(pidof st); do kill -s USR1 "$pid"; done
+    printf '\n%s\n' '==> Eliminare o tenere lo sfondo? [e/t]'
+    read -p '==> ' risposta
+    if [[ "$risposta" == "e" ]]; then
+      rm -f "$wallpaper"
+    fi
+  done
+else
+  for wallpaper in ~/progetti/wallpapers/*; do
+    wal -c -q --backend wal -i "$wallpaper" -o "${HOME}/bin/wal-set" &>/dev/null
+    sed -i -e "s/st.opacity: .*/st.opacity: 255/" "${HOME}/.Xresources"
+    xrdb .Xresources
+    for pid in $(pidof st); do kill -s USR1 "$pid"; done
+    printf '\n%s\n' '==> Eliminare o tenere lo sfondo? [e/t]'
+    read -p '==> ' risposta
+    if [[ "$risposta" == "e" ]]; then
+      rm -f "$wallpaper"
+    fi
+  done
+fi

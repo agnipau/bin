@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#
+# A simple script to take screenshots using scrot (without selecting area).
+
+# shellcheck disable=SC2016
+scrot '%H:%M:%S.png' -e 'mv $f ~/immagini'
+
+ico="$(printf '%b\n' "\\uf030")"
+
+notify-send --expire-time=3000 "$ico  Screenshot saved"

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Shorten an URL 0x0.st and cURL.
+
+curl -F"shorten=$1" https://0x0.st

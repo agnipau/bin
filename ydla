@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#
+# Download songs from YouTube and then adds user specified metadata like the
+# title of the song and the name of the artist.
+
+# Create the neccesary directories.
+temp_dir="$(mktemp -d)"
+download_dir="${PWD}/downloaded_music"
+mkdir -p ./downloaded_music
+
+# Set some variables for the if block.
+[[ "$#" -eq 5 && "$1" == --title || "$1" == -t ]]  && title="$2" \
+	                                           && artist="$4" \
+						   && link="$5"
+
+[[ "$#" -eq 5 && "$1" == --artist || "$1" == -a ]] && artist="$2" \
+	                                           && title="$4" \
+						   && link="$5"
+
+[[ "$#" -eq 1 ]] && link="$1"
+
+# Download the song.
+if [[ "$#" -eq 5 ]]; then
+  # Download the song adding id3v2 metadata.
+  cd "$temp_dir" || exit 1
+  youtube-dl "$link" \
+             --extract-audio --audio-format mp3 --audio-quality 0 \
+             --prefer-ffmpeg --youtube-skip-dash-manifest --ignore-errors \
+             --continue --no-overwrites --restrict-filenames --verbose
+  mv ./*.mp3 "${download_dir}/${artist} - ${title}.mp3"
+  cd "$download_dir" || exit 1
+  link_abbreviato="${link:8}"
+  id3v2 --delete-all "${artist} - ${title}.mp3"
+  id3v2 --artist "$artist" \
+	--song "$title" \
+	--comment "$link_abbreviato" \
+	--track "" \
+	"${artist} - ${title}.mp3"
+  notify-send --expire-time=3000 "YouTube" "${artist} - ${title} downloaded"
+elif [[ "$#" -eq 1 ]]; then
+  # Download the song without adding id3v2 tags.
+  youtube-dl "$link" \
+             --add-metadata --metadata-from-title "%(artist)s - %(title)s" \
+             --extract-audio --audio-format mp3 --audio-quality 0 \
+	     --prefer-ffmpeg --youtube-skip-dash-manifest --ignore-errors \
+	     --continue --no-overwrites --restrict-filenames --verbose
+  notify-send --expire-time=3000 "YouTube" "Song downloaded"
+else
+  help && exit 1
+fi
+
+# Remove the temporary directory.
+rm -rf "$temp_dir"

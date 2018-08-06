@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#
+# xbacklight doesn't work with my nvidia gpu so I wrote this script.
+# I can still manually change the content of
+# /sys/class/backlight/intel_backlight/brightness, so this script automatize the
+# process of changing the value of this file.
+
+# Store the actual brightness and the state of the battery.
+abr="$(</sys/class/backlight/intel_backlight/brightness)"
+mbr="$(</sys/class/backlight/intel_backlight/max_brightness)"
+prc="$2"
+
+# Decrease the screen brigthness.
+dec() {
+  (( abr -= $((abr * prc / 100)) ))
+  printf '%s\n' "$abr" > /sys/class/backlight/intel_backlight/brightness
+}
+
+# Increase the screen brigthness.
+inc() {
+  (( abr += $((abr * prc / 100)) ))
+  [[ "$abr" -ge "$mbr" ]] && \
+    printf '%s\n' "$mbr" > /sys/class/backlight/intel_backlight/brightness
+  [[ "$abr" -lt "$mbr" ]] && \
+    printf '%s\n' "$abr" > /sys/class/backlight/intel_backlight/brightness
+}
+
+# Set the screen brightness to the max value.
+max() {
+  printf '%s\n' "$mbr" > /sys/class/backlight/intel_backlight/brightness
+}
+
+# Set the screen brightness to the minimum value.
+min() {
+  printf '%s\n' "0" > /sys/class/backlight/intel_backlight/brightness
+}
+
+# Display the current brigthness value.
+current() {
+  mbr="$((mbr / 100))"
+  printf '%s\n' "$((abr / mbr - 1))%"
+}
+
+[[ "$1" == --dec ]]     && dec
+[[ "$1" == --inc ]]     && inc
+[[ "$1" == --max ]]     && max
+[[ "$1" == --min ]]     && min
+[[ "$1" == --current ]] && current

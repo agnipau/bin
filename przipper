@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# Create a backup copy of some of my projects.
+
+for project in ~/progetti/*; do
+  if [[ "${project##*/}" != wallpapers ]]; then
+    tar cvzf "${project##*/}.tar.gz" "$project"
+  fi
+done

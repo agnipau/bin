@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#
+# Control PulseAudio controllers values.
+# Uses FontAwesome icons for the current() function.
+
+# Get the current volume value.
+current() {
+  nperc="$(pactl list sinks \
+    | grep '^[[:space:]]Volume:' \
+    | head -n"$((SINK + 1))" \
+    | tail -n1 \
+    | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
+
+  vsta="$(amixer sget Master \
+    | tail -n1 \
+    | cut -d' ' -f8 \
+    | cut -d[ -f2 \
+    | cut -d] -f1)"
+
+  if [[ "$vsta" == on ]]; then
+    case "$nperc" in
+      [0-9])  iperc="\\uf026 ${nperc}%" ;;
+      [1-4]?) iperc="\\uf026 ${nperc}%" ;;
+      [5-8]?) iperc="\\uf027 ${nperc}%" ;;
+      *)      iperc="\\uf028 ${nperc}%" ;;
+    esac
+  elif [[ "$vsta" == off ]]; then
+    iperc="\\uf026 muted"
+  fi
+
+  printf '%b\n' "$iperc"
+}
+
+[[ "$1" == --volup ]]   && pactl set-sink-volume 0 +"$2"%
+[[ "$1" == --voldown ]] && pactl set-sink-volume 0 -"$2"%
+[[ "$1" == --toggle ]]  && pactl set-sink-mute 0 toggle
+[[ "$1" == --mute ]]    && pactl set-sink-mute 0 1
+[[ "$1" == --unmute ]]  && pactl set-sink-mute 0 0
+[[ "$1" == --beast ]]   && pactl set-sink-volume 0 150%
+[[ "$1" == --cento ]]   && pactl set-sink-volume 0 100%
+[[ "$1" == --zero ]]    && pactl set-sink-volume 0 0%
+[[ "$1" == --current ]] && current

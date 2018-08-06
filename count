@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#
+# Count how many files/folders there are in the current directory.
+
+# cd into the directory if it exists, if it does not exist display an error mex.
+if [[ "$1" ]]; then
+  if [[ -d "$1" ]]; then
+    cd "$1"
+  elif [[ ! -d "$1" ]]; then
+    printf '%s\n' "Dir doesn't exist"
+    exit 1
+  fi
+fi
+
+# Display the count of files/folders.
+if [[ -z "$(ls)" ]]; then
+  printf '%s\n' "There are no files/folders"
+else
+  for i in *; do
+    ((c += 1))
+  done
+  printf '%s\n' "There are $c files/folders"
+fi

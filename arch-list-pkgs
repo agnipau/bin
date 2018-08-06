@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# Generate a list of installed pkgs in Arch Linux.
+
+# Create a file with the list of installed pkgs.
+pacman -Qq > arch_installed_pkgs
+
+# Remove pkgs installed from the AUR.
+for word in $(pacman -Qqm); do
+  sed -i -e "s/$word//" \
+         arch_installed_pkgs
+done
+
+# Remove blank lines.
+sed -i -e '/^\s*$/d' \
+       arch_installed_pkgs
+
+# Calculate the number of installed pkgs.
+n_pkgs="$(wc -l arch_installed_pkgs | cut -d' ' -f1)"
+
+# Print the number of installed pkgs.
+printf '%s\n' "==> You have installed $n_pkgs packages"

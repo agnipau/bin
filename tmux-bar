@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+#
+# A minimal tmux status line that uses FontAwesome icons.
+# It works only when in full screen (see the last if block).
+# This is a modified version of the bar script by Dylan Araps.
+
+# Display the screen brightness.
+lum() {
+  abr="$(</sys/class/backlight/intel_backlight/brightness)"
+  mbr="$(( "$(</sys/class/backlight/intel_backlight/max_brightness)" / 100 ))"
+  lum="\\uf0eb $((abr / mbr - 1))%"
+}
+
+# Display the ALSA volume value.
+avol() {
+  nperc="$(amixer sget Master \
+    | tail -n1 \
+    | cut -d' ' -f6 \
+    | cut -d[ -f2 \
+    | cut -d] -f1)"
+
+  vsta="$(amixer sget Master \
+    | tail -n1 \
+    | cut -d' ' -f8 \
+    | cut -d[ -f2 \
+    | cut -d] -f1)"
+
+  if [[ "$vsta" == on ]]; then
+    case "$nperc" in
+      [0-9]%)  vol="\\uf026 ${nperc}" ;;
+      [1-7]?%) vol="\\uf027 ${nperc}" ;;
+      *)       vol="\\uf028  ${nperc}" ;;
+    esac
+  elif [[ "$vsta" == off ]]; then
+    vol="\\uf026 muted"
+  fi
+}
+
+# Display the PulseAudio volume value.
+pvol() {
+  nperc="$(pactl list sinks \
+    | grep '^[[:space:]]Volume:' \
+    | head -n"$((SINK + 1))" \
+    | tail -n1 \
+    | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
+
+  vsta="$(amixer sget Master \
+    | tail -n1 \
+    | cut -d' ' -f8 \
+    | cut -d[ -f2 \
+    | cut -d] -f1)"
+
+  if [[ "$vsta" == on ]]; then
+    case "$nperc" in
+      [0-9])  vol="\\uf026 ${nperc}%" ;;
+      [1-7]?) vol="\\uf027 ${nperc}%" ;;
+      *)      vol="\\uf028  ${nperc}%" ;;
+    esac
+  elif [[ "$vsta" == off ]]; then
+    vol="\\uf026 muted"
+  fi
+}
+
+# Display the SSID name.
+ssid() {
+  if [[ -z "$(iwgetid -r)" ]]; then
+    ssid="\\uf1eb  -"
+  elif [[ "$(iwgetid -r)" ]]; then
+    ssid="\\uf1eb  $(iwgetid -r)"
+  fi
+}
+
+# Display the battery percentage.
+bat() {
+  sta="$(</sys/class/power_supply/BAT0/status)"
+  cap="$(</sys/class/power_supply/BAT0/capacity)"
+
+  case "$cap" in
+    [0-9])  bat="\\uf244   ${cap}%" ;;
+    [1-3]?) bat="\\uf243   ${cap}%" ;;
+    [4-6]?) bat="\\uf242   ${cap}%" ;;
+    [7-9]?) bat="\\uf241   ${cap}%" ;;
+    *)      bat="\\uf240   100%" ;;
+  esac
+
+  [[ "$sta" == Charging ]] && \
+    bat="$bat  \\uf0e7"
+}
+
+# Display the date and time.
+ore() {
+  ore="\\uf017  $(printf "%(%a %d %b %H:%M)T" "-1")"
+}
+
+# If tmux is on fullscreen, display the bar.
+if (("${1:-165}" >= 164 && "${2:-35}" >= 34)); then
+  lum
+  pvol
+  ssid
+  bat
+  ore
+  [[ "$sta" == Discharging ]] && \
+    printf '%b\n' "$lum  $vol  $ssid  $bat  $ore"
+  [[ "$sta" == Charging ]] && \
+    printf '%b\n' "$lum  $vol  $ssid  $bat  $ore "
+fi

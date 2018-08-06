@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+#
+# Download all the updated LFS resources and make an archive out of them.
+# Be aware that this script downloads A LOT of files, so be patient.
+# download_size=~134MB
+# archive_size=~30MB
+
+olddir="$PWD"
+tmpdir="$(mktemp -d)"
+cd "$tmpdir" || exit 1
+
+# LFS.
+wget -mkEpnp http://www.linuxfromscratch.org/lfs/downloads/stable/
+rm -f www.linuxfromscratch.org/lfs/downloads/stable/index*
+mkdir lfs
+mv www.linuxfromscratch.org/lfs/downloads/stable/* lfs
+
+# BLFS.
+wget -mkEpnp http://www.linuxfromscratch.org/blfs/downloads/stable/
+rm -f www.linuxfromscratch.org/blfs/downloads/stable/index*
+rm -f www.linuxfromscratch.org/blfs/downloads/stable/patches/index*
+mkdir blfs
+mv www.linuxfromscratch.org/blfs/downloads/stable/* blfs
+
+# JHALFS.
+wget -mkEpnp http://www.linuxfromscratch.org/alfs/downloads/jhalfs/stable/
+rm -f www.linuxfromscratch.org/alfs/downloads/jhalfs/stable/index*
+mkdir jhalfs
+mv www.linuxfromscratch.org/alfs/downloads/jhalfs/stable/* jhalfs
+
+# Hints.
+wget -mkEpnp http://www.linuxfromscratch.org/hints/downloads/files/
+rm -f www.linuxfromscratch.org/hints/downloads/files/index*
+rm -f www.linuxfromscratch.org/hints/downloads/files/ATTACHMENTS/index*
+rm -f www.linuxfromscratch.org/hints/downloads/files/LICENSES/index*
+# That's not a typo, they wrote it by mistake.
+rm -f www.linuxfromscratch.org/hints/downloads/files/MAINTAINER/index*
+rm -f www.linuxfromscratch.org/hints/downloads/files/OLD/index*
+rm -f www.linuxfromscratch.org/hints/downloads/files/pio-files/index*
+rm -f www.linuxfromscratch.org/hints/downloads/files/PREVIOUS_FORMAT/index*
+mkdir hints
+mv www.linuxfromscratch.org/hints/downloads/files/* hints
+
+# Patches.
+wget -mkEpnp http://www.linuxfromscratch.org/patches/downloads/
+rm -f www.linuxfromscratch.org/patches/downloads/index*
+for i in www.linuxfromscratch.org/patches/downloads/*; do
+  if [[ -d "$i" ]]; then
+    rm -rf "$i"/index*
+  fi
+done
+mkdir patches
+mv www.linuxfromscratch.org/patches/downloads/* patches
+
+# Create an archive out of the downloaded resources.
+tar -cvzf lfs.tar.gz lfs blfs jhalfs hints patches
+mv lfs.tar.gz "$olddir"
+cd "$olddir" || exit 1 
+rm -rf "$tmpdir"

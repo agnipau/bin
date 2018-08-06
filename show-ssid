@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# Show the SSID of the network I'm currently connected to.
+
+ssid="$(iwgetid -r)"
+printf '%s\n' "${ssid:--}"

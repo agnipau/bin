@@ -1,0 +1,19 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#
+# Generate a list of installed pkgs in Termux.
+
+# Generate a list of installed pkgs.
+tmpfile="$(mktemp)"
+pkg list-installed >"$tmpfile" 2>/dev/null
+cat "$tmpfile" | cut -d/ -f1 > termux_installed_pkgs
+rm -f "$tmpfile"
+
+# Delete the Listing... trash line.
+sed -i -e 's/Listing...//' termux_installed_pkgs
+sed -i -e '/^\s*$/d' termux_installed_pkgs
+
+# Calculate the number of installed pkgs.
+n_pkgs="$(wc -l termux_installed_pkgs | cut -d' ' -f1)"
+
+# Print the number of installed pkgs.
+printf '%s\n' "==> You have installed $n_pkgs packages"
