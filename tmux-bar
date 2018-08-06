@@ -87,9 +87,14 @@ bat() {
     bat="$bat  \\uf0e7"
 }
 
-# Display the date and time.
+# Display the date.
+data() {
+  data="\\uf274  $(printf "%(%a %d %b)T" "-1")"
+}
+
+# Display the time.
 ore() {
-  ore="\\uf017  $(printf "%(%a %d %b %H:%M)T" "-1")"
+  ore="\\uf017  $(printf "%(%H:%M)T" "-1")"
 }
 
 # If tmux is on fullscreen, display the bar.
@@ -98,9 +103,10 @@ if (("${1:-165}" >= 164 && "${2:-35}" >= 34)); then
   pvol
   ssid
   bat
+  data
   ore
   [[ "$sta" == Discharging ]] && \
-    printf '%b\n' "$lum  $vol  $ssid  $bat  $ore"
+    printf '%b\n' "$ssid   $bat   $vol   $lum   $data   $ore"
   [[ "$sta" == Charging ]] && \
-    printf '%b\n' "$lum  $vol  $ssid  $bat  $ore "
+    printf '%b\n' "$ssid   $bat   $vol   $lum   $data   $ore"
 fi
