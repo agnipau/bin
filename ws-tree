@@ -69,7 +69,7 @@ for d in *; do
   fi
 
   # Print the windows aligned to their respective workspaces.
-  #shellcheck disable=SC2012
+  # shellcheck disable=SC2012
   nw="$(ls "$d" | wc -l)"
   if [[ "$nw" -ge 1 ]]; then
     for w in "$d"/*; do

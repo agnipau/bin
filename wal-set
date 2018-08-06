@@ -85,7 +85,7 @@ main() {
   reload_rofi
   "${HOME}/progetti/wal-telegram/wal-telegram"
   "${HOME}/altri_progetti/wal-discord/wal-discord"
-  "${HOME}/bin/extend_pywal"
+  "${HOME}/progetti/extend-wal/extend-wal"
   add_colors_variants
   reload_rifle
 }
