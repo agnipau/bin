@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# After Arch Linux fresh install, I have to manually update the upstream links
+# of my projects in order to use git with ssh.
+# This script automates that process.
+
+old_dir="$PWD"
+
+for project in ~/progetti/*; do
+  site="$(grep 'url' "${project}/.git/config" \
+    | rev \
+    | cut -d/ -f3 \
+    | rev)"
+
+  [[ -z "$site" ]] && \
+    site="$(grep 'url' "${project}/.git/config" \
+    | rev \
+    | cut -d@ -f1 \
+    | cut -d: -f2 \
+    | rev)"
+
+  if [[ "$site" == github.com ]]; then
+    cd "$project" || exit 1
+    git remote set-url origin "git@github.com:matteoguarda/${project##*/}.git"
+  elif [[ "$site" == gitlab.com ]]; then
+    cd "$project" || exit 1
+    git remote set-url origin "git@gitlab.com:matteoguarda/${project##*/}.git"
+  fi
+done
+
+cd "$old_dir" || exit 1
