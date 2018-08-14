@@ -3,10 +3,10 @@
 # A small script that activates the "tapping" for libinput in Arch Linux.
 
 # Remove xf86-input-synaptics.
-sudo pacman -R --noconfirm xf86-input-synaptics
+sudo pacman -R --noconfirm xf86-input-synaptics &>/dev/null
 
 # Install xf86-input-libinput.
-sudo pacman -S --noconfirm --needed xf86-input-libinput libinput
+sudo pacman -S --noconfirm --needed xf86-input-libinput libinput &>/dev/null
 
 # Content of the file that activates the tapping for the touchpad.
 tap_file="$(cat <<EOF

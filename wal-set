@@ -78,89 +78,6 @@ add_colors_variants() {
   done
 }
 
-# Change the colors of qutebrowser.
-style_qutebrowser() {
-  . "${HOME}/.cache/wal/colors.sh"
-  
-  sed -i -e "s/^c.colors.completion.category.bg = '#.*'/c.colors.completion.category.bg = '${color0}'/" \
-         -e "s/^c.colors.completion.category.border.bottom = '#.*'/c.colors.completion.category.border.bottom = '${color0}'/" \
-         -e "s/^c.colors.completion.category.border.top = '#.*'/c.colors.completion.category.border.top = '${color0}'/" \
-         -e "s/^c.colors.completion.category.fg = '#.*'/c.colors.completion.category.fg = '${color0}'/" \
-         -e "s/^c.colors.completion.even.bg = '#.*'/c.colors.completion.even.bg = '${color0}'/" \
-         -e "s/^c.colors.completion.fg = .*/c.colors.completion.fg = ['${color0_lighter_150}', '${color0_lighter_150}', '${color0_lighter_150}']/" \
-         -e "s/^c.colors.completion.item.selected.bg = '#.*'/c.colors.completion.item.selected.bg = '${color0}'/" \
-         -e "s/^c.colors.completion.item.selected.border.bottom = '#.*'/c.colors.completion.item.selected.border.bottom = '${color0}'/" \
-         -e "s/^c.colors.completion.item.selected.border.top = '#.*'/c.colors.completion.item.selected.border.top = '${color0}'/" \
-         -e "s/^c.colors.completion.item.selected.fg = '#.*'/c.colors.completion.item.selected.fg = '${color7}'/" \
-         -e "s/^c.colors.completion.match.fg = '#.*'/c.colors.completion.match.fg = '${color7}'/" \
-         -e "s/^c.colors.completion.odd.bg = '#.*'/c.colors.completion.odd.bg = '${color0}'/" \
-         -e "s/^c.colors.completion.scrollbar.bg = '#.*'/c.colors.completion.scrollbar.bg = '${color0}'/" \
-         -e "s/^c.colors.completion.scrollbar.fg = '#.*'/c.colors.completion.scrollbar.fg = '${color0}'/" \
-         -e "s/^c.colors.downloads.bar.bg = '#.*'/c.colors.downloads.bar.bg = '${color0}'/" \
-         -e "s/^c.colors.downloads.error.bg = '#.*'/c.colors.downloads.error.bg = '${color0}'/" \
-         -e "s/^c.colors.downloads.error.fg = '#.*'/c.colors.downloads.error.fg = '${color1}'/" \
-         -e "s/^c.colors.downloads.start.bg = '#.*'/c.colors.downloads.start.bg = '${color0}'/" \
-         -e "s/^c.colors.downloads.start.fg = '#.*'/c.colors.downloads.start.fg = '${color7}'/" \
-         -e "s/^c.colors.downloads.stop.bg = '#.*'/c.colors.downloads.stop.bg = '${color0}'/" \
-         -e "s/^c.colors.downloads.stop.fg = '#.*'/c.colors.downloads.stop.fg = '${color7}'/" \
-         -e "s/^c.colors.hints.bg = '#.*'/c.colors.hints.bg = '${color0}'/" \
-         -e "s/^c.colors.hints.fg = '#.*'/c.colors.hints.fg = '${color7}'/" \
-         -e "s/^c.colors.hints.match.fg = '#.*'/c.colors.hints.match.fg = '${color7}'/" \
-         -e "s/^c.colors.keyhint.bg = '#.*'/c.colors.keyhint.bg = '#00ff00'/" \
-         -e "s/^c.colors.keyhint.fg = '#.*'/c.colors.keyhint.fg = '${color0}'/" \
-         -e "s/^c.colors.keyhint.suffix.fg = '#.*'/c.colors.keyhint.suffix.fg = '#00ff00'/" \
-         -e "s/^c.colors.messages.error.bg = '#.*'/c.colors.messages.error.bg = '${color0}'/" \
-         -e "s/^c.colors.messages.error.border = '#.*'/c.colors.messages.error.border = '${color0}'/" \
-         -e "s/^c.colors.messages.error.fg = '#.*'/c.colors.messages.error.fg = '${color1}'/" \
-         -e "s/^c.colors.messages.info.bg = '#.*'/c.colors.messages.info.bg = '${color0}'/" \
-         -e "s/^c.colors.messages.info.border = '#.*'/c.colors.messages.info.border = '${color0}'/" \
-         -e "s/^c.colors.messages.info.fg = '#.*'/c.colors.messages.info.fg = '${color0_lighter_150}'/" \
-         -e "s/^c.colors.messages.warning.bg = '#.*'/c.colors.messages.warning.bg = '${color0}'/" \
-         -e "s/^c.colors.messages.warning.border = '#.*'/c.colors.messages.warning.border = '${color0}'/" \
-         -e "s/^c.colors.messages.warning.fg = '#.*'/c.colors.messages.warning.fg = '${color7}'/" \
-         -e "s/^c.colors.prompts.bg = '#.*'/c.colors.prompts.bg = '${color0}'/" \
-         -e "s/^c.colors.prompts.border = '.*'/c.colors.prompts.border = '1px solid ${color0}'/" \
-         -e "s/^c.colors.prompts.fg = '#.*'/c.colors.prompts.fg = '${color7}'/" \
-         -e "s/^c.colors.prompts.selected.bg = '#.*'/c.colors.prompts.selected.bg = '${color1}'/" \
-         -e "s/^c.colors.statusbar.caret.bg = '#.*'/c.colors.statusbar.caret.bg = '#00ff00'/" \
-         -e "s/^c.colors.statusbar.caret.fg = '#.*'/c.colors.statusbar.caret.fg = '#000000'/" \
-         -e "s/^c.colors.statusbar.caret.selection.bg = '#.*'/c.colors.statusbar.caret.selection.bg = '#0000ff'/" \
-         -e "s/^c.colors.statusbar.caret.selection.fg = '#.*'/c.colors.statusbar.caret.selection.fg = '#000000'/" \
-         -e "s/^c.colors.statusbar.command.bg = '#.*'/c.colors.statusbar.command.bg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.command.fg = '#.*'/c.colors.statusbar.command.fg = '${color7}'/" \
-         -e "s/^c.colors.statusbar.command.private.bg = '#.*'/c.colors.statusbar.command.private.bg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.command.private.fg = '#.*'/c.colors.statusbar.command.private.fg = '${color7}'/" \
-         -e "s/^c.colors.statusbar.insert.bg = '#.*'/c.colors.statusbar.insert.bg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.insert.fg = '#.*'/c.colors.statusbar.insert.fg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.normal.bg = '#.*'/c.colors.statusbar.normal.bg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.normal.fg = '#.*'/c.colors.statusbar.normal.fg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.passthrough.bg = '#.*'/c.colors.statusbar.passthrough.bg = '#00ff00'/" \
-         -e "s/^c.colors.statusbar.passthrough.fg = '#.*'/c.colors.statusbar.passthrough.fg = '#000000'/" \
-         -e "s/^c.colors.statusbar.private.bg = '#.*'/c.colors.statusbar.private.bg = '#00ff00'/" \
-         -e "s/^c.colors.statusbar.private.fg = '#.*'/c.colors.statusbar.private.fg = '#000000'/" \
-         -e "s/^c.colors.statusbar.progress.bg = '#.*'/c.colors.statusbar.progress.bg = '${color7}'/" \
-         -e "s/^c.colors.statusbar.url.error.fg = '#.*'/c.colors.statusbar.url.error.fg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.url.fg = '#.*'/c.colors.statusbar.url.fg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.url.hover.fg = '#.*'/c.colors.statusbar.url.hover.fg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.url.success.http.fg = '#.*'/c.colors.statusbar.url.success.http.fg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.url.success.https.fg = '#.*'/c.colors.statusbar.url.success.https.fg = '${color0}'/" \
-         -e "s/^c.colors.statusbar.url.warn.fg = '#.*'/c.colors.statusbar.url.warn.fg = '${color0}'/" \
-         -e "s/^c.colors.tabs.bar.bg = '#.*'/c.colors.tabs.bar.bg = '${color0}'/" \
-         -e "s/^c.colors.tabs.even.bg = '#.*'/c.colors.tabs.even.bg = '${color0}'/" \
-         -e "s/^c.colors.tabs.even.fg = '#.*'/c.colors.tabs.even.fg = '${color0_lighter_150}'/" \
-         -e "s/^c.colors.tabs.indicator.error = '#.*'/c.colors.tabs.indicator.error = '${color0}'/" \
-         -e "s/^c.colors.tabs.indicator.start = '#.*'/c.colors.tabs.indicator.start = '${color0}'/" \
-         -e "s/^c.colors.tabs.indicator.stop = '#.*'/c.colors.tabs.indicator.stop = '${color0}'/" \
-         -e "s/^c.colors.tabs.odd.bg = '#.*'/c.colors.tabs.odd.bg = '${color0}'/" \
-         -e "s/^c.colors.tabs.odd.fg = '#.*'/c.colors.tabs.odd.fg = '${color0_lighter_150}'/" \
-         -e "s/^c.colors.tabs.selected.even.bg = '#.*'/c.colors.tabs.selected.even.bg = '${color0}'/" \
-         -e "s/^c.colors.tabs.selected.even.fg = '#.*'/c.colors.tabs.selected.even.fg = '${color7}'/" \
-         -e "s/^c.colors.tabs.selected.odd.bg = '#.*'/c.colors.tabs.selected.odd.bg = '${color0}'/" \
-         -e "s/^c.colors.tabs.selected.odd.fg = '#.*'/c.colors.tabs.selected.odd.fg = '${color7}'/" \
-         -e "s/^c.colors.webpage.bg = '#.*'/c.colors.webpage.bg = '${color0}'/" \
-         "${HOME}/.config/qutebrowser/config.py"
-}
-
 main() {
   style_dunst
   style_zathura
@@ -172,7 +89,6 @@ main() {
   "${HOME}/altri_progetti/wal-discord/wal-discord"
   "${HOME}/progetti/extend-wal/extend-wal"
   add_colors_variants
-  style_qutebrowser
 }
 
 main
