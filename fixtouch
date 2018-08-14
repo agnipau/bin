@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# A small script that activates the "tapping" for libinput in Arch Linux.
+
+# Remove xf86-input-synaptics.
+sudo pacman -R --noconfirm xf86-input-synaptics
+
+# Install xf86-input-libinput.
+sudo pacman -S --noconfirm --needed xf86-input-libinput libinput
+
+# Content of the file that activates the tapping for the touchpad.
+tap_file="$(cat <<EOF
+ection "InputClass"
+  Identifier "touchpad overrides"
+  Driver "libinput"
+  MatchIsTouchpad "on"
+  Option "Tapping" "on"
+  Option "TappingButtonMap" "lmr"
+EndSection
+EOF
+)"
+
+# Write the file.
+printf '%s\n' "$tap_file" \
+  | sudo tee /etc/X11/xorg.conf.d/99-synaptics-overrides.conf

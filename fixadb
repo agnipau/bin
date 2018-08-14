@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#
+# Get adb working.
+
+# Clone android-udev-rules in the right place.
+sudo git clone --depth 1 https://github.com/M0Rf30/android-udev-rules.git \
+                         /opt/android-udev-rules
+
+# Create the adbusers group if it doesn't already exist.
+grep -q adbusers /etc/group || sudo groupadd adbusers
+
+# Add the current user to adbusers if he already isn't part of it.
+groups "$USER" | grep -q adbusers || sudo usermod -a -G adbusers "$USER"
+
+# Add rules for Samsung Galaxy S7.
+tmprules="$(mktemp)"
+cat << EOF > "$tmprules"
+# Samsung Galaxy S7 rules.
+SUBSYSTEM=="usb", ATTR{idVendor}=="04e8:6860", MODE="0666", OWNER="abusers"
+EOF
+
+# Save the rules in the right place.
+sudo rm -f /usr/lib/udev/rules.d/51-android.rules
+sudo mv "$tmprules" /usr/lib/udev/rules.d/51-android.rules
+
+# Give execution rights.
+sudo chmod a+r /usr/lib/udev/rules.d/51-android.rules
+
+# Reload the rules.
+sudo udevadm control --reload-rules
+
+# Restart the adb server.
+sudo adb kill-server
+sudo adb start-server
