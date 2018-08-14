@@ -10,7 +10,7 @@ sudo pacman -S --noconfirm --needed xf86-input-libinput libinput
 
 # Content of the file that activates the tapping for the touchpad.
 tap_file="$(cat <<EOF
-ection "InputClass"
+Section "InputClass"
   Identifier "touchpad overrides"
   Driver "libinput"
   MatchIsTouchpad "on"
@@ -21,5 +21,5 @@ EOF
 )"
 
 # Write the file.
-printf '%s\n' "$tap_file" \
-  | sudo tee /etc/X11/xorg.conf.d/99-synaptics-overrides.conf
+printf '%s' "$tap_file" \
+  | sudo tee /etc/X11/xorg.conf.d/99-synaptics-overrides.conf >/dev/null
