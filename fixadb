@@ -12,7 +12,7 @@ grep -q adbusers /etc/group || sudo groupadd adbusers
 # Add the current user to adbusers if he already isn't part of it.
 groups "$USER" | grep -q adbusers || sudo usermod -a -G adbusers "$USER"
 
-# Add rules for Samsung Galaxy S7.
+# Add rules for my Samsung Galaxy S7.
 tmprules="$(mktemp)"
 cat << EOF > "$tmprules"
 # Samsung Galaxy S7 rules.

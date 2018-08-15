@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
-# Generate a list of installed pkgs in Arch Linux.
+# Generate a list of installed pkgs from official repos in Arch Linux.
 
-# Create a file with the list of installed pkgs.
+# Create a file with the list of the installed pkgs from the official repos.
 pacman -Qq > arch_installed_pkgs
 
 # Remove pkgs installed from the AUR.
@@ -19,4 +19,4 @@ sed -i -e '/^\s*$/d' \
 n_pkgs="$(wc -l arch_installed_pkgs | cut -d' ' -f1)"
 
 # Print the number of installed pkgs.
-printf '%s\n' "==> You have installed $n_pkgs packages"
+printf '%s\n' "==> You have installed $n_pkgs packages from the official repos."

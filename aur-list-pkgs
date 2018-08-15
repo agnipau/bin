@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Generate a list of installed pkgs from the AUR in Arch Linux.
+
+# Create a file with the list of installed pkgs from the AUR.
+pacman -Qqm > aur_installed_pkgs
+
+# Remove some garbage.
+sed -i -e '/^libc++abi$/d' \
+       -e '/^libc++experimental$/d' \
+       aur_installed_pkgs
+
+# Calculate the number of installed pkgs.
+n_pkgs="$(wc -l aur_installed_pkgs | cut -d' ' -f1)"
+
+# Print the number of installed pkgs.
+printf '%s\n' "==> You have installed $n_pkgs packages from the AUR."

@@ -9,39 +9,39 @@
 style_dunst() {
   killall -9 dunst
   dunst \
-    -lb "${color0:-#000000}" \
-    -nb "${color0:-#000000}" \
-    -cb "${color1:-#ff0000}" \
-    -lf "${color7:-#ffffff}" \
-    -nf "${color7:-#ffffff}" \
-    -cf "${color0:-#000000}" \
-    -lfr "${color0:-#000000}" \
-    -nfr "${color0:-#000000}" \
-    -cfr "${color1:-#ff0000}" &
+    -lb "$color0" \
+    -nb "$color0" \
+    -cb "$color1" \
+    -lf "$color7" \
+    -nf "$color7" \
+    -cf "$color0" \
+    -lfr "$color0" \
+    -nfr "$color0" \
+    -cfr "$color1" &
 }
 
 # Generate a theme for zathura.
 style_zathura() {
   cat <<EOF >"${HOME}/.cache/wal/colors-zathura"
-set default-bg "${color0:-#000000}"
-set default-fg "${color7:-#ffffff}"
-set completion-bg "${color0:-#000000}"
-set completion-fg "${color7:-#ffffff}"
-set completion-highlight-bg "${color1:-#ff0000}"
-set completion-highlight-fg "${color0:-#000000}"
-set statusbar-bg "${color1:-#ff0000}"
-set statusbar-fg "${color0:-#000000}"
-set inputbar-bg "${color0:-#000000}"
-set inputbar-fg "${color7:-#ffffff}"
+set default-bg "$color0"
+set default-fg "$color7"
+set completion-bg "$color0"
+set completion-fg "$color7"
+set completion-highlight-bg "$color1"
+set completion-highlight-fg "$color0"
+set statusbar-bg "$color1"
+set statusbar-fg "$color0"
+set inputbar-bg "$color0"
+set inputbar-fg "$color7"
 EOF
 }
 
 # Apply the colors to my OpenBox theme.
 style_openbox() {
-  sed -i -e "s/bg.color:       #.*/bg.color:       ${color0:-#000000}/" \
-         -e "s/text.color:   #.*/text.color:   ${color7:-#ffffff}/" \
-         -e "s/image.color: #.*/image.color: ${color7:-#ffffff}/" \
-         "${HOME}/.themes/thicc/openbox-3/themerc"
+  sed -i -e "s/bg.color:       #.*/bg.color:       ${color0}/" \
+         -e "s/text.color:     #.*/text.color:     ${color7}/" \
+         -e "s/image.color: #.*/image.color: ${color7}/" \
+         "${HOME}/.themes/Samiero/openbox-3/themerc"
   openbox --reconfigure
 }
 
@@ -49,15 +49,15 @@ style_openbox() {
 fix_fzf_transparency() {
   old_string="--color fg:7,bg:0,hl:1,fg+:232,bg+:1,hl+:255"
   new_string="--color fg:7,hl:1,fg+:232,bg+:1,hl+:255"
-  sed -i -e "s/$old_string/$new_string/" \
+  sed -i -e "s/${old_string}/${new_string}/" \
          "${HOME}/.cache/wal/colors.sh"
 }
 
 # Set radius to rofi and change the foreground color of the selected program.
 style_rofi() {
   sed -i -e "33i\ \ \ \ border-radius: 4;" \
-         "${HOME}/.cache/wal/colors-rofi-dark.rasi"
-  sed -i -e "s/selected-normal-foreground: @.*/selected-normal-foreground: @background;/" \
+         -e "s/selected-normal-background: #.*/selected-normal-background: @background;/" \
+         -e "s/selected-normal-foreground: @.*/selected-normal-foreground: ${color1};/" \
          "${HOME}/.cache/wal/colors-rofi-dark.rasi"
 }
 
