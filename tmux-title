@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+#
+# Change the tmux title to show the currently playing song.
+
+if pgrep -x cmus &>/dev/null; then
+  if [[ "$(cmus-remote -Q | grep '^status ' | sed 's/status //')" == paused ]]; then
+    printf '%s' " "
+  else
+    title_gre="$(cmus-remote -Q | grep '^tag title')"
+    title="${title_gre/'tag title '}"
+    
+    artist_gre="$(cmus-remote -Q | grep '^tag artist')"
+    artist="${artist_gre/'tag artist '}"
+    
+    seconds_gre="$(cmus-remote -Q | grep '^position')"
+    seconds="$(( ${seconds_gre/'position '} + 1 ))"
+
+    while [[ "$seconds" -ge 60 ]]; do
+      ((seconds -= 60))
+      ((minutes += 1))
+    done
+
+    if [[ -z "$minutes" ]]; then
+      if [[ "$seconds" =~ ^[0-9]$ ]]; then
+        time="00:0${seconds}"
+      else
+        time="00:${seconds}"
+      fi
+    else
+      if [[ "$seconds" =~ ^[0-9]$ && "$minutes" =~ ^[0-9]$ ]]; then
+        time="0${minutes}:0${seconds}"
+      elif [[ "$minutes" =~ ^[0-9]$ ]]; then
+        time="0${minutes}:${seconds}"
+      elif [[ "$seconds" =~ ^[0-9]$ ]]; then
+        time="${minutes}:0${seconds}"
+      else
+        time="${minutes}:${seconds}"
+      fi
+    fi
+    
+    ico="$(printf '%b' '\uf001')"
+
+    printf '%s' "${ico}   ${artist} - ${title}  (${time})"
+  fi
+else
+  printf '%s' " "
+fi
