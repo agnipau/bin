@@ -36,18 +36,19 @@ for ((c=1; c<=end; c+=2)); do
   # Download the song.
   youtube-dl "$link" \
              --extract-audio --audio-format mp3 --audio-quality 0 \
-	     --prefer-ffmpeg --youtube-skip-dash-manifest --ignore-errors \
-	     --continue --no-overwrites --restrict-filenames --verbose
+             --prefer-ffmpeg --youtube-skip-dash-manifest --ignore-errors \
+             --continue --no-overwrites --restrict-filenames --verbose
   mv ./*.mp3 "../${artist} - ${title}.mp3"
   cd .. || exit 1
 
   # Apply id3v2 tags to the song.
   id3v2 --delete-all "${artist} - ${title}.mp3"
   id3v2 --artist "$artist" \
-	--song "$title" \
-	--comment "$short_link" \
-	--track "" \
-	"${artist} - ${title}.mp3"
+        --song "$title" \
+        --comment "$short_link" \
+        --album " " \
+        --track "" \
+        "${artist} - ${title}.mp3"
 
   # Send a notification when the download completes.
   notify-send --expire-time=3000 "YouTube" "${artist} - ${title} downloaded"

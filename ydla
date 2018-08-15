@@ -32,18 +32,19 @@ if [[ "$#" -eq 5 ]]; then
   link_abbreviato="${link:8}"
   id3v2 --delete-all "${artist} - ${title}.mp3"
   id3v2 --artist "$artist" \
-	--song "$title" \
-	--comment "$link_abbreviato" \
-	--track "" \
-	"${artist} - ${title}.mp3"
+        --song "$title" \
+        --comment "$link_abbreviato" \
+        --album " " \
+        --track "" \
+        "${artist} - ${title}.mp3"
   notify-send --expire-time=3000 "YouTube" "${artist} - ${title} downloaded"
 elif [[ "$#" -eq 1 ]]; then
   # Download the song without adding id3v2 tags.
   youtube-dl "$link" \
              --add-metadata --metadata-from-title "%(artist)s - %(title)s" \
              --extract-audio --audio-format mp3 --audio-quality 0 \
-	     --prefer-ffmpeg --youtube-skip-dash-manifest --ignore-errors \
-	     --continue --no-overwrites --restrict-filenames --verbose
+             --prefer-ffmpeg --youtube-skip-dash-manifest --ignore-errors \
+             --continue --no-overwrites --restrict-filenames --verbose
   notify-send --expire-time=3000 "YouTube" "Song downloaded"
 else
   help && exit 1
