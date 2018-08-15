@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+# Display the dseconds of a song played by cmus.
+
+if pgrep -x cmus &>/dev/null; then
+  seconds_gre="$(cmus-remote -Q | grep '^position')"
+  seconds="${seconds_gre/'position '}"
+  
+  while [[ "$seconds" -ge 60 ]]; do
+    ((seconds -= 60))
+    ((minutes += 1))
+  done
+  
+  if [[ -z "$minutes" ]]; then
+    if [[ "$seconds" =~ ^[0-9]$ ]]; then
+      time="00:0${seconds}"
+    else
+      time="00:${seconds}"
+    fi
+  else
+    if [[ "$seconds" =~ ^[0-9]$ && "$minutes" =~ ^[0-9]$ ]]; then
+      time="0${minutes}:0${seconds}"
+    elif [[ "$minutes" =~ ^[0-9]$ ]]; then
+      time="0${minutes}:${seconds}"
+    elif [[ "$seconds" =~ ^[0-9]$ ]]; then
+      time="${minutes}:0${seconds}"
+    else
+      time="${minutes}:${seconds}"
+    fi
+  fi
+
+  dseconds_gre="$(cmus-remote -Q | grep '^dseconds')"
+  dseconds="${dseconds_gre/'dseconds '}"
+
+  while [[ "$dseconds" -ge 60 ]]; do
+    ((dseconds -= 60))
+    ((dminutes += 1))
+  done
+  
+  if [[ -z "$dminutes" ]]; then
+    if [[ "$dseconds" =~ ^[0-9]$ ]]; then
+      dtime="00:0${dseconds}"
+    else
+      dtime="00:${dseconds}"
+    fi
+  else
+    if [[ "$dseconds" =~ ^[0-9]$ && "$dminutes" =~ ^[0-9]$ ]]; then
+      dtime="0${dminutes}:0${dseconds}"
+    elif [[ "$dminutes" =~ ^[0-9]$ ]]; then
+      dtime="0${dminutes}:${dseconds}"
+    elif [[ "$dseconds" =~ ^[0-9]$ ]]; then
+      dtime="${dminutes}:0${dseconds}"
+    else
+      dtime="${dminutes}:${dseconds}"
+    fi
+  fi
+
+  ico="$(printf '%b' '\uf001')"
+  printf '%s\n' "${ico}  ${time} / ${dtime}"
+else
+  ico="$(printf '%b' '\uf001')"
+  printf '%s\n' "${ico}"
+fi
