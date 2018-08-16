@@ -2,6 +2,6 @@
 #
 # Make xst not transparent.
 
-sed -i -e "s/st.opacity: .*/st.opacity: 255/" "${HOME}/.Xresources"
+sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
 xrdb "${HOME}/.Xresources"
 for pid in $(pidof st); do kill -s USR1 "$pid"; done

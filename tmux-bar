@@ -25,14 +25,21 @@ avol() {
     | cut -d[ -f2 \
     | cut -d] -f1)"
 
-  if [[ "$vsta" == on ]]; then
-    case "$nperc" in
-      [0-9]%)  vol="\\uf026 ${nperc}" ;;
-      [1-7]?%) vol="\\uf027 ${nperc}" ;;
-      *)       vol="\\uf028  ${nperc}" ;;
-    esac
-  elif [[ "$vsta" == off ]]; then
-    vol="\\uf026 muted"
+  case "$nperc" in
+    [0-9])  vol="\\uf026 ${nperc}%" ;;
+    [1-4]?) vol="\\uf026 ${nperc}%" ;;
+    [5-8]?) vol="\\uf027 ${nperc}%" ;;
+    *)      vol="\\uf028 ${nperc}%" ;;
+  esac
+
+  if [[ "$vsta" == off ]]; then
+    if [[ "$vol" =~ \ [0-9]%$ ]]; then
+      vol="$(printf '%b' "$vol" | sed -e 's/[0-9]\+%/\.%/')"
+    elif [[ "$vol" =~ \ [0-9][0-9]%$ ]]; then
+      vol="$(printf '%b' "$vol" | sed -e 's/[0-9]\+%/\.\.%/')"
+    elif [[ "$vol" =~ \ [0-9][0-9][0-9]%$ ]]; then
+      vol="$(printf '%b' "$vol" | sed -e 's/[0-9]\+%/\.\.\.%/')"
+    fi
   fi
 }
 
@@ -50,14 +57,21 @@ pvol() {
     | cut -d[ -f2 \
     | cut -d] -f1)"
 
-  if [[ "$vsta" == on ]]; then
-    case "$nperc" in
-      [0-9])  vol="\\uf026 ${nperc}%" ;;
-      [1-7]?) vol="\\uf027 ${nperc}%" ;;
-      *)      vol="\\uf028  ${nperc}%" ;;
-    esac
-  elif [[ "$vsta" == off ]]; then
-    vol="\\uf026 muted"
+  case "$nperc" in
+    [0-9])  vol="\\uf026 ${nperc}%" ;;
+    [1-4]?) vol="\\uf026 ${nperc}%" ;;
+    [5-8]?) vol="\\uf027 ${nperc}%" ;;
+    *)      vol="\\uf028 ${nperc}%" ;;
+  esac
+
+  if [[ "$vsta" == off ]]; then
+    if [[ "$vol" =~ \ [0-9]%$ ]]; then
+      vol="$(printf '%b' "$vol" | sed -e 's/[0-9]\+%/\.%/')"
+    elif [[ "$vol" =~ \ [0-9][0-9]%$ ]]; then
+      vol="$(printf '%b' "$vol" | sed -e 's/[0-9]\+%/\.\.%/')"
+    elif [[ "$vol" =~ \ [0-9][0-9][0-9]%$ ]]; then
+      vol="$(printf '%b' "$vol" | sed -e 's/[0-9]\+%/\.\.\.%/')"
+    fi
   fi
 }
 
@@ -75,16 +89,23 @@ bat() {
   sta="$(</sys/class/power_supply/BAT0/status)"
   cap="$(</sys/class/power_supply/BAT0/capacity)"
 
-  case "$cap" in
-    [0-9])  bat="\\uf244   ${cap}%" ;;
-    [1-3]?) bat="\\uf243   ${cap}%" ;;
-    [4-6]?) bat="\\uf242   ${cap}%" ;;
-    [7-9]?) bat="\\uf241   ${cap}%" ;;
-    *)      bat="\\uf240   100%" ;;
-  esac
-
-  [[ "$sta" == Charging ]] && \
-    bat="$bat  \\uf0e7"
+  if [[ "$sta" == Charging ]]; then
+    case "$cap" in
+      [0-9])  bat="\\uf244  \\uf0e7 ${cap}%" ;;
+      [1-3]?) bat="\\uf243  \\uf0e7 ${cap}%" ;;
+      [4-6]?) bat="\\uf242  \\uf0e7 ${cap}%" ;;
+      [7-9]?) bat="\\uf241  \\uf0e7 ${cap}%" ;;
+      *)      bat="\\uf240  \\uf0e7 100%" ;;
+    esac
+  else
+    case "$cap" in
+      [0-9])  bat="\\uf244   ${cap}%" ;;
+      [1-3]?) bat="\\uf243   ${cap}%" ;;
+      [4-6]?) bat="\\uf242   ${cap}%" ;;
+      [7-9]?) bat="\\uf241   ${cap}%" ;;
+      *)      bat="\\uf240   100%" ;;
+    esac
+  fi
 }
 
 # Display the date.

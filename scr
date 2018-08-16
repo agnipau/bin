@@ -2,9 +2,12 @@
 #
 # A simple script to take screenshots using scrot (without selecting area).
 
+# Source pywal colors.
+. "${HOME}/.cache/wal/colors.sh"
+
+# Take the screenshot.
 # shellcheck disable=SC2016
-scrot '%H:%M:%S.png' -e 'mv $f ~/immagini'
+scrot '%H:%M:%S.png' -e 'mv $f ~/immagini; screen=$f'
 
-ico="$(printf '%b\n' "\\uf030")"
-
-notify-send --expire-time=3000 "$ico  Screenshot saved"
+# Open the screenshot in pqiv.
+pqiv -i --box-colors="$color7":"$color0_lighter_90" --bind-key="@MONTAGE { h { montage_mode_shift_x(-1) } }" --bind-key="@MONTAGE { j { montage_mode_shift_y(1) } }" --bind-key "@MONTAGE { k { montage_mode_shift_y(-1) } }" --bind-key "@MONTAGE { l { montage_mode_shift_x(1) } }" --bind-key="j { goto_file_relative(-1) }" --bind-key="k { goto_file_relative(1) }" --bind-key="h { goto_file_relative(-1) }" --bind-key="l { goto_file_relative(1) }" --bind-key="d { command(rm $1) }" "${HOME}/immagini/${screen}"

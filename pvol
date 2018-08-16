@@ -17,15 +17,21 @@ current() {
     | cut -d[ -f2 \
     | cut -d] -f1)"
 
-  if [[ "$vsta" == on ]]; then
-    case "$nperc" in
-      [0-9])  iperc="\\uf026 ${nperc}%" ;;
-      [1-4]?) iperc="\\uf026 ${nperc}%" ;;
-      [5-8]?) iperc="\\uf027 ${nperc}%" ;;
-      *)      iperc="\\uf028 ${nperc}%" ;;
-    esac
-  elif [[ "$vsta" == off ]]; then
-    iperc="\\uf026 muted"
+  case "$nperc" in
+    [0-9])  iperc="\\uf026 ${nperc}%" ;;
+    [1-4]?) iperc="\\uf026 ${nperc}%" ;;
+    [5-8]?) iperc="\\uf027 ${nperc}%" ;;
+    *)      iperc="\\uf028 ${nperc}%" ;;
+  esac
+
+  if [[ "$vsta" == off ]]; then
+    if [[ "$iperc" =~ \ [0-9]%$ ]]; then
+      iperc="$(printf '%b' "$iperc" | sed -e 's/[0-9]\+%/\.%/')"
+    elif [[ "$iperc" =~ \ [0-9][0-9]%$ ]]; then
+      iperc="$(printf '%b' "$iperc" | sed -e 's/[0-9]\+%/\.\.%/')"
+    elif [[ "$iperc" =~ \ [0-9][0-9][0-9]%$ ]]; then
+      iperc="$(printf '%b' "$iperc" | sed -e 's/[0-9]\+%/\.\.\.%/')"
+    fi
   fi
 
   printf '%b\n' "$iperc"
