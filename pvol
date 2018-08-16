@@ -19,8 +19,8 @@ current() {
 
   case "$nperc" in
     [0-9])  iperc="\\uf026 ${nperc}%" ;;
-    [1-4]?) iperc="\\uf026 ${nperc}%" ;;
-    [5-8]?) iperc="\\uf027 ${nperc}%" ;;
+    [1-3]?) iperc="\\uf026 ${nperc}%" ;;
+    [4-6]?) iperc="\\uf027 ${nperc}%" ;;
     *)      iperc="\\uf028 ${nperc}%" ;;
   esac
 

@@ -27,8 +27,8 @@ avol() {
 
   case "$nperc" in
     [0-9])  vol="\\uf026 ${nperc}%" ;;
-    [1-4]?) vol="\\uf026 ${nperc}%" ;;
-    [5-8]?) vol="\\uf027 ${nperc}%" ;;
+    [1-3]?) vol="\\uf026 ${nperc}%" ;;
+    [4-6]?) vol="\\uf027 ${nperc}%" ;;
     *)      vol="\\uf028 ${nperc}%" ;;
   esac
 
@@ -59,8 +59,8 @@ pvol() {
 
   case "$nperc" in
     [0-9])  vol="\\uf026 ${nperc}%" ;;
-    [1-4]?) vol="\\uf026 ${nperc}%" ;;
-    [5-8]?) vol="\\uf027 ${nperc}%" ;;
+    [1-3]?) vol="\\uf026 ${nperc}%" ;;
+    [4-6]?) vol="\\uf027 ${nperc}%" ;;
     *)      vol="\\uf028 ${nperc}%" ;;
   esac
 
@@ -92,17 +92,19 @@ bat() {
   if [[ "$sta" == Charging ]]; then
     case "$cap" in
       [0-9])  bat="\\uf244  \\uf0e7 ${cap}%" ;;
-      [1-3]?) bat="\\uf243  \\uf0e7 ${cap}%" ;;
-      [4-6]?) bat="\\uf242  \\uf0e7 ${cap}%" ;;
-      [7-9]?) bat="\\uf241  \\uf0e7 ${cap}%" ;;
+      1?)     bat="\\uf244  \\uf0e7 ${cap}%" ;;
+      [2-3]?) bat="\\uf243  \\uf0e7 ${cap}%" ;;
+      [4-5]?) bat="\\uf242  \\uf0e7 ${cap}%" ;;
+      [6-7]?) bat="\\uf241  \\uf0e7 ${cap}%" ;;
       *)      bat="\\uf240  \\uf0e7 100%" ;;
     esac
   else
     case "$cap" in
       [0-9])  bat="\\uf244   ${cap}%" ;;
-      [1-3]?) bat="\\uf243   ${cap}%" ;;
-      [4-6]?) bat="\\uf242   ${cap}%" ;;
-      [7-9]?) bat="\\uf241   ${cap}%" ;;
+      1?)     bat="\\uf244   ${cap}%" ;;
+      [2-3]?) bat="\\uf243   ${cap}%" ;;
+      [4-5]?) bat="\\uf242   ${cap}%" ;;
+      [6-7]?) bat="\\uf241   ${cap}%" ;;
       *)      bat="\\uf240   100%" ;;
     esac
   fi
