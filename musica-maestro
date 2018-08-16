@@ -1,0 +1,13 @@
+#/usr/bin/env bash
+#
+# I need this small script to launch a xst terminal instance that launches
+# ncmpcpp with a different version of color17.
+
+# Set the $color17 to $color0_ligter_150 (used in the progress bar).
+if [[ -f "${HOME}/.cache/wal/colors.sh" ]]; then
+  . "${HOME}/.cache/wal/colors.sh"
+  printf "\e]4;17;rgb:${color0_lighter_150:1:2}/${color0_lighter_150:3:2}/${color0_lighter_150:5:2}\e\\"
+fi
+
+# Launch ncmpcpp.
+ncmpcpp

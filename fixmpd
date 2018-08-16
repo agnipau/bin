@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#
+# A script for adding the required directories/files to get mpd working.
+
+mkdir -p "${HOME}/.mpd"
+
+touch "${HOME}/.mpd/mpd.db" \
+      "${HOME}/.mpd/mpd.log" \
+      "${HOME}/.mpd/mpd.pid" \
+      "${HOME}/.mpd/mpdstate"

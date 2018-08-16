@@ -65,7 +65,7 @@ fix_rofi() {
          -e "s/^    normal-foreground: @.*/normal-foreground: ${color0_lighter_150};/" \
          -e "s/^    alternate-normal-foreground: @.*/alternate-normal-foreground: ${color0_lighter_150};/" \
          -e "s/^    selected-normal-background: #.*/selected-normal-background: @background;/" \
-         -e "s/^    selected-normal-foreground: @.*/selected-normal-foreground: @foreground;/" \
+         -e "s/^    selected-normal-foreground: @.*/selected-normal-foreground: ${color1};/" \
          "${HOME}/.cache/wal/colors-rofi-dark.rasi"
 }
 
