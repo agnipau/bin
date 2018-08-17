@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# Clear pacman cache.
+
+alias sudo='sudo -p "$(tput bold)$(tput setaf 1)~~> $(tput sgr0)"'
+
+garbage_size="$(du -h /var/cache/pacman/pkg \
+               | tail -n1 \
+               | awk '{ print $1 }')"
+
+for garbage in /var/cache/pacman/pkg/*; do
+  [[ -f "$garbage" ]] && \
+    sudo rm -f "$garbage"
+done
+
+printf '%s\n' "You have cleaned $garbage_size of pacman garbage."
