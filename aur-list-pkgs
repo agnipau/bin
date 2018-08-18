@@ -6,8 +6,8 @@
 pacman -Qqm > aur_installed_pkgs
 
 # Remove some garbage.
-sed -i -e '/^libc++abi$/d' \
-       -e '/^libc++experimental$/d' \
+sed -i -e '/libc++abi/d' \
+       -e '/libc++experimental/d' \
        aur_installed_pkgs
 
 # Calculate the number of installed pkgs.
