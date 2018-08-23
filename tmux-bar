@@ -4,6 +4,8 @@
 # It works only when in full screen (see the last if block).
 # This is a modified version of the bar script by Dylan Araps.
 
+set -x
+
 # Display the screen brightness.
 lum() {
   abr="$(</sys/class/backlight/intel_backlight/brightness)"
@@ -61,7 +63,7 @@ pvol() {
     [0-9])  vol="\\uf026 ${nperc}%" ;;
     [1-3]?) vol="\\uf026 ${nperc}%" ;;
     [4-6]?) vol="\\uf027 ${nperc}%" ;;
-    *)      vol="\\uf028 ${nperc}%" ;;
+    *)      vol="\\uf028  ${nperc}%" ;;
   esac
 
   if [[ "$vsta" == off ]]; then
@@ -131,5 +133,7 @@ if (("${1:-165}" >= 164 && "${2:-35}" >= 34)); then
   [[ "$sta" == Discharging ]] && \
     printf '%b\n' "$ssid   $bat   $vol   $lum   $data   $ore"
   [[ "$sta" == Charging ]] && \
+    printf '%b\n' "$ssid   $bat   $vol   $lum   $data   $ore"
+  [[ "$sta" == 'Not charging' ]] && \
     printf '%b\n' "$ssid   $bat   $vol   $lum   $data   $ore"
 fi

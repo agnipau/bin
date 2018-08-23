@@ -44,7 +44,7 @@ for ((c=1; c<=end; c+=2)); do
   # Apply id3v2 tags to the song.
   id3v2 --delete-all "${artist} - ${title}.mp3"
   id3v2 --artist "$artist" \
-        --song "$title" \
+        --song "${artist} - ${title}" \
         --comment "$short_link" \
         --album " " \
         --track "" \

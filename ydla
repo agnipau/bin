@@ -32,7 +32,7 @@ if [[ "$#" -eq 5 ]]; then
   link_abbreviato="${link:8}"
   id3v2 --delete-all "${artist} - ${title}.mp3"
   id3v2 --artist "$artist" \
-        --song "$title" \
+        --song "${artist} - ${title}" \
         --comment "$link_abbreviato" \
         --album " " \
         --track "" \
