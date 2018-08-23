@@ -10,7 +10,7 @@ source_wal() {
 # Change wallpaper and apply to the terminals a dark theme using the wallpapers colors.
 another-wal-dark() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers" \
-      -o "${HOME}/bin/wal-set"
+      -o "${HOME}/bin/wal-set-dark"
   sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
@@ -19,7 +19,7 @@ another-wal-dark() {
 # Change wallpaper and apply to the terminals a light theme using the wallpapers colors.
 another-wal-light() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers" \
-      -o "${HOME}/bin/wal-set" -l
+      -o "${HOME}/bin/wal-set-light" -l
   sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
@@ -29,7 +29,7 @@ another-wal-light() {
 # terminals a dark theme using the wallpapers colors.
 another-grad-dark() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers" \
-      -o "${HOME}/bin/wal-set" -n
+      -o "${HOME}/bin/wal-set-dark" -n
   source_wal
   # shellcheck disable=SC2154
   hsetroot -add "$color1" -add "$color2" -gradient 0
@@ -42,7 +42,7 @@ another-grad-dark() {
 # terminals a light theme using the wallpapers colors.
 another-grad-light() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers" \
-      -o "${HOME}/bin/wal-set" -l -n
+      -o "${HOME}/bin/wal-set-light" -l -n
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
   sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
@@ -53,7 +53,7 @@ another-grad-light() {
 # Apply to the terminals a dark theme using the wallpapers colors.
 current-wal-dark() {
   wal -c -q --backend wal -i "$(<"${HOME}/.cache/wal/wal")" \
-      -o "${HOME}/bin/wal-set"
+      -o "${HOME}/bin/wal-set-dark"
   sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
@@ -62,7 +62,7 @@ current-wal-dark() {
 # Apply to the terminals a light theme using the wallpapers colors.
 current-wal-light() {
   wal -c -q --backend wal -i "$(<"${HOME}/.cache/wal/wal")" \
-      -o "${HOME}/bin/wal-set" -l
+      -o "${HOME}/bin/wal-set-light" -l
   sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
@@ -72,7 +72,7 @@ current-wal-light() {
 # theme using the wallpapers colors.
 current-grad-dark() {
   wal -c -q --backend wal -i "$(<"${HOME}/.cache/wal/wal")" \
-      -o "${HOME}/bin/wal-set" -n
+      -o "${HOME}/bin/wal-set-dark" -n
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
   sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
@@ -84,7 +84,7 @@ current-grad-dark() {
 # theme using the wallpapers colors.
 current-grad-light() {
   wal -c -q --backend wal -i "$(<"${HOME}/.cache/wal/wal")" \
-      -o "${HOME}/bin/wal-set" -l -n
+      -o "${HOME}/bin/wal-set-light" -l -n
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
   sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"

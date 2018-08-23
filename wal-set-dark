@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Hook script executed by pywal.
+# Hook script executed by pywal (works with dark version).
 
 # Set the value of color17 to $color0_lighter_150 for all the active terminals.
 add_colors_variants() {
@@ -76,6 +76,7 @@ fix_rifle() {
 }
 
 main() {
+  printf '%s' "dark" > "${HOME}/.cache/wal/mode"
   "${HOME}/progetti/extend-wal/extend-wal"
   # shellcheck source=/dev/null
   . "${HOME}/.cache/wal/colors.sh"
