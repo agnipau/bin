@@ -7,8 +7,15 @@
 for i in *; do
   # Do these operations only if it is a file, not a directory.
   if [[ -f "$i" ]]; then
-    artist="$(printf '%s' "$i" | cut -d- -f1 | sed "s/'/\\\'/g" | xargs)"
-    title="$(printf '%s' "$i" | cut -d- -f2- | sed "s/'/\\\'/g" | sed 's/.mp3//' | xargs)"
+    artist="$(printf '%s' "$i" \
+             | cut -d- -f1 \
+             | sed "s/'/\\\'/g" \
+             | xargs)"
+    title="$(printf '%s' "$i" \
+            | cut -d- -f2- \
+            | sed "s/'/\\\'/g" \
+            | sed 's/.mp3//' \
+            | xargs)"
 
     id3v2 --delete-all "$i"
     id3v2 --artist "$artist" \

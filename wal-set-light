@@ -2,11 +2,11 @@
 #
 # Hook script executed by pywal (works with light version).
 
-# Set the value of color17 to $color0_darker_10 for all the active terminals.
+# Set the value of color17 to $color0_darker_20 for all the active terminals.
 add_colors_variants() {
   for term in /dev/pts/[0-9]*; do
     if [[ -w "$term" ]]; then
-      printf "\e]4;17;rgb:${color0_darker_10:1:2}/${color0_darker_10:3:2}/${color0_darker_10:5:2}\e\\" > "$term"
+      printf "\e]4;17;rgb:${color0_darker_20:1:2}/${color0_darker_20:3:2}/${color0_darker_20:5:2}\e\\" > "$term"
     fi
   done
 }
@@ -62,8 +62,8 @@ fix_fzf_transparency() {
 # Set radius to rofi and apply some modifications to the colors.
 fix_rofi() {
   sed -i -e "33i\ \ \ \ border-radius: 4;" \
-         -e "s/^    normal-foreground: @.*/normal-foreground: ${color0_darker_10};/" \
-         -e "s/^    alternate-normal-foreground: @.*/alternate-normal-foreground: ${color0_darker_10};/" \
+         -e "s/^    normal-foreground: @.*/normal-foreground: ${color0_darker_20};/" \
+         -e "s/^    alternate-normal-foreground: @.*/alternate-normal-foreground: ${color0_darker_20};/" \
          -e "s/^    selected-normal-background: #.*/selected-normal-background: @background;/" \
          -e "s/^    selected-normal-foreground: @.*/selected-normal-foreground: ${color1};/" \
          "${HOME}/.cache/wal/colors-rofi-dark.rasi"
