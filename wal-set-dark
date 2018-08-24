@@ -29,16 +29,18 @@ fix_dunst() {
 # Generate a theme for zathura.
 fix_zathura() {
   cat <<EOF >"${HOME}/.cache/wal/colors-zathura"
-set default-bg "$color0"
-set default-fg "$color7"
-set completion-bg "$color0"
-set completion-fg "$color7"
-set completion-highlight-bg "$color1"
-set completion-highlight-fg "$color0"
-set statusbar-bg "$color1"
-set statusbar-fg "$color0"
-set inputbar-bg "$color0"
-set inputbar-fg "$color7"
+set default-bg              "$color0"
+set default-fg              "$color7"
+set highlight-color         "$color0_lighter_150"
+set highlight-active-color  "$color1"
+set completion-bg           "$color0"
+set completion-fg           "$color0_lighter_150"
+set completion-highlight-bg "$color0"
+set completion-highlight-fg "$color1"
+set statusbar-bg            "$color1"
+set statusbar-fg            "$color0"
+set inputbar-bg             "$color0"
+set inputbar-fg             "$color7"
 EOF
 }
 
