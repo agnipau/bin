@@ -130,10 +130,5 @@ if (("${1:-165}" >= 164 && "${2:-35}" >= 34)); then
   bat
   data
   ore
-  [[ "$sta" == Discharging ]] && \
-    printf '%b\n' "$ssid   $bat   $vol   $lum   $data   $ore"
-  [[ "$sta" == Charging ]] && \
-    printf '%b\n' "$ssid   $bat   $vol   $lum   $data   $ore"
-  [[ "$sta" == 'Not charging' ]] && \
-    printf '%b\n' "$ssid   $bat   $vol   $lum   $data   $ore"
+  printf '%b\n' "$ssid   $bat   $lum   $data   $ore   $vol"
 fi
