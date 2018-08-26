@@ -92,13 +92,60 @@ current-grad-light() {
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
 
+# Change quality wallpaper and apply to the terminals a dark theme using the wallpapers colors.
+quality-another-wal-dark() {
+  wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers-obg" \
+      -o "${HOME}/bin/wal-set-dark"
+  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
+  xrdb .Xresources
+  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+}
+
+# Change quality wallpaper and apply to the terminals a light theme using the wallpapers colors.
+quality-another-wal-light() {
+  wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers-obg" \
+      -o "${HOME}/bin/wal-set-light" -l
+  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
+  xrdb .Xresources
+  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+}
+
+# Change quality wallpaper, make the current wallpaper a gradient image and apply to the
+# terminals a dark theme using the wallpapers colors.
+quality-another-grad-dark() {
+  wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers-obg" \
+      -o "${HOME}/bin/wal-set-dark" -n
+  source_wal
+  # shellcheck disable=SC2154
+  hsetroot -add "$color1" -add "$color2" -gradient 0
+  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
+  xrdb .Xresources
+  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+}
+
+# Change quality wallpaper, make the current wallpaper a gradient image and apply to the
+# terminals a light theme using the wallpapers colors.
+quality-another-grad-light() {
+  wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers-obg" \
+      -o "${HOME}/bin/wal-set-light" -l -n
+  source_wal
+  hsetroot -add "$color1" -add "$color2" -gradient 0
+  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
+  xrdb .Xresources
+  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+}
+
 source_wal
 
-[[ "$1" == --another-wal-light ]]  && another-wal-light
-[[ "$1" == --another-wal-dark ]]   && another-wal-dark
-[[ "$1" == --another-grad-dark ]]  && another-grad-dark
-[[ "$1" == --another-grad-light ]] && another-grad-light
-[[ "$1" == --current-wal-light ]]  && current-wal-light
-[[ "$1" == --current-wal-dark ]]   && current-wal-dark
-[[ "$1" == --current-grad-dark ]]  && current-grad-dark
-[[ "$1" == --current-grad-light ]] && current-grad-light
+[[ "$1" == --another-wal-light ]]          && another-wal-light
+[[ "$1" == --another-wal-dark ]]           && another-wal-dark
+[[ "$1" == --another-grad-dark ]]          && another-grad-dark
+[[ "$1" == --another-grad-light ]]         && another-grad-light
+[[ "$1" == --current-wal-light ]]          && current-wal-light
+[[ "$1" == --current-wal-dark ]]           && current-wal-dark
+[[ "$1" == --current-grad-dark ]]          && current-grad-dark
+[[ "$1" == --current-grad-light ]]         && current-grad-light
+[[ "$1" == --quality-another-wal-light ]]  && quality-another-wal-light
+[[ "$1" == --quality-another-wal-dark ]]   && quality-another-wal-dark
+[[ "$1" == --quality-another-grad-dark ]]  && quality-another-grad-dark
+[[ "$1" == --quality-another-grad-light ]] && quality-another-grad-light
