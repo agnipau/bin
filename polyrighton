@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# A script to launch polybar.
+
+polybar bar-right &

@@ -9,5 +9,4 @@
 killall -9 telegram-desktop \
            Discord &> /dev/null
 
-clear
-printf '%s\n' "Ora concentrati e porta a termine il tuo obbiettivo."
+notify-send "Zen mode activated" "Ora concentrati e porta a termine il tuo obbiettivo."

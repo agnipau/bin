@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# Unblur my current desktop wallpaper.
+
+# Set the unblurred image as the desktop wallpaper.
+feh --bg-fill "$(<"${HOME}/.cache/wal/wal")"

@@ -130,5 +130,5 @@ if (("${1:-165}" >= 164 && "${2:-35}" >= 34)); then
   bat
   data
   ore
-  printf '%b\n' "$ssid   $bat   $lum   $data   $ore   $vol"
+  printf '%b\n' "$ssid   $bat   $lum   $vol   $data   $ore"
 fi

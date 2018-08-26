@@ -12,7 +12,7 @@ add_colors_variants() {
 }
 
 # Apply colors to dunst.
-fix_dunst() {
+restyle_dunst() {
   killall -9 dunst
   dunst \
     -lb "$color0" \
@@ -27,7 +27,7 @@ fix_dunst() {
 }
 
 # Generate a theme for zathura.
-fix_zathura() {
+restyle_zathura() {
   cat <<EOF >"${HOME}/.cache/wal/colors-zathura"
 set default-bg              "$color0"
 set default-fg              "$color7"
@@ -45,7 +45,7 @@ EOF
 }
 
 # Apply the colors to my OpenBox theme.
-fix_openbox() {
+restyle_openbox() {
   sed -i -e "s/bg.color:       #.*/bg.color:       ${color0}/" \
          -e "s/text.color:     #.*/text.color:     ${color7}/" \
          -e "s/image.color: #.*/image.color: ${color7}/" \
@@ -53,26 +53,39 @@ fix_openbox() {
   openbox --reconfigure
 }
 
-# Fix transparency with fzf in terminal.
-fix_fzf_transparency() {
-  old_string="--color fg:7,bg:0,hl:1,fg+:232,bg+:1,hl+:255"
-  new_string="--color fg:7,hl:1,fg+:232,bg+:1,hl+:255"
-  sed -i -e "s/${old_string}/${new_string}/" \
+# Make fzf more minimal.
+restyle_fzf() {
+  old_string_1="--color fg:7,bg:0,hl:1,fg+:232,bg+:1,hl+:255"
+  new_string_1="--color fg:17,hl:1,fg+:1,bg+:0,hl+:7"
+  sed -i -e "s/${old_string_1}/${new_string_1}/" \
+         "${HOME}/.cache/wal/colors.sh"
+
+  old_string_2="--color info:7,prompt:2,spinner:1,pointer:232,marker:1"
+  new_string_2="--color info:0,prompt:1,spinner:1,pointer:1,marker:1"
+  sed -i -e "s/${old_string_2}/${new_string_2}/" \
          "${HOME}/.cache/wal/colors.sh"
 }
 
 # Set radius to rofi and apply some modifications to the colors.
-fix_rofi() {
+restyle_rofi() {
   sed -i -e "33i\ \ \ \ border-radius: 4;" \
-         -e "s/^    normal-foreground: @.*/normal-foreground: ${color0_lighter_150};/" \
-         -e "s/^    alternate-normal-foreground: @.*/alternate-normal-foreground: ${color0_lighter_150};/" \
-         -e "s/^    selected-normal-background: #.*/selected-normal-background: @background;/" \
-         -e "s/^    selected-normal-foreground: @.*/selected-normal-foreground: ${color1};/" \
+         -e "s/^    active-foreground: @.*/    active-foreground: ${color0_lighter_150};/" \
+         -e "s/^    normal-foreground: @.*/    normal-foreground: ${color0_lighter_150};/" \
+         -e "s/^    urgent-foreground: @.*/    urgent-foreground: ${color0_lighter_150};/" \
+         -e "s/^    alternate-active-foreground: @.*/    alternate-active-foreground: ${color0_lighter_150};/" \
+         -e "s/^    alternate-normal-foreground: @.*/    alternate-normal-foreground: ${color0_lighter_150};/" \
+         -e "s/^    alternate-urgent-foreground: @.*/    alternate-urgent-foreground: ${color0_lighter_150};/" \
+         -e "s/^    selected-active-background: #.*/    selected-normal-background: @background;/" \
+         -e "s/^    selected-active-foreground: @.*/    selected-normal-foreground: ${color1};/" \
+         -e "s/^    selected-normal-background: #.*/    selected-normal-background: @background;/" \
+         -e "s/^    selected-normal-foreground: @.*/    selected-normal-foreground: ${color1};/" \
+         -e "s/^    selected-urgent-background: #.*/    selected-normal-background: @background;/" \
+         -e "s/^    selected-urgent-foreground: @.*/    selected-normal-foreground: ${color1};/" \
          "${HOME}/.cache/wal/colors-rofi-dark.rasi"
 }
 
 # Change some color values for pqiv in rifle's rifle.conf config file.
-fix_rifle() {
+restyle_rifle() {
   sed -i -e "s/--box-colors='#.*':'#.*'/--box-colors='${color7}':'${color0}'/" \
          "${HOME}/.config/ranger/rifle.conf"
 }
@@ -83,12 +96,12 @@ main() {
   # shellcheck source=/dev/null
   . "${HOME}/.cache/wal/colors.sh"
   add_colors_variants
-  fix_dunst
-  fix_zathura
-  fix_openbox
-  fix_fzf_transparency
-  fix_rofi
-  fix_rifle
+  restyle_dunst
+  restyle_zathura
+  restyle_openbox
+  restyle_fzf
+  restyle_rofi
+  restyle_rifle
   "${HOME}/progetti/wal-telegram/wal-telegram"
   "${HOME}/altri_progetti/wal-discord/wal-discord"
 }
