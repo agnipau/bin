@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-# Make xst transparent.
-
-sed -i -e "s/st.opacity:           .*/st.opacity:           240/" "${HOME}/.Xresources"
-xrdb "${HOME}/.Xresources"
-for pid in $(pidof st); do kill -s USR1 "$pid"; done

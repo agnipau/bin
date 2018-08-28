@@ -11,7 +11,6 @@ source_wal() {
 another-wal-dark() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers" \
       -o "${HOME}/bin/wal-set-dark"
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -20,7 +19,6 @@ another-wal-dark() {
 another-wal-light() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers" \
       -o "${HOME}/bin/wal-set-light" -l
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -33,7 +31,6 @@ another-grad-dark() {
   source_wal
   # shellcheck disable=SC2154
   hsetroot -add "$color1" -add "$color2" -gradient 0
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -45,7 +42,6 @@ another-grad-light() {
       -o "${HOME}/bin/wal-set-light" -l -n
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -54,7 +50,6 @@ another-grad-light() {
 current-wal-dark() {
   wal -c -q --backend wal -i "$(<"${HOME}/.cache/wal/wal")" \
       -o "${HOME}/bin/wal-set-dark"
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -63,7 +58,6 @@ current-wal-dark() {
 current-wal-light() {
   wal -c -q --backend wal -i "$(<"${HOME}/.cache/wal/wal")" \
       -o "${HOME}/bin/wal-set-light" -l
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -75,7 +69,6 @@ current-grad-dark() {
       -o "${HOME}/bin/wal-set-dark" -n
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -87,7 +80,6 @@ current-grad-light() {
       -o "${HOME}/bin/wal-set-light" -l -n
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -96,7 +88,6 @@ current-grad-light() {
 quality-another-wal-dark() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers-obg" \
       -o "${HOME}/bin/wal-set-dark"
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -105,7 +96,6 @@ quality-another-wal-dark() {
 quality-another-wal-light() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers-obg" \
       -o "${HOME}/bin/wal-set-light" -l
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -118,7 +108,6 @@ quality-another-grad-dark() {
   source_wal
   # shellcheck disable=SC2154
   hsetroot -add "$color1" -add "$color2" -gradient 0
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -130,7 +119,14 @@ quality-another-grad-light() {
       -o "${HOME}/bin/wal-set-light" -l -n
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
-  sed -i -e "s/st.opacity:           .*/st.opacity:           255/" "${HOME}/.Xresources"
+  xrdb .Xresources
+  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+}
+
+# Used to pass the selected wallpaper from ranger to wal.
+ranger-mode() {
+  wal -c -q --backend wal -i "$walfile" \
+      -o "${HOME}/bin/wal-set-dark"
   xrdb .Xresources
   for pid in $(pidof st); do kill -s USR1 "$pid"; done
 }
@@ -149,3 +145,4 @@ source_wal
 [[ "$1" == --quality-another-wal-dark ]]   && quality-another-wal-dark
 [[ "$1" == --quality-another-grad-dark ]]  && quality-another-grad-dark
 [[ "$1" == --quality-another-grad-light ]] && quality-another-grad-light
+[[ "$1" == --ranger-mode ]]                && walfile="$2" && ranger-mode
