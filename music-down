@@ -12,7 +12,7 @@
 
 # Set some variables that will be used in the for block.
 batch_file="$1"
-end_gre="$(wc -l $batch_file)"
+end_gre="$(wc -l "$batch_file")"
 end="$((${end_gre/${batch_file}} - 1))"
 
 # Create a directory to store the songs.

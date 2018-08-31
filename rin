@@ -21,6 +21,7 @@ if [[ -z "$match" ]]; then
     [[ ! "$file" =~ "." ]] && mv "$file" "${tmp_dir}/${prefix}${c}"
   done
 elif [[ "$match" ]]; then
+  #shellcheck disable=SC2076
   for file in *; do
     [[ "$file" =~ "$match" ]] && ((c += 1))
     # shellcheck disable=SC2076

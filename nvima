@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# Open in NeoVim all the files in a dir.
-
-for file in *; do nvim "$file"; done

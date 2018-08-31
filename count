@@ -5,7 +5,7 @@
 # cd into the directory if it exists, if it does not exist display an error mex.
 if [[ "$1" ]]; then
   if [[ -d "$1" ]]; then
-    cd "$1"
+    cd "$1" || exit 1
   elif [[ ! -d "$1" ]]; then
     printf '%s\n' "Dir doesn't exist"
     exit 1
@@ -16,6 +16,7 @@ fi
 if [[ -z "$(ls)" ]]; then
   printf '%s\n' "There are no files/folders"
 else
+  #shellcheck disable=2034
   for i in *; do
     ((c += 1))
   done

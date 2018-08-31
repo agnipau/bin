@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# One-liner that outputs the terminal's current row number.
+# I need this number for my fish prompt but fish doesn't come with read with
+# the -d option, so why not execute this script from fish with bash...
+
+#shellcheck disable=SC2162,2034
+IFS=''; read -sdR -p $'\e[6n' ROW COL; ROW="${ROW#*[}"; printf '%s' "${ROW%;*}" > "${HOME}/.crown.tmp"

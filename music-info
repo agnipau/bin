@@ -21,13 +21,13 @@ name() {
   elif pgrep -x auryo &>/dev/null; then
     tmp_dir="$(mktemp -d)"
     playerctl status &>"${tmp_dir}/status"
-    status="$(cat "${tmp_dir}/status" | tail -n1)"
+    status="$(tail -n1 "${tmp_dir}/status")"
     case "$status" in
       Playing)
         playerctl metadata title &>"${tmp_dir}/title"
         playerctl metadata artist &>"${tmp_dir}/artist"
-	artist="$(cat "${tmp_dir}/artist" | tail -n1)"
-	title="$(cat "${tmp_dir}/title" | tail -n1)"
+	artist="$(tail -n1 "${tmp_dir}/artist")"
+	title="$(tail -n1 "${tmp_dir}/title")"
         printf '%s' "${artist} - ${title}"
         ;;
       Paused)

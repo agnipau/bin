@@ -5,7 +5,7 @@
 # Generate a list of installed pkgs.
 tmpfile="$(mktemp)"
 pkg list-installed >"$tmpfile" 2>/dev/null
-cat "$tmpfile" | cut -d/ -f1 > termux_installed_pkgs
+cut -d/ -f1 "$tmpfile" > termux_installed_pkgs
 rm -f "$tmpfile"
 
 # Delete the Listing... trash line.

@@ -12,7 +12,7 @@ if [[ -d "${HOME}/progetti/wallpapers/test" ]]; then
     xrdb .Xresources
     for pid in $(pidof st); do kill -s USR1 "$pid"; done
     printf '\n%s\n' '==> Eliminare o tenere lo sfondo? [e/t]'
-    read -p '==> ' risposta
+    read -rp '==> ' risposta
     if [[ "$risposta" == "e" ]]; then
       rm -f "$wallpaper"
     fi
@@ -24,7 +24,7 @@ else
     xrdb .Xresources
     for pid in $(pidof st); do kill -s USR1 "$pid"; done
     printf '\n%s\n' '==> Eliminare o tenere lo sfondo? [e/t]'
-    read -p '==> ' risposta
+    read -rp '==> ' risposta
     if [[ "$risposta" == "e" ]]; then
       rm -f "$wallpaper"
     fi

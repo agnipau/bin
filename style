@@ -12,7 +12,7 @@ another-wal-dark() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers" \
       -o "${HOME}/bin/wal-set-dark"
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Change wallpaper and apply to the terminals a light theme using the wallpapers colors.
@@ -20,7 +20,7 @@ another-wal-light() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers" \
       -o "${HOME}/bin/wal-set-light" -l
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Change wallpaper, make the current wallpaper a gradient image and apply to the
@@ -32,7 +32,7 @@ another-grad-dark() {
   # shellcheck disable=SC2154
   hsetroot -add "$color1" -add "$color2" -gradient 0
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Change wallpaper, make the current wallpaper a gradient image and apply to the
@@ -43,7 +43,7 @@ another-grad-light() {
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Apply to the terminals a dark theme using the wallpapers colors.
@@ -51,7 +51,7 @@ current-wal-dark() {
   wal -c -q --backend wal -i "$(<"${HOME}/.cache/wal/wal")" \
       -o "${HOME}/bin/wal-set-dark"
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Apply to the terminals a light theme using the wallpapers colors.
@@ -59,7 +59,7 @@ current-wal-light() {
   wal -c -q --backend wal -i "$(<"${HOME}/.cache/wal/wal")" \
       -o "${HOME}/bin/wal-set-light" -l
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Make the current wallpaper a gradient image and apply to the terminals a dark
@@ -70,7 +70,7 @@ current-grad-dark() {
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Make the current wallpaper a gradient image and apply to the terminals a light
@@ -81,7 +81,7 @@ current-grad-light() {
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Change quality wallpaper and apply to the terminals a dark theme using the wallpapers colors.
@@ -89,7 +89,7 @@ quality-another-wal-dark() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers-obg" \
       -o "${HOME}/bin/wal-set-dark"
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Change quality wallpaper and apply to the terminals a light theme using the wallpapers colors.
@@ -97,7 +97,7 @@ quality-another-wal-light() {
   wal -c -q --iterative --backend wal -i "${HOME}/progetti/wallpapers-obg" \
       -o "${HOME}/bin/wal-set-light" -l
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Change quality wallpaper, make the current wallpaper a gradient image and apply to the
@@ -109,7 +109,7 @@ quality-another-grad-dark() {
   # shellcheck disable=SC2154
   hsetroot -add "$color1" -add "$color2" -gradient 0
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Change quality wallpaper, make the current wallpaper a gradient image and apply to the
@@ -120,7 +120,7 @@ quality-another-grad-light() {
   source_wal
   hsetroot -add "$color1" -add "$color2" -gradient 0
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 # Used to pass the selected wallpaper from ranger to wal.
@@ -128,7 +128,7 @@ ranger-mode() {
   wal -c -q --backend wal -i "$walfile" \
       -o "${HOME}/bin/wal-set-dark"
   xrdb .Xresources
-  for pid in $(pidof st); do kill -s USR1 "$pid"; done
+  for pid in $(pidof xst); do kill -s USR1 "$pid"; done
 }
 
 source_wal

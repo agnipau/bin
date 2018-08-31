@@ -14,4 +14,4 @@ convert "$wal" -filter Gaussian -blur 0x8 "${tmpdir}/blurred-image.${ext}"
 feh --bg-fill "${tmpdir}/blurred-image.${ext}"
 
 # Remove the tmpdir where the image is saved.
-rm -rf ${tmpdir}
+rm -rf "${tmpdir}"

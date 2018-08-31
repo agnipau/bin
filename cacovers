@@ -6,6 +6,7 @@ idir="${HOME}/immagini/album-covers"
 
 for i in *; do
   # Do these operations only if it is a file, not a directory.
+  #shellcheck disable=SC1117
   if [[ -f "$i" ]]; then
     artist="$(printf '%s' "$i" \
              | cut -d- -f1 \
@@ -17,6 +18,6 @@ for i in *; do
             | sed 's/.mp3//' \
             | xargs)"
 
-    mkdir -p "${idir}/${artist}/${i/.mp3}"
+    mkdir -p "${idir}/${artist}/${title}"
   fi
 done

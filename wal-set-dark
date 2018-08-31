@@ -6,9 +6,17 @@
 add_colors_variants() {
   for term in /dev/pts/[0-9]*; do
     if [[ -w "$term" ]]; then
-      printf "\e]4;17;rgb:${color0_lighter_150:1:2}/${color0_lighter_150:3:2}/${color0_lighter_150:5:2}\e\\" > "$term"
+      printf '%b' "\\e]4;17;rgb:${color0_lighter_150:1:2}/${color0_lighter_150:3:2}/${color0_lighter_150:5:2}\\e\\" > "$term"
     fi
   done
+}
+
+# Change the value for some highlight groups.
+restyle_fish() {
+  sed -i -e "s/fish_color_autosuggestion    .*/fish_color_autosuggestion    ${color0_lighter_150:1:6}/" \
+         -e "s/fish_pager_color_progress    .*/fish_pager_color_progress    ${color0:1:6}/" \
+         -e "s/fish_pager_color_description .*/fish_pager_color_description ${color8:1:6}/" \
+         "${HOME}/.config/fish/config.fish"
 }
 
 # Apply colors to dunst.
@@ -49,6 +57,12 @@ restyle_openbox() {
   sed -i -e "s/bg.color:       #.*/bg.color:       ${color0}/" \
          -e "s/text.color:     #.*/text.color:     ${color7}/" \
          -e "s/image.color: #.*/image.color: ${color7}/" \
+         -e "s/menu.items.bg.color:          #.*/menu.items.bg.color:          ${color0}/" \
+         -e "s/menu.items.text.color:        #.*/menu.items.text.color:        ${color0_lighter_150}/" \
+         -e "s/menu.items.active.bg.color:   #.*/menu.items.active.bg.color:   ${color0}/" \
+         -e "s/menu.items.active.text.color: #.*/menu.items.active.text.color: ${color1}/" \
+         -e "s/menu.border.color:            #.*/menu.border.color:            ${color0}/" \
+         -e "s/menu.separator.color:         #.*/menu.separator.color:         ${color0}/" \
          "${HOME}/.themes/Samiero/openbox-3/themerc"
   openbox --reconfigure
 }
@@ -59,16 +73,20 @@ restyle_fzf() {
   new_string_1="--color fg:17,hl:1,fg+:1,bg+:0,hl+:7"
   sed -i -e "s/${old_string_1}/${new_string_1}/" \
          "${HOME}/.cache/wal/colors.sh"
+  sed -i -e "s/${old_string_1}/${new_string_1}/" \
+         "${HOME}/.cache/wal/colors.fish"
 
   old_string_2="--color info:7,prompt:2,spinner:1,pointer:232,marker:1"
   new_string_2="--color info:0,prompt:1,spinner:1,pointer:1,marker:1"
   sed -i -e "s/${old_string_2}/${new_string_2}/" \
          "${HOME}/.cache/wal/colors.sh"
+  sed -i -e "s/${old_string_2}/${new_string_2}/" \
+         "${HOME}/.cache/wal/colors.fish"
 }
 
 # Set radius to rofi and apply some modifications to the colors.
 restyle_rofi() {
-  sed -i -e "33i\ \ \ \ border-radius: 4;" \
+  sed -i -e "33i\\ \\ \\ \\ border-radius: 4;" \
          -e "s/^    active-foreground: @.*/    active-foreground: ${color0_lighter_150};/" \
          -e "s/^    normal-foreground: @.*/    normal-foreground: ${color0_lighter_150};/" \
          -e "s/^    urgent-foreground: @.*/    urgent-foreground: ${color0_lighter_150};/" \
@@ -96,6 +114,7 @@ main() {
   # shellcheck source=/dev/null
   . "${HOME}/.cache/wal/colors.sh"
   add_colors_variants
+  restyle_fish
   restyle_dunst
   restyle_zathura
   restyle_openbox
