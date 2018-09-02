@@ -108,6 +108,39 @@ restyle_rifle() {
          "${HOME}/.config/ranger/rifle.conf"
 }
 
+# Change the alacritty colorscheme.
+restyle_alacritty() {
+  sed -i -e "s/background: '.*/background: '0x${color0:1:6}'/" \
+         -e "s/foreground: '.*/foreground: '0x${color7:1:6}'/" \
+         -e "s/text:   '.*/text:   '0x${color0:1:6}'/" \
+         -e "s/cursor: '.*/cursor: '0x${color7:1:6}'/" \
+         -e "s/black:   '.*/black:   '0x${color0:1:6}'/" \
+         -e "s/red:     '.*/red:     '0x${color1:1:6}'/" \
+         -e "s/green:   '.*/green:   '0x${color2:1:6}'/" \
+         -e "s/yellow:  '.*/yellow:  '0x${color3:1:6}'/" \
+         -e "s/blue:    '.*/blue:    '0x${color4:1:6}'/" \
+         -e "s/magenta: '.*/magenta: '0x${color5:1:6}'/" \
+         -e "s/cyan:    '.*/cyan:    '0x${color6:1:6}'/" \
+         -e "s/white:   '.*/white:   '0x${color7:1:6}'/" \
+         -e "s/black:    '.*/black:    '0x${color8:1:6}'/" \
+         -e "s/red:      '.*/red:      '0x${color9:1:6}'/" \
+         -e "s/green:    '.*/green:    '0x${color10:1:6}'/" \
+         -e "s/yellow:   '.*/yellow:   '0x${color11:1:6}'/" \
+         -e "s/blue:     '.*/blue:     '0x${color12:1:6}'/" \
+         -e "s/magenta:  '.*/magenta:  '0x${color13:1:6}'/" \
+         -e "s/cyan:     '.*/cyan:     '0x${color14:1:6}'/" \
+         -e "s/white:    '.*/white:    '0x${color15:1:6}'/" \
+         -e "s/black:     '.*/black:     '0x${color0_lighter_20:1:6}'/" \
+         -e "s/red:       '.*/red:       '0x${color1_lighter_20:1:6}'/" \
+         -e "s/green:     '.*/green:     '0x${color2_lighter_20:1:6}'/" \
+         -e "s/yellow:    '.*/yellow:    '0x${color3_lighter_20:1:6}'/" \
+         -e "s/blue:      '.*/blue:      '0x${color4_lighter_20:1:6}'/" \
+         -e "s/magenta:   '.*/magenta:   '0x${color5_lighter_20:1:6}'/" \
+         -e "s/cyan:      '.*/cyan:      '0x${color6_lighter_20:1:6}'/" \
+         -e "s/white:     '.*/white:     '0x${color7_lighter_20:1:6}'/" \
+         "${HOME}/.config/alacritty/alacritty.yml"
+}
+
 main() {
   printf '%s' "light" > "${HOME}/.cache/wal/mode"
   "${HOME}/progetti/extend-wal/extend-wal"
@@ -121,6 +154,7 @@ main() {
   restyle_fzf
   restyle_rofi
   restyle_rifle
+  restyle_alacritty
   "${HOME}/progetti/wal-telegram/wal-telegram"
   "${HOME}/altri_progetti/wal-discord/wal-discord"
 }

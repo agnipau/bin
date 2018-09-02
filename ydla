@@ -26,7 +26,8 @@ if [[ "$#" -eq 5 ]]; then
   youtube-dl "$link" \
              --extract-audio --audio-format mp3 --audio-quality 0 \
              --prefer-ffmpeg --youtube-skip-dash-manifest --ignore-errors \
-             --continue --no-overwrites --restrict-filenames --verbose
+             --continue --no-overwrites --no-playlist --restrict-filenames \
+             --verbose
   mv ./*.mp3 "${download_dir}/${artist} - ${title}.mp3"
   cd "$download_dir" || exit 1
   link_abbreviato="${link:8}"
@@ -44,7 +45,8 @@ elif [[ "$#" -eq 1 ]]; then
              --add-metadata --metadata-from-title "%(artist)s - %(title)s" \
              --extract-audio --audio-format mp3 --audio-quality 0 \
              --prefer-ffmpeg --youtube-skip-dash-manifest --ignore-errors \
-             --continue --no-overwrites --restrict-filenames --verbose
+             --continue --no-overwrites --no-playlist --restrict-filenames \
+             --verbose
   notify-send --expire-time=3000 "YouTube" "Song downloaded"
 else
   help && exit 1

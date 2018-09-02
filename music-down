@@ -37,7 +37,8 @@ for ((c=1; c<=end; c+=2)); do
   youtube-dl "$link" \
              --extract-audio --audio-format mp3 --audio-quality 0 \
              --prefer-ffmpeg --youtube-skip-dash-manifest --ignore-errors \
-             --continue --no-overwrites --restrict-filenames --verbose
+             --continue --no-overwrites --no-playlist --restrict-filenames \
+             --verbose
   mv ./*.mp3 "../${artist} - ${title}.mp3"
   cd .. || exit 1
 
