@@ -2,13 +2,21 @@
 #
 # Hook script executed by pywal (works with light version).
 
-# Set the value of color17 to $color0_darker_20 for all the active terminals.
+# Set the value of color13 (bold magenta) to $color0_darker_20 for all the active terminals.
 add_colors_variants() {
   for term in /dev/pts/[0-9]*; do
     if [[ -w "$term" ]]; then
-      printf '%b' "\\e]4;17;rgb:${color0_darker_20:1:2}/${color0_darker_20:3:2}/${color0_darker_20:5:2}\\e\\" > "$term"
+      printf '%b' "\\e]4;13;rgb:${color0_darker_20:1:2}/${color0_darker_20:3:2}/${color0_darker_20:5:2}\\e\\" > "$term"
     fi
   done
+}
+
+# Do the same as above but in the .Xresources file so it is persistent.
+fix_xresources() {
+  sed -i -e "s/\\*.color13: #.*/\\*.color13: ${color0_darker_20}/" \
+         -e "s/\\*color13:  #.*/\\*color13:  ${color0_darker_20}/" \
+         "${HOME}/.cache/wal/colors.Xresources"
+  xrdb "${HOME}/.Xresources"
 }
 
 # Change the value for some highlight groups.
@@ -70,7 +78,7 @@ restyle_openbox() {
 # Make fzf more minimal.
 restyle_fzf() {
   old_string_1="--color fg:7,bg:0,hl:1,fg+:232,bg+:1,hl+:255"
-  new_string_1="--color fg:17,hl:1,fg+:1,bg+:0,hl+:7"
+  new_string_1="--color fg:13,hl:1,fg+:1,bg+:0,hl+:7"
   sed -i -e "s/${old_string_1}/${new_string_1}/" \
          "${HOME}/.cache/wal/colors.sh"
   sed -i -e "s/${old_string_1}/${new_string_1}/" \
