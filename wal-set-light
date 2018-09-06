@@ -155,6 +155,7 @@ main() {
   # shellcheck source=/dev/null
   . "${HOME}/.cache/wal/colors.sh"
   add_colors_variants
+  fix_xresources
   restyle_fish
   restyle_dunst
   restyle_zathura
