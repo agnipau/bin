@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Git diff wrapper to use with NeoVim.
+
+nvim -d "$1" "$2"

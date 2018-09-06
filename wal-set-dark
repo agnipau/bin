@@ -2,7 +2,7 @@
 #
 # Hook script executed by pywal (works with dark version).
 
-# Set the value of color13 (bold magenta) to $color0_lighter_150 for all the active terminals.
+# Set the value of color13 to $color0_lighter_150 for all the active terminals.
 add_colors_variants() {
   for term in /dev/pts/[0-9]*; do
     if [[ -w "$term" ]]; then
