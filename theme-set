@@ -94,12 +94,6 @@ set -x FZF_DEFAULT_OPTS "
 EOF
 }
 
-# Reorder some files.
-reorder_files() {
-  # tmux.
-  cp "${HOME}/.tmux.conf.themes" "${HOME}/.tmux.conf"
-}
-
 # Fix the fish shell config file.
 fix_fish() {
   # shellcheck disable=SC2016
@@ -225,7 +219,6 @@ main() {
   gen_themes_sh
   # Source the freshly generated sh file.
   . "${HOME}/progetti/themes/sh/colors.sh"
-  reorder_files
   fix_fish
   restyle_fish
   restyle_dunst

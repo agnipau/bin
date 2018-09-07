@@ -11,12 +11,6 @@ add_colors_variants() {
   done
 }
 
-# Reorder some files.
-reorder_files() {
-  # tmux.
-  cp "${HOME}/.tmux.conf.wal" "${HOME}/.tmux.conf"
-}
-
 # Do the same as above but in the .Xresources file so it is persistent.
 fix_wal_xresources() {
   sed -i -e "s/\\*.color13: #.*/\\*.color13: ${color0_lighter_150}/" \
@@ -177,7 +171,6 @@ main() {
   # shellcheck source=/dev/null
   . "${HOME}/.cache/wal/colors.sh"
   add_colors_variants
-  reorder_files
   fix_wal_xresources
   fix_xresources
   fix_fish
