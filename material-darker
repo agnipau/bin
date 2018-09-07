@@ -4,20 +4,20 @@
 
 # Change the terminal colors to source.
 sed -i -e 's/! Include .*/! Include material-darker colors\./' \
-       -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/base16-material-darker.Xresources"_' \
+       -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-darker.Xresources"_' \
        "${HOME}/.Xresources"
 
 # Reload .Xresources.
 xrdb "${HOME}/.Xresources"
 
 # Execute a hook script.
-"${HOME}/bin/base16-set"
+"${HOME}/bin/theme-set"
 
 # Change the rofi theme to source.
 sed -i -e 's_rofi.theme: .*_rofi.theme:             progetti/themes/rofi/colors-rofi.rasi_' \
        "${HOME}/.Xresources"
 
-# Switch to "base16 mode".
+# Switch to "themes mode".
 sed -i -e 's/^!if 1/if 1/' \
        -e 's/^!if 0/if 0/' \
        -e 's/^if 0/!if 0/' \
