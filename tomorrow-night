@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#
+# A script that sets tomorrow-night as my terminal colorscheme.
+
+# Change the terminal colors to source.
+sed -i -e 's/! Include .*/! Include base 16 tomorrow-night colors\./' \
+       -e 's_#include .*_#include "/home/matte/altri\_progetti/base16/xresources/base16-tomorrow-night.Xresources"_' \
+       "${HOME}/.Xresources"
+
+# Reload .Xresources.
+xrdb "${HOME}/.Xresources"
+
+# Execute a hook script.
+"${HOME}/bin/base16-set"
+
+# Change the rofi theme to source.
+sed -i -e 's_rofi.theme: .*_rofi.theme:             altri\_progetti/base16/rofi/colors-rofi.rasi_' \
+       "${HOME}/.Xresources"
+
+# Switch to "base16 mode".
+sed -i -e 's/^!if 1/if 1/' \
+       -e 's/^!if 0/if 0/' \
+       -e 's/^if 0/!if 0/' \
+       "${HOME}/.config/nvim/init.vim"
+
+# Reload everything.
+xrdb "${HOME}/.Xresources"
+for pid in $(pidof xst); do kill -s USR1 "$pid"; done

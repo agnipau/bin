@@ -11,12 +11,34 @@ add_colors_variants() {
   done
 }
 
+# Reorder some files.
+reorder_files() {
+  # tmux.
+  cp "${HOME}/.tmux.conf.wal" "${HOME}/.tmux.conf"
+}
+
 # Do the same as above but in the .Xresources file so it is persistent.
-fix_xresources() {
+fix_wal_xresources() {
   sed -i -e "s/\\*.color13: #.*/\\*.color13: ${color0_darker_20}/" \
          -e "s/\\*color13:  #.*/\\*color13:  ${color0_darker_20}/" \
          "${HOME}/.cache/wal/colors.Xresources"
+}
+
+# Set the mode to "wal" if the previous colorscheme was from my themes folder.
+fix_xresources() {
+  sed -i -e 's/! Include .*/! Include pywal colors\./' \
+         -e 's_#include .*_#include "/home/matte/.cache/wal/colors.Xresources"_' \
+         -e 's_rofi.theme: .*_rofi.theme:             .cache/wal/colors-rofi-dark.rasi_' \
+         "${HOME}/.Xresources"
   xrdb "${HOME}/.Xresources"
+}
+
+# Fix the fish shell config file.
+fix_fish() {
+  # shellcheck disable=SC2016
+  sed -i -e 's/# Source .*/# Source pywal-generated colors./' \
+         -e 's_^\. .*_\. $HOME/.cache/wal/colors.fish_' \
+         "${HOME}/.config/fish/config.fish"
 }
 
 # Change the value for some highlight groups.
@@ -155,7 +177,10 @@ main() {
   # shellcheck source=/dev/null
   . "${HOME}/.cache/wal/colors.sh"
   add_colors_variants
+  reorder_files
+  fix_wal_xresources
   fix_xresources
+  fix_fish
   restyle_fish
   restyle_dunst
   restyle_zathura

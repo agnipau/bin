@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# A script that exploits the "$RANDOM" variable that bash generates to set a casual wallpaper from a folder containing multiple wallpapers.
+
+# Change this to your wallpaper folder.
+wal_folder="${HOME}/progetti/wallpapers"
+
+# Save the random integer for later.
+RANDINT="$RANDOM"
+
+c=0
+while [[ "$c" -le "$RANDINT" ]]; do
+  for wallpaper in "$wal_folder"/*; do
+    ((c++))
+    if [[ "$c" -eq "$RANDINT" ]]; then
+      feh --bg-fill "$wallpaper"
+    fi
+  done
+done
