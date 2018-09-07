@@ -215,7 +215,14 @@ restyle_alacritty() {
          "${HOME}/.config/alacritty/alacritty.yml"
 }
 
+# Restart polybar.
+restart_polybar() {
+  killall -q polybar
+  polybar bar-left &
+}
+
 main() {
+  touch "${HOME}/.themes-mode"
   gen_themes_sh
   # Source the freshly generated sh file.
   . "${HOME}/progetti/themes/sh/colors.sh"
@@ -228,6 +235,7 @@ main() {
   restyle_rofi
   restyle_rifle
   restyle_alacritty
+  restart_polybar
 }
 
 main

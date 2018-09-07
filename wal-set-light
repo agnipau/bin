@@ -165,11 +165,25 @@ restyle_alacritty() {
          "${HOME}/.config/alacritty/alacritty.yml"
 }
 
+# Reload terminals.
+reload_terminals() {
+  for pid in $(pidof xst); do
+    kill -s USR1 "$pid"
+  done
+}
+
+# Close all the bars and start the bar-left.
+restart_polybar() {
+  killall -q polybar
+  polybar bar-left &
+}
+
 main() {
   printf '%s' "light" > "${HOME}/.cache/wal/mode"
   "${HOME}/progetti/extend-wal/extend-wal"
   # shellcheck source=/dev/null
   . "${HOME}/.cache/wal/colors.sh"
+
   add_colors_variants
   fix_wal_xresources
   fix_xresources
@@ -182,8 +196,14 @@ main() {
   restyle_rofi
   restyle_rifle
   restyle_alacritty
+
+  if [[ -f "${HOME}/.themes-mode" ]]; then
+    reload_terminals
+    restart_polybar
+  fi
+  rm "${HOME}/.themes-mode"
+
   "${HOME}/progetti/wal-telegram/wal-telegram"
-  "${HOME}/altri_progetti/wal-discord/wal-discord"
 }
 
 main
