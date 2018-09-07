@@ -3,8 +3,8 @@
 # A script that sets tomorrow-night as my terminal colorscheme.
 
 # Change the terminal colors to source.
-sed -i -e 's/! Include .*/! Include base 16 tomorrow-night colors\./' \
-       -e 's_#include .*_#include "/home/matte/altri\_progetti/base16/xresources/base16-tomorrow-night.Xresources"_' \
+sed -i -e 's/! Include .*/! Include tomorrow-night colors\./' \
+       -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/base16-tomorrow-night.Xresources"_' \
        "${HOME}/.Xresources"
 
 # Reload .Xresources.
@@ -14,7 +14,7 @@ xrdb "${HOME}/.Xresources"
 "${HOME}/bin/base16-set"
 
 # Change the rofi theme to source.
-sed -i -e 's_rofi.theme: .*_rofi.theme:             altri\_progetti/base16/rofi/colors-rofi.rasi_' \
+sed -i -e 's_rofi.theme: .*_rofi.theme:             progetti/themes/rofi/colors-rofi.rasi_' \
        "${HOME}/.Xresources"
 
 # Switch to "base16 mode".
