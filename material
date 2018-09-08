@@ -206,13 +206,13 @@ main() {
 
   # Source the new colors.
   if [[ "$(<"${HOME}/.current-theme")" == Default ]]; then
-    . "${HOME}/progetti/themes/sh/material-default.fish"
+    . "${HOME}/progetti/themes/sh/material-default.sh"
   elif [[ "$(<"${HOME}/.current-theme")" == Palenight ]]; then
-    . "${HOME}/progetti/themes/sh/material-palenight.fish"
+    . "${HOME}/progetti/themes/sh/material-palenight.sh"
   elif [[ "$(<"${HOME}/.current-theme")" == Darker ]]; then
-    . "${HOME}/progetti/themes/sh/material-darker.fish"
+    . "${HOME}/progetti/themes/sh/material-darker.sh"
   elif [[ "$(<"${HOME}/.current-theme")" == Ocean ]]; then
-    . "${HOME}/progetti/themes/sh/material-ocean.fish"
+    . "${HOME}/progetti/themes/sh/material-ocean.sh"
   fi
 
   refresh_dunst
