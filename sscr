@@ -2,12 +2,20 @@
 #
 # A simple script to take screenshots using scrot (without selecting area).
 
-# Source pywal colors.
-. "${HOME}/.cache/wal/colors.sh"
+# Source the colors.
+if [[ "$(<"${HOME}/.current-theme")" == Default ]]; then
+  . "${HOME}/progetti/themes/sh/material-default.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == Palenight ]]; then
+  . "${HOME}/progetti/themes/sh/material-palenight.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == Darker ]]; then
+  . "${HOME}/progetti/themes/sh/material-darker.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == Ocean ]]; then
+  . "${HOME}/progetti/themes/sh/material-ocean.sh"
+fi
 
 # Take the screenshot.
 # shellcheck disable=SC2016
 scrot -s '%H:%M:%S.png' -e 'mv $f ~/immagini; sscreen=$f'
 
 # Open the screenshot in pqiv.
-pqiv -i --box-colors="$color7":"$color0_lighter_90" --bind-key="@MONTAGE { h { montage_mode_shift_x(-1) } }" --bind-key="@MONTAGE { j { montage_mode_shift_y(1) } }" --bind-key "@MONTAGE { k { montage_mode_shift_y(-1) } }" --bind-key "@MONTAGE { l { montage_mode_shift_x(1) } }" --bind-key="j { goto_file_relative(-1) }" --bind-key="k { goto_file_relative(1) }" --bind-key="h { goto_file_relative(-1) }" --bind-key="l { goto_file_relative(1) }" --bind-key="d { command(rm $1) }" "${HOME}/immagini/${sscreen}"
+pqiv -i --box-colors="$color7":"$color13" --bind-key="@MONTAGE { h { montage_mode_shift_x(-1) } }" --bind-key="@MONTAGE { j { montage_mode_shift_y(1) } }" --bind-key "@MONTAGE { k { montage_mode_shift_y(-1) } }" --bind-key "@MONTAGE { l { montage_mode_shift_x(1) } }" --bind-key="j { goto_file_relative(-1) }" --bind-key="k { goto_file_relative(1) }" --bind-key="h { goto_file_relative(-1) }" --bind-key="l { goto_file_relative(1) }" --bind-key="d { command(rm $1) }" "${HOME}/immagini/${sscreen}"
