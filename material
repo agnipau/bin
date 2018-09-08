@@ -1,42 +1,205 @@
 #!/usr/bin/env bash
 #
-# A script that sets material as my terminal colorscheme.
+# A script that changes my terminal colorscheme.
 
 # Change the terminal colors to source.
-if [[ "$1" == --default ]]; then
-  sed -i -e 's/! Include .*/! Include material-default colors\./' \
-         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-default.Xresources"_' \
-         "${HOME}/.Xresources"
-elif [[ "$1" == --lighter ]]; then
-  sed -i -e 's/! Include .*/! Include material-lighter colors\./' \
-         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-lighter.Xresources"_' \
-         "${HOME}/.Xresources"
-elif [[ "$1" == --palenight ]]; then
-  sed -i -e 's/! Include .*/! Include material-palenight colors\./' \
-         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-palenight.Xresources"_' \
-         "${HOME}/.Xresources"
-elif [[ "$1" == --darker ]]; then
-  sed -i -e 's/! Include .*/! Include material-darker colors\./' \
-         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-darker.Xresources"_' \
-         "${HOME}/.Xresources"
-elif [[ "$1" == --ocean ]]; then
-  sed -i -e 's/! Include .*/! Include material-ocean colors\./' \
-         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-ocean.Xresources"_' \
-         "${HOME}/.Xresources"
-else
-  exit 1
-fi
+refresh_theme() {
+  if [[ "$option" == --default ]]; then
+    sed -i -e 's/! Source .*/! Source material-default colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-default.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-default colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-default.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-default colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-default.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Material .*_  <name>Material Default</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-default.rasi_' \
+           "${HOME}/.Xresources"
+
+    printf '%s' "Default" >"${HOME}/.current-theme"
+
+  elif [[ "$option" == --lighter ]]; then
+    sed -i -e 's/! Source .*/! Source material-lighter colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-lighter.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-lighter colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-lighter.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-lighter colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-lighter.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Material .*_  <name>Material Lighter</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-lighter.rasi_' \
+           "${HOME}/.Xresources"
+
+    printf '%s' "Lighter" >"${HOME}/.current-theme"
+
+  elif [[ "$option" == --palenight ]]; then
+    sed -i -e 's/! Source .*/! Source material-palenight colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-palenight.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-palenight colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-palenight.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-palenight colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-palenight.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Material .*_  <name>Material Palenight</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-palenight.rasi_' \
+           "${HOME}/.Xresources"
+
+    printf '%s' "Palenight" >"${HOME}/.current-theme"
+
+  elif [[ "$option" == --darker ]]; then
+    sed -i -e 's/! Source .*/! Source material-darker colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-darker.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-darker colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-darker.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-darker colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-darker.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Material .*_  <name>Material Darker</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-darker.rasi_' \
+           "${HOME}/.Xresources"
+
+    printf '%s' "Darker" >"${HOME}/.current-theme"
+
+  elif [[ "$option" == --ocean ]]; then
+    sed -i -e 's/! Source .*/! Source material-ocean colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-ocean.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-ocean colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-ocean.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-ocean colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-ocean.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Material .*_  <name>Material Ocean</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-ocean.rasi_' \
+           "${HOME}/.Xresources"
+
+    printf '%s' "Ocean" >"${HOME}/.current-theme"
+
+  else
+    exit 1
+  fi
+}
 
 # Reload .Xresources.
-xrdb "${HOME}/.Xresources"
+reload_xres() {
+  xrdb "${HOME}/.Xresources"
+}
 
-# Execute a hook script.
-"${HOME}/bin/theme-set"
+# Reload OpenBox.
+reload_openbox() {
+  openbox --restart
+}
 
-# Change the rofi theme to source.
-sed -i -e 's_rofi.theme: .*_rofi.theme:             progetti/themes/rofi/colors-rofi.rasi_' \
-       "${HOME}/.Xresources"
+# Apply colors to dunst.
+refresh_dunst() {
+  killall -9 dunst
+  dunst \
+    -lb "$color0" \
+    -nb "$color0" \
+    -cb "$color1" \
+    -lf "$color7" \
+    -nf "$color7" \
+    -cf "$color0" \
+    -lfr "$color0" \
+    -nfr "$color0" \
+    -cfr "$color1" &
+}
 
-# Reload everything.
-xrdb "${HOME}/.Xresources"
-for pid in $(pidof xst); do kill -s USR1 "$pid"; done
+# Change some color values for pqiv in rifle's rifle.conf config file.
+refresh_rifle() {
+  sed -i -e "s/--box-colors='#.*':'#.*'/--box-colors='${color7}':'${color0}'/" \
+         "${HOME}/.config/ranger/rifle.conf"
+}
+
+# Change the alacritty colorscheme.
+refresh_alacritty() {
+  sed -i -e "s/background: '.*/background: '0x${color0:1:6}'/" \
+         -e "s/foreground: '.*/foreground: '0x${color7:1:6}'/" \
+         -e "s/text:   '.*/text:   '0x${color0:1:6}'/" \
+         -e "s/cursor: '.*/cursor: '0x${color7:1:6}'/" \
+         -e "s/black:   '.*/black:   '0x${color0:1:6}'/" \
+         -e "s/red:     '.*/red:     '0x${color1:1:6}'/" \
+         -e "s/green:   '.*/green:   '0x${color2:1:6}'/" \
+         -e "s/yellow:  '.*/yellow:  '0x${color3:1:6}'/" \
+         -e "s/blue:    '.*/blue:    '0x${color4:1:6}'/" \
+         -e "s/magenta: '.*/magenta: '0x${color5:1:6}'/" \
+         -e "s/cyan:    '.*/cyan:    '0x${color6:1:6}'/" \
+         -e "s/white:   '.*/white:   '0x${color7:1:6}'/" \
+         -e "s/black:    '.*/black:    '0x${color8:1:6}'/" \
+         -e "s/red:      '.*/red:      '0x${color9:1:6}'/" \
+         -e "s/green:    '.*/green:    '0x${color10:1:6}'/" \
+         -e "s/yellow:   '.*/yellow:   '0x${color11:1:6}'/" \
+         -e "s/blue:     '.*/blue:     '0x${color12:1:6}'/" \
+         -e "s/magenta:  '.*/magenta:  '0x${color13:1:6}'/" \
+         -e "s/cyan:     '.*/cyan:     '0x${color14:1:6}'/" \
+         -e "s/white:    '.*/white:    '0x${color15:1:6}'/" \
+         "${HOME}/.config/alacritty/alacritty.yml"
+}
+
+# Restart polybar.
+restart_polybar() {
+  if pgrep -x polybar; then
+    killall -q polybar
+    polybar bar-bottom &
+  fi
+}
+
+# Refresh all the active terminals.
+refresh_terminals() {
+  for pid in $(pidof xst); do
+    kill -s USR1 "$pid"
+  done
+}
+
+main() {
+  refresh_theme
+  reload_xres
+  refresh_dunst
+  refresh_rifle
+  refresh_alacritty
+  reload_openbox
+  restart_polybar
+  refresh_terminals
+}
+
+option="$1"
+main
