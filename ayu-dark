@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
-# A script that sets onedark as my terminal colorscheme.
+# A script that sets ayu-dark as my terminal colorscheme.
 
 # Change the terminal colors to source.
-sed -i -e 's/! Include .*/! Include onedark colors\./' \
-       -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/onedark.Xresources"_' \
+sed -i -e 's/! Include .*/! Include ayu-dark colors\./' \
+       -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/ayu-dark.Xresources"_' \
        "${HOME}/.Xresources"
 
 # Reload .Xresources.

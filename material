@@ -3,9 +3,47 @@
 # A script that sets material as my terminal colorscheme.
 
 # Change the terminal colors to source.
-sed -i -e 's/! Include .*/! Include material colors\./' \
-       -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material.Xresources"_' \
-       "${HOME}/.Xresources"
+if [[ "$1" == --default ]]; then
+  sed -i -e 's/! Include .*/! Include material-default colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-default.Xresources"_' \
+         "${HOME}/.Xresources"
+elif [[ "$1" == --default-hc ]]; then
+  sed -i -e 's/! Include .*/! Include material-default-hc colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-default-hc.Xresources"_' \
+         "${HOME}/.Xresources"
+elif [[ "$1" == --lighter ]]; then
+  sed -i -e 's/! Include .*/! Include material-lighter colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-lighter.Xresources"_' \
+         "${HOME}/.Xresources"
+elif [[ "$1" == --lighter-hc ]]; then
+  sed -i -e 's/! Include .*/! Include material-lighter-hc colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-lighter-hc.Xresources"_' \
+         "${HOME}/.Xresources"
+elif [[ "$1" == --palenight ]]; then
+  sed -i -e 's/! Include .*/! Include material-palenight colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-palenight.Xresources"_' \
+         "${HOME}/.Xresources"
+elif [[ "$1" == --palenight-hc ]]; then
+  sed -i -e 's/! Include .*/! Include material-palenight-hc colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-palenight-hc.Xresources"_' \
+         "${HOME}/.Xresources"
+elif [[ "$1" == --darker ]]; then
+  sed -i -e 's/! Include .*/! Include material-darker colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-darker.Xresources"_' \
+         "${HOME}/.Xresources"
+elif [[ "$1" == --darker-hc ]]; then
+  sed -i -e 's/! Include .*/! Include material-darker-hc colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-darker-hc.Xresources"_' \
+         "${HOME}/.Xresources"
+elif [[ "$1" == --ocean ]]; then
+  sed -i -e 's/! Include .*/! Include material-ocean colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-ocean.Xresources"_' \
+         "${HOME}/.Xresources"
+elif [[ "$1" == --ocean-hc ]]; then
+  sed -i -e 's/! Include .*/! Include material-ocean-hc colors\./' \
+         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-ocean-hc.Xresources"_' \
+         "${HOME}/.Xresources"
+fi
 
 # Reload .Xresources.
 xrdb "${HOME}/.Xresources"

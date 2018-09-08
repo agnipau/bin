@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #
-# A script that sets material-palenight as my terminal colorscheme.
+# A script that sets ayu-mirage as my terminal colorscheme.
 
 # Change the terminal colors to source.
-sed -i -e 's/! Include .*/! Include material-palenight colors\./' \
-       -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-palenight.Xresources"_' \
+sed -i -e 's/! Include .*/! Include ayu-mirage colors\./' \
+       -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/ayu-mirage.Xresources"_' \
        "${HOME}/.Xresources"
 
 # Reload .Xresources.
