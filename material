@@ -134,11 +134,6 @@ reload_xres() {
   xrdb "${HOME}/.Xresources"
 }
 
-# Reload OpenBox.
-reload_openbox() {
-  openbox --restart
-}
-
 # Apply colors to dunst.
 refresh_dunst() {
   killall -9 dunst
@@ -185,6 +180,11 @@ refresh_alacritty() {
          "${HOME}/.config/alacritty/alacritty.yml"
 }
 
+# Reload OpenBox.
+reload_openbox() {
+  openbox --restart
+}
+
 # Restart polybar.
 restart_polybar() {
   if pgrep -x polybar; then
@@ -203,6 +203,18 @@ refresh_terminals() {
 main() {
   refresh_theme
   reload_xres
+
+  # Source the new colors.
+  if [[ "$(<"${HOME}/.current-theme")" == Default ]]; then
+    . "${HOME}/progetti/themes/sh/material-default.fish"
+  elif [[ "$(<"${HOME}/.current-theme")" == Palenight ]]; then
+    . "${HOME}/progetti/themes/sh/material-palenight.fish"
+  elif [[ "$(<"${HOME}/.current-theme")" == Darker ]]; then
+    . "${HOME}/progetti/themes/sh/material-darker.fish"
+  elif [[ "$(<"${HOME}/.current-theme")" == Ocean ]]; then
+    . "${HOME}/progetti/themes/sh/material-ocean.fish"
+  fi
+
   refresh_dunst
   refresh_rifle
   refresh_alacritty
