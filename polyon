@@ -2,4 +2,4 @@
 #
 # A script to launch polybar.
 
-polybar bar-left &
+polybar bar-bottom &

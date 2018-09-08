@@ -218,7 +218,7 @@ restyle_alacritty() {
 # Restart polybar.
 restart_polybar() {
   killall -q polybar
-  polybar bar-left &
+  polybar bar-bottom &
 }
 
 main() {
