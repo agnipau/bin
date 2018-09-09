@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# TERmuxTHeme.
+
+if [[ "$1" == --default ]]; then
+  cp "${HOME}/progetti/themes/termux/material-default" \
+     "${HOME}/.termux/colors.properties"
+  termux-reload-settings
+elif [[ "$1" == --palenight ]]; then
+  cp "${HOME}/progetti/themes/termux/material-palenight" \
+     "${HOME}/.termux/colors.properties"
+  termux-reload-settings
+elif [[ "$1" == --darker ]]; then
+  cp "${HOME}/progetti/themes/termux/material-darker" \
+     "${HOME}/.termux/colors.properties"
+  termux-reload-settings
+elif [[ "$1" == --ocean ]]; then
+  cp "${HOME}/progetti/themes/termux/material-ocean" \
+     "${HOME}/.termux/colors.properties"
+  termux-reload-settings
+elif [[ "$1" == --lighter ]]; then
+  cp "${HOME}/progetti/themes/termux/material-lighter" \
+     "${HOME}/.termux/colors.properties"
+  termux-reload-settings
+fi
