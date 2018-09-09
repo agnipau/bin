@@ -65,7 +65,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/material-palenight.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/default.jpg" \
+    cp "${HOME}/progetti/wallpapers/palenight.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     printf '%s' "Palenight" >"${HOME}/.current-theme"
@@ -98,7 +98,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/material-darker.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/default.jpg" \
+    cp "${HOME}/progetti/wallpapers/darker.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     printf '%s' "Darker" >"${HOME}/.current-theme"
@@ -131,7 +131,40 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/material-ocean.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/default.jpg" \
+    cp "${HOME}/progetti/wallpapers/ocean.jpg" \
+       "${HOME}/.cache/wal-telegram/background.jpg"
+
+    printf '%s' "Ocean" >"${HOME}/.current-theme"
+
+  elif [[ "$option" == --lighter ]]; then
+    sed -i -e 's/! Source .*/! Source material-lighter colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-lighter.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-lighter colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-lighter.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-lighter colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-lighter.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Material .*_  <name>Material Lighter</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-lighter.rasi_' \
+           "${HOME}/.Xresources"
+
+    sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'lighter'/" \
+           "${HOME}/.config/nvim/init.vim"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/lighter.jpg"
+
+    cp "${HOME}/progetti/themes/telegram/material-lighter.tdesktop-theme" \
+       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+
+    cp "${HOME}/progetti/wallpapers/lighter.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     printf '%s' "Ocean" >"${HOME}/.current-theme"
