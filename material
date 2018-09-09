@@ -24,6 +24,9 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-default.rasi_' \
            "${HOME}/.Xresources"
 
+    sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'default'/" \
+           "${HOME}/.config/nvim/init.vim"
+
     feh --bg-fill "${HOME}/progetti/wallpapers/default.jpg"
 
     cp "${HOME}/progetti/themes/telegram/material-default.tdesktop-theme" \
@@ -53,6 +56,9 @@ refresh_theme() {
 
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-palenight.rasi_' \
            "${HOME}/.Xresources"
+
+    sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'palenight'/" \
+           "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/palenight.jpg"
 
@@ -84,6 +90,9 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-darker.rasi_' \
            "${HOME}/.Xresources"
 
+    sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'darker'/" \
+           "${HOME}/.config/nvim/init.vim"
+
     feh --bg-fill "${HOME}/progetti/wallpapers/darker.jpg"
 
     cp "${HOME}/progetti/themes/telegram/material-darker.tdesktop-theme" \
@@ -113,6 +122,9 @@ refresh_theme() {
 
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-ocean.rasi_' \
            "${HOME}/.Xresources"
+
+    sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'ocean'/" \
+           "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/ocean.jpg"
 
