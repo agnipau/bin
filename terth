@@ -22,4 +22,10 @@ elif [[ "$1" == --lighter ]]; then
   cp "${HOME}/progetti/themes/termux/material-lighter" \
      "${HOME}/.termux/colors.properties"
   termux-reload-settings
+elif [[ "$1" == --auto ]]; then
+  # shellcheck disable=SC2002
+  theme="$(basename "$(cat "${HOME}/.config/fish/config.fish" | rg 'material' | tail -n1)")"
+  cp "${HOME}/progetti/themes/termux/${theme/.fish}" \
+     "${HOME}/.termux/colors.properties"
+  termux-reload-settings
 fi
