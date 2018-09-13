@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Tiny wrapper for AlgoBuild.
+
+java -jar "${HOME}/java/algo.jar"
