@@ -33,8 +33,7 @@ send_to_terms() {
 # Hide terminal cursors when taking a scrot.
 send_to_terms "\\e[?25l"
 sleep 0.5
-import -window root "$scr".png &
-sleep 2
+import -window root "$scr".png
 send_to_terms "\\e[?25h"
 
 # Open the screenshot in pqiv.
