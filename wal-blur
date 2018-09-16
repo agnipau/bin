@@ -4,10 +4,7 @@
 
 # Create some required variables.
 tmpdir="$(mktemp -d)"
-wal="$(printf '%s\n' "$(<"${HOME}/.fehbg")" \
-      | awk '{print $3}' \
-      | sed "s/'//g" \
-      | tail -n1)"
+wal="$(<"${HOME}/.cache/wal/wal")"
 ext="${wal#*.}"
 
 # Blur the image.
