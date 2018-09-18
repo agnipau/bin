@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Small utility to convert binary numbers to decimal.
+
+nbin="$1"
+nbin_len="$(printf '%s' "$nbin" | wc -m)"
+c="$nbin_len"
+p=0
+
+while [[ "$c" -gt 0 ]]; do
+  partial_dec="$(( "$(printf '%s' "$nbin" | cut -c"$c"-"$c")" * 2 ** "$p" ))"
+  dec="$((dec + partial_dec))"
+  ((c--))
+  ((p++))
+done
+
+printf '%s\n' "$dec"

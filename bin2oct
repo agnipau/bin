@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Small utility to convert binary numbers to octal.
+
+"${HOME}/progetti/bin/dec2oct" "$("${HOME}/progetti/bin/bin2dec" "$1")"

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Small utility to convert binaru numbers to hexadecimal.
+
+"${HOME}/progetti/bin/dec2hex" "$("${HOME}/progetti/bin/bin2dec" "$1")"

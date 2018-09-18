@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#
+# Small utility to convert decimal numbers to binary.
+
+calc_reminder() {
+  reminder="$(( dividend_bak - "$(( dividend * 2 ))" ))"
+  [[ "$dividend" -eq 0 ]] && reminder=1
+
+  reminder_total+="$reminder"
+}
+
+ndec="$1"
+dividend="$ndec"
+
+while true; do
+  if [[ "$dividend" -ne 0 ]]; then
+    dividend_bak="$dividend"
+    partial="$(bc -l <<<"$dividend / 2" )"
+    dividend="$(printf '%s' "$partial" | cut -d. -f1)"
+
+    if [[ "$(printf '%s' "$partial" | cut -d. -f2 | cut -c1-1)" -ne 0 ]]; then
+      calc_reminder
+    else
+      reminder_total+=0
+    fi
+  else
+    break
+  fi
+done
+
+
+printf '%s\n' "$(printf '%s' "$reminder_total" | rev)"

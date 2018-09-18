@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# Small utility to convert hexadecimal numbers to decimal.
+
+letter_to_number() {
+  letter="$1"
+
+  if [[ "$letter" =~ ^[Aa]$ ]]; then
+    letter=10
+  elif [[ "$letter" =~ ^[Bb]$ ]]; then
+    letter=11
+  elif [[ "$letter" =~ ^[Cc]$ ]]; then
+    letter=12
+  elif [[ "$letter" =~ ^[Dd]$ ]]; then
+    letter=13
+  elif [[ "$letter" =~ ^[Ee]$ ]]; then
+    letter=14
+  elif [[ "$letter" =~ ^[Ff]$ ]]; then
+    letter=15
+  fi
+
+  printf '%s' "$letter"
+}
+
+nhex="$1"
+nhex_len="$(printf '%s' "$nhex" | wc -m)"
+c="$nhex_len"
+p=0
+
+while [[ "$c" -gt 0 ]]; do
+  partial_dec="$(( "$(letter_to_number "$(printf '%s' "$nhex" | cut -c"$c"-"$c")")" * 16 ** "$p" ))"
+  dec="$((dec + partial_dec))"
+  ((c--))
+  ((p++))
+done
+
+printf '%s\n' "$dec"

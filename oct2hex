@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Small utility to convert octal numbers to hexadecimal.
+
+"${HOME}/progetti/bin/dec2hex" "$("${HOME}/progetti/bin/oct2dec" "$1")"
