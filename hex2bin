@@ -3,6 +3,7 @@
 # Small script for converting hexadecimal numbers to binary using bc.
 
 [[ "$1" =~ [g-z] || "$1" =~ [G-Z] ]] && \
-  printf '%b\n' "\\e[1;31m::\\e[0m \\e[1;37mImpara a scrivere e ritenta, sarai più fortunato.\\e[0m"
+  printf '%b\n' "\\e[1;31m::\\e[0m \\e[1;37mImpara a scrivere e ritenta, sarai più fortunato.\\e[0m" && \
+  exit 1
 
 bc <<<"ibase=16; obase=2; $1"
