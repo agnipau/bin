@@ -2,7 +2,7 @@
 #
 # Small script for converting hexadecimal numbers to octal using bc.
 
-[[ "$1" =~ [g-z] || "$1" =~ [G-Z] ]] && \
+[[ "$1" =~ [a-z] || "$1" =~ [G-Z] ]] && \
   printf '%b\n' "\\e[1;31m::\\e[0m \\e[1;37mImpara a scrivere e ritenta, sarai più fortunato.\\e[0m" && \
   exit 1
 
