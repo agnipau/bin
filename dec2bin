@@ -1,4 +1,4 @@
-#!/usr/bin/env/bash
+#!/usr/bin/env bash
 #
 # Small script for converting decimal numbers to binary using bc.
 
