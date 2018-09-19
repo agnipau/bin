@@ -6,4 +6,4 @@
   printf '%b\n' "\\e[1;31m::\\e[0m \\e[1;37mImpara a scrivere e ritenta, sarai più fortunato.\\e[0m" && \
   exit 1
 
-bc <<<"ibase=8; obase=10; $1"
+bc <<<"ibase=8; $1"
