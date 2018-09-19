@@ -1,17 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env/bash
 #
-# Small utility to convert octal numbers to decimal.
+# Small script for converting octal numbers to decimal using bc.
 
-noct="$1"
-noct_len="$(printf '%s' "$noct" | wc -m)"
-c="$noct_len"
-p=0
+[[ "$1" =~ [8-9] || "$1" =~ [a-z] || "$1" =~ [A-Z] ]] && \
+  printf '%b\n' "\\e[1;31m::\\e[0m \\e[1;37mImpara a scrivere e ritenta, sarai più fortunato.\\e[0m"
 
-while [[ "$c" -gt 0 ]]; do
-  partial_dec="$(( "$(printf '%s' "$noct" | cut -c"$c"-"$c")" * 8 ** "$p" ))"
-  dec="$((dec + partial_dec))"
-  ((c--))
-  ((p++))
-done
-
-printf '%s\n' "$dec"
+bc <<<"ibase=8; obase=10; $1"

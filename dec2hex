@@ -1,71 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env/bash
 #
-# Small utility to convert decimal numbers to binary.
+# Small script for converting decimal numbers to hexadecimal using bc.
 
-check_if_null() {
-  if [[ "$(printf '%s' "$partial" | cut -d. -f2)" =~ [1-9] ]]; then
-    checkres="nonzero"
-  fi
-}
+[[ "$1" =~ [a-z] || "$1" =~ [A-Z] ]] && \
+  printf '%b\n' "\\e[1;31m::\\e[0m \\e[1;37mImpara a scrivere e ritenta, sarai più fortunato.\\e[0m"
 
-number_to_letter() {
-  number="$1"
-
-  if [[ "$number" -eq 10 ]]; then
-    letter='A'
-  elif [[ "$number" -eq 11 ]]; then
-    letter='B'
-  elif [[ "$number" -eq 12 ]]; then
-    letter='C'
-  elif [[ "$number" -eq 13 ]]; then
-    letter='D'
-  elif [[ "$number" -eq 14 ]]; then
-    letter='E'
-  elif [[ "$number" -eq 15 ]]; then
-    letter='F'
-  fi
-
-  reminder_total+="$letter"
-}
-
-calc_reminder() {
-  if [[ "$dividend" -eq 0 ]]; then
-    if [[ "$dividend_bak" -ge 10 ]]; then
-      number_to_letter "$dividend_bak"
-    else
-      reminder_total+="$dividend_bak"
-    fi
-  else
-    reminder="$(( dividend_bak - "$(( dividend * 16 ))" ))"
-
-    if [[ "$reminder" -ge 10 ]]; then
-      number_to_letter "$reminder"
-    else
-      reminder_total+="$reminder"
-    fi
-  fi
-}
-
-ndec="$1"
-dividend="$ndec"
-
-while true; do
-  if [[ "$dividend" -ne 0 ]]; then
-    dividend_bak="$dividend"
-    partial="$(bc -l <<<"$dividend / 16" )"
-    dividend="$(printf '%s' "$partial" | cut -d. -f1)"
-    [[ -z "$dividend" ]] && dividend=0
-
-    check_if_null
-    if [[ "$checkres" == nonzero ]]; then
-      calc_reminder
-    else
-      reminder_total+=0
-    fi
-  else
-    break
-  fi
-done
-
-
-printf '%s\n' "$(printf '%s' "$reminder_total" | rev)"
+bc <<<"ibase=10; obase=16; $1"

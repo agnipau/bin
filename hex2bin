@@ -1,5 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env/bash
 #
-# Small utility to convert hexadecimal numbers to binary.
+# Small script for converting hexadecimal numbers to binary using bc.
 
-"${HOME}/progetti/bin/dec2bin" "$("${HOME}/progetti/bin/hex2dec" "$1")"
+[[ "$1" =~ [g-z] || "$1" =~ [G-Z] ]] && \
+  printf '%b\n' "\\e[1;31m::\\e[0m \\e[1;37mImpara a scrivere e ritenta, sarai più fortunato.\\e[0m"
+
+bc <<<"ibase=16; obase=2; $1"
