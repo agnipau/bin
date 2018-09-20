@@ -26,7 +26,12 @@ approssima() {
     votapprox=true
   fi
 
-  if [[ "$(printf '%s' "$media" | cut -d. -f2 | cut -c3-3)" -eq 0 && "$medapprox" == false ]]; then
+  if [[ "$(printf '%s' "$media" | cut -d. -f2 | cut -c2-2)" -eq 0 && "$medapprox" == false ]]; then
+    media="$(printf '%s' "$media" \
+            | cut -d. -f1).$(printf '%s' "$media" \
+            | cut -d. -f2 \
+            | cut -c1-1)"
+  elif [[ "$(printf '%s' "$media" | cut -d. -f2 | cut -c3-3)" -eq 0 && "$medapprox" == false ]]; then
     media="$(printf '%s' "$media" \
             | cut -d. -f1).$(printf '%s' "$media" \
             | cut -d. -f2 \
@@ -47,7 +52,12 @@ approssima() {
             | cut -c3-3)" - 1 ))"
   fi
 
-  if [[ "$(printf '%s' "$voto_per_suff" | cut -d. -f2 | cut -c3-3)" -eq 0 || "$votapprox" == false ]]; then
+  if [[ "$(printf '%s' "$voto_per_suff" | cut -d. -f2 | cut -c2-2)" -eq 0 || "$votapprox" == false ]]; then
+    voto_per_suff="$(printf '%s' "$voto_per_suff" \
+                    | cut -d. -f1).$(printf '%s' "$voto_per_suff" \
+                    | cut -d. -f2 \
+                    | cut -c1-1)"
+  elif [[ "$(printf '%s' "$voto_per_suff" | cut -d. -f2 | cut -c3-3)" -eq 0 || "$votapprox" == false ]]; then
     voto_per_suff="$(printf '%s' "$voto_per_suff" \
                     | cut -d. -f1).$(printf '%s' "$voto_per_suff" \
                     | cut -d. -f2 \
