@@ -35,6 +35,9 @@ refresh_theme() {
     cp "${HOME}/progetti/wallpapers/default.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
+    cp "${HOME}/progetti/themes/netwmpager/material-default.config" \
+       "${HOME}/.config/netwmpager/config"
+
     printf '%s' "Default" >"${HOME}/.current-theme"
 
   elif [[ "$option" == --palenight ]]; then
@@ -67,6 +70,9 @@ refresh_theme() {
 
     cp "${HOME}/progetti/wallpapers/palenight.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
+
+    cp "${HOME}/progetti/themes/netwmpager/material-palenight.config" \
+       "${HOME}/.config/netwmpager/config"
 
     printf '%s' "Palenight" >"${HOME}/.current-theme"
 
@@ -101,6 +107,9 @@ refresh_theme() {
     cp "${HOME}/progetti/wallpapers/darker.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
+    cp "${HOME}/progetti/themes/netwmpager/material-darker.config" \
+       "${HOME}/.config/netwmpager/config"
+
     printf '%s' "Darker" >"${HOME}/.current-theme"
 
   elif [[ "$option" == --ocean ]]; then
@@ -133,6 +142,9 @@ refresh_theme() {
 
     cp "${HOME}/progetti/wallpapers/ocean.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
+
+    cp "${HOME}/progetti/themes/netwmpager/material-ocean.config" \
+       "${HOME}/.config/netwmpager/config"
 
     printf '%s' "Ocean" >"${HOME}/.current-theme"
 
@@ -167,7 +179,10 @@ refresh_theme() {
     cp "${HOME}/progetti/wallpapers/lighter.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
-    printf '%s' "Ocean" >"${HOME}/.current-theme"
+    cp "${HOME}/progetti/themes/netwmpager/material-lighter.config" \
+       "${HOME}/.config/netwmpager/config"
+
+    printf '%s' "Lighter" >"${HOME}/.current-theme"
 
   else
     exit 1
