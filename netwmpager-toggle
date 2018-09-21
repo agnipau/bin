@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# A script binded in my openbox rc.xml for toggling netwmpager.
+
+killall -q polybar
+netwmpager &
+sleep 3
+polybar bar-bottom &
