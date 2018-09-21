@@ -3,6 +3,8 @@
 # A script binded in my openbox rc.xml for toggling netwmpager.
 
 killall -q polybar
+sleep 1
 netwmpager &
 sleep 3
+killall -q netwmpager
 polybar bar-bottom &
