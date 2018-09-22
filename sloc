@@ -3,23 +3,22 @@
 # A bash script for calculating the sloc count of a codebase.
 
 total_count() {
-  # shellcheck disable=SC2044
-  for file in $(find . -path ./.git -prune -o -print); do
-    [[ -f "$file" ]] && sloccount="$(( sloccount + $(wc -l "$file" | awk '{print $1}') ))"
-  done
-  printf '%b\n' "\\e[1;31m:: \\e[1;37m$sloccount total sloc\\e[0m"
+  if [[ -z "$dir" ]]; then
+    # shellcheck disable=SC2044
+    for file in $(find . -path ./.git -prune -o -print); do
+      [[ -f "$file" ]] && sloccount="$(( sloccount + $(wc -l "$file" | awk '{print $1}') ))"
+    done
+    printf '%b\n' "\\e[1;31m:: \\e[1;37m$sloccount total sloc\\e[0m"
+  else
+    # shellcheck disable=SC2044
+    for file in $(find "$dir" -path ./.git -prune -o -print); do
+      [[ -f "$file" ]] && sloccount="$(( sloccount + $(wc -l "$file" | awk '{print $1}') ))"
+    done
+    printf '%b\n' "\\e[1;31m:: \\e[1;37m$sloccount total sloc\\e[0m"
+  fi
 }
 
 incremental_count() {
-  # shellcheck disable=SC2044
-  for file in $(find . -path ./.git -prune -o -print); do
-    [[ -f "$file" ]] && \
-      sloccount="$(wc -l "$file" | awk '{print $1}')" && \
-      printf '%b\n' "\\e[1;31m:: \\e[1;37m$sloccount sloc (${file/.\/})\\e[0m"
-  done
-}
-
-single_count() {
   if [[ -f "$argument" ]]; then
     printf '%b\n' "\\e[1;31m:: \\e[1;37m$(wc -l "$argument" | awk '{print $1}') sloc ($argument)\\e[0m"
   elif [[ -d "$argument" ]]; then
@@ -33,13 +32,12 @@ single_count() {
 }
 
 if [[ -z "$1" ]]; then
-  printf '%b\n' "\\e[1;31m:: Use the --total parameter to view the total sloc count of the codebase or the --incremental parameter to view the sloc count for every file of the codebase.\\e[0m"
+  printf '%b\n' "\\e[1;31m:: Use the -t|--total parameter to view the total sloc count of the codebase. Don't use any parameter to view the sloc count for every file of the codebase or use the file name you want to view the sloc count of as \$1 parameter.\\e[0m"
   exit 1
-elif [[ "$1" == --total ]]; then
+elif [[ "$1" == --total || "$1" == -t ]]; then
+  dir="$2"
   total_count
-elif [[ "$1" == --incremental ]]; then
-  incremental_count
 else
   argument="$1"
-  single_count
+  incremental_count
 fi
