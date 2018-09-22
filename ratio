@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+#
+# A small script for calculating ratios.
+# You can name the variable to what you prefer.
+
+# Approximate $vv to 3 significant figures.
+approx_vv() {
+  vvapprox=false
+
+  [[ -z "$(printf '%s' "$vv" | cut -d. -f1)" ]] && \
+    vv=0."$(printf '%s' "$vv" \
+                      | cut -d. -f2)"
+
+  [[ "$(printf '%s' "$vv" | cut -d. -f2)" -eq 0 ]] && \
+    vv="$(printf '%s' "$vv" \
+                    | cut -d. -f1)" && \
+    vvapprox=true
+
+  grep -q \\. <<<"$vv" || return
+
+  if [[ "$(printf '%s' "$vv" | cut -d. -f2 | cut -c2-2)" -eq 0 || "$vvapprox" == false ]]; then
+    vv="$(printf '%s' "$vv" \
+                    | cut -d. -f1).$(printf '%s' "$vv" \
+                    | cut -d. -f2 \
+                    | cut -c1-1)"
+  elif [[ "$(printf '%s' "$vv" | cut -d. -f2 | cut -c3-3)" -eq 0 || "$vvapprox" == false ]]; then
+    vv="$(printf '%s' "$vv" \
+                    | cut -d. -f1).$(printf '%s' "$vv" \
+                    | cut -d. -f2 \
+                    | cut -c1-2)"
+  elif [[ "$(printf '%s' "$vv" | cut -d. -f2 | cut -c4-4)" -ge 5 || "$vvapprox" == false ]]; then
+    vv="$(printf '%s' "$vv" \
+                    | cut -d. -f1).$(printf '%s' "$vv" \
+                    | cut -d. -f2 \
+                    | cut -c1-2)$(( "$(printf '%s' "$vv" \
+                    | cut -d. -f2 \
+                    | cut -c3-3)" + 1 ))"
+  elif [[ "$vvapprox" == false ]]; then
+    vv="$(printf '%s' "$vv" \
+                    | cut -d. -f1).$(printf '%s' "$vv" \
+                    | cut -d. -f2 \
+                    | cut -c1-2)$(( "$(printf '%s' "$vv" \
+                    | cut -d. -f2 \
+                    | cut -c3-3)" - 1 ))"
+  fi
+}
+
+[[ -z "$1" ]] && \
+  printf '%b\n' '\\e[1;31m:: Insert a ratio betweeen double quotes (e.g. ratio "2 : 10 = x : 20"; or ratio "40 * x = 20 * 6")\\e[0m' && \
+  exit 1
+
+e1="$(printf '%s' "$1"   | awk '{print $1}')"
+m1="$(printf '%s' "$1"   | awk '{print $3}')"
+m2="$(printf '%s' "$1"   | awk '{print $5}')"
+e2="$(printf '%s' "$1"   | awk '{print $7}')"
+sign="$(printf '%s' "$1" | awk '{print $2}')"
+
+# Find the variable name.
+if [[ "$sign" == ':' ]]; then
+  if [[ ! "$e1" =~ ^[0-9]+$ ]]; then
+    f1="$m1"
+    f2="$m2"
+    d="$e2"
+  elif [[ ! "$m1" =~ ^[0-9]+$ ]]; then
+    f1="$e1"
+    f2="$e2"
+    d="$m2"
+  elif [[ ! "$m2" =~ ^[0-9]+$ ]]; then
+    f1="$e1"
+    f2="$e2"
+    d="$m1"
+  elif [[ ! "$e2" =~ ^[0-9]+$ ]]; then
+    f1="$m1"
+    f2="$m2"
+    d="$e1"
+  fi
+elif [[ "$sign" == '*' ]]; then
+  if [[ ! "$e1" =~ ^[0-9]+$ ]]; then
+    f1="$m2"
+    f2="$e2"
+    d="$m1"
+  elif [[ ! "$m1" =~ ^[0-9]+$ ]]; then
+    f1="$m2"
+    f2="$e2"
+    d="$e1"
+  elif [[ ! "$m2" =~ ^[0-9]+$ ]]; then
+    f1="$e1"
+    f2="$m1"
+    d="$e2"
+  elif [[ ! "$e2" =~ ^[0-9]+$ ]]; then
+    f1="$e1"
+    f2="$m1"
+    d="$m2"
+  fi
+fi
+
+vv="$(bc -l <<<"($f1 * $f2) / $d")"
+approx_vv
+printf '%s\n' "$vv"
