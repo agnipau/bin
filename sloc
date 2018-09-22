@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#
+# A bash script for calculating the sloc count of a codebase.
+
+total_count() {
+  # shellcheck disable=SC2044
+  for file in $(find . -path ./.git -prune -o -print); do
+    [[ -f "$file" ]] && sloccount="$(( sloccount + $(wc -l "$file" | awk '{print $1}') ))"
+  done
+  printf '%b\n' "\\e[1;31m:: \\e[1;37m$sloccount total sloc\\e[0m"
+}
+
+incremental_count() {
+  # shellcheck disable=SC2044
+  for file in $(find . -path ./.git -prune -o -print); do
+    [[ -f "$file" ]] && \
+      sloccount="$(wc -l "$file" | awk '{print $1}')" && \
+      printf '%b\n' "\\e[1;31m:: \\e[1;37m$sloccount sloc (${file/.\/})\\e[0m"
+  done
+}
+
+single_count() {
+  printf '%b\n' "\\e[1;31m:: \\e[1;37m$(wc -l "$file" | awk '{print $1}') sloc (${file##*/})\\e[0m"
+}
+
+if [[ -z "$1" ]]; then
+  printf '%b\n' "\\e[1;31m:: Use the --total parameter to view the total sloc count of the codebase or the --incremental parameter to view the sloc count for every file of the codebase.\\e[0m"
+  exit 1
+elif [[ "$1" == --total ]]; then
+  total_count
+elif [[ "$1" == --incremental ]]; then
+  incremental_count
+else
+  file="$1"
+  single_count
+fi
