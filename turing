@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+#
+# Turing machine in bash because I am a masochist.
+
+# Parse arguments.
+if [[ "$1" == --mdt || "$1" == -m ]]; then
+  mdt="$2"
+
+  # shellcheck disable=SC2155
+  declare -a tape="$(printf '%s\n' "$4" \
+                    | sed -e "s/,/ /g" \
+                          -e "s/>/'>'/g" \
+                          -e "s/</'<'/g")"
+  tape+=(-)
+elif [[ "$1" == --tape || "$1" == -t ]]; then
+  mdt="$4"
+
+  # shellcheck disable=SC2155
+  declare -a tape="$(printf '%s\n' "$2" \
+                    | sed -e "s/,/ /g" \
+                          -e "s/>/'>'/g" \
+                          -e "s/</'<'/g")"
+  tape+=(-)
+fi
+
+mdt_len="$(wc -l "$mdt" | awk '{print $1}')"
+actual_state=0
+actual_char=0
+continue=true
+
+while [[ "$continue" == true ]]; do
+  continue=false
+  for ((c=1; c<="$mdt_len"; c++)); do
+    # shellcheck disable=SC2155
+    declare -a current_instruction="$(printf '%s\n' "$(<"$mdt")" \
+                          | head -n"$c" \
+                          | tail -n1 \
+                          | sed -e "s/,/ /g" \
+                                -e "s/>/'>'/g" \
+                                -e "s/</'<'/g")"
+
+    # If the initial state is the actual state.
+    if [[ "${current_instruction[0]}" -eq "$actual_state" ]]; then
+      continue=true
+      # If the read charachter is equal to the actual character in the "$tape".
+      if [[ "${current_instruction[1]}" == "${tape[$actual_char]}" ]]; then
+        actual_state="${current_instruction[2]}"
+        declare -a tape[$actual_char]="${current_instruction[3]}"
+
+        if [[ "${current_instruction[4]}" == '>' ]]; then
+          actual_char="$((actual_char + 1))"
+        elif [[ "${current_instruction[4]}" == '<' ]]; then
+          actual_char="$((actual_char - 1))"
+        fi
+      fi
+    fi
+  done
+done
+
+printf '%s\n' "${tape[*]}"
