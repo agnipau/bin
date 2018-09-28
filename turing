@@ -62,7 +62,7 @@ while [[ "$continue" == true ]]; do
           [[ "${#tape[@]}" -lt "$((actual_char + 1))" ]] && tape+=(-)
         elif [[ "${current_instruction[4]}" == '<' ]]; then
           actual_char="$((actual_char - 1))"
-          [[ "$actual_char" -lt 0 ]] && tape=(- "${tape[@]}")
+          [[ "$actual_char" -lt 0 ]] && tape=(- "${tape[@]}") && actual_char=0
         fi
       fi
     fi
