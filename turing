@@ -2,23 +2,33 @@
 #
 # Turing machine in bash because I am a masochist.
 
+# Convert "$tape" to an array.
+input_to_tape_array() {
+  for ((c=0; c<"${#1}"; c++)); do
+    declare -ga tape[$c]="${1:$c:1}"
+  done
+}
+
+# Convert the "$tape" array to a better looking output.
+tape_array_to_output() {
+  for i in "${!tape[@]}"; do
+    [[ "${tape[$i]}" == '-' ]] && unset -v tape["$i"]
+  done
+
+  for ((c=0; c<"${#tape[@]}"; c++)); do
+    output+="${tape[$c]}"
+  done
+
+  printf '%s\n' "$output"
+}
+
 # Parse arguments.
 if [[ "$1" == --mdt || "$1" == -m ]]; then
   mdt="$2"
-
-  # shellcheck disable=SC2155
-  declare -a tape="$(printf '%s\n' "$4" \
-                    | sed -e "s/,/ /g" \
-                          -e "s/>/'>'/g" \
-                          -e "s/</'<'/g")"
+  input_to_tape_array "$4"
 elif [[ "$1" == --tape || "$1" == -t ]]; then
   mdt="$4"
-
-  # shellcheck disable=SC2155
-  declare -a tape="$(printf '%s\n' "$2" \
-                    | sed -e "s/,/ /g" \
-                          -e "s/>/'>'/g" \
-                          -e "s/</'<'/g")"
+  input_to_tape_array "$2"
 fi
 
 mdt_len="$(wc -l "$mdt" | awk '{print $1}')"
@@ -28,18 +38,20 @@ continue=true
 
 while [[ "$continue" == true ]]; do
   continue=false
+
   for ((c=1; c<="$mdt_len"; c++)); do
     # shellcheck disable=SC2155
     declare -a current_instruction="$(printf '%s\n' "$(<"$mdt")" \
-                          | head -n"$c" \
-                          | tail -n1 \
-                          | sed -e "s/,/ /g" \
-                                -e "s/>/'>'/g" \
-                                -e "s/</'<'/g")"
+                                     | head -n"$c" \
+                                     | tail -n1 \
+                                     | sed -e "s/,/ /g" \
+                                           -e "s/>/'>'/g" \
+                                           -e "s/</'<'/g")"
 
     # If the initial state is the actual state.
     if [[ "${current_instruction[0]}" -eq "$actual_state" ]]; then
       continue=true
+
       # If the read charachter is equal to the actual character in the "$tape".
       if [[ "${current_instruction[1]}" == "${tape[$actual_char]}" ]]; then
         actual_state="${current_instruction[2]}"
@@ -57,8 +69,4 @@ while [[ "$continue" == true ]]; do
   done
 done
 
-for i in "${!tape[@]}"; do
-  [[ "${tape[$i]}" == '-' ]] && unset -v tape["$i"]
-done
-
-printf '%s\n' "${tape[*]}"
+tape_array_to_output
