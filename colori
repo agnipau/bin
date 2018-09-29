@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# A basic color script.
+
+printf '\n'
+
+for normal in {0..7}; do
+  printf '%b' "\\e[0;3${normal}m████  "
+done
+
+printf '\n'
+
+for bold in {0..7}; do
+  printf '%b' "\\e[1;3${bold}m████  "
+done
+
+printf '\n\n'
