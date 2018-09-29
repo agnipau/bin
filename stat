@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#
+# Outputs cpu usage, ram usage and temperature.
+
+cpu() {
+  ptwo="$(printf '%s\n' "$(</proc/stat)"  | head -n1 | cut -d' ' -f3)"
+  pfour="$(printf '%s\n' "$(</proc/stat)" | head -n1 | cut -d' ' -f5)"
+  pfive="$(printf '%s\n' "$(</proc/stat)" | head -n1 | cut -d' ' -f6)"
+
+  cpu_usage="$(bc -l <<<"($ptwo + $pfour) * 100 / ($ptwo + $pfour + $pfive)" | cut -d. -f1)%"
+}
+
+ram() {
+  aram="$(printf '%s\n' "$(</proc/meminfo)" | head -n7 | tail -n1 | awk '{print $2}')"
+  tram="$(printf '%s\n' "$(</proc/meminfo)" | head -n1 | awk '{print $2}')"
+
+  ram_usage="$(bc -l <<<"($aram * 100) / $tram" | cut -d. -f1)%"
+}
+
+temp() {
+  cpu_temp="$(sensors | head -n4 | tail -n1 | awk '{print $3}' | cut -d. -f1 | cut -d+ -f2)°C"
+}
+
+main() {
+  cpu
+  ram
+  temp
+  printf '\n%b\n%b\n%b\n\n' "\\e[1;31m:: \\e[1;37mcpu  $cpu_usage\\e[0m" \
+                            "\\e[1;31m:: \\e[1;37mram  $ram_usage\\e[0m" \
+                            "\\e[1;31m:: \\e[1;37mtemp $cpu_temp\\e[0m"
+}
+
+main
