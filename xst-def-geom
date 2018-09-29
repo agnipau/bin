@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-# Script to fix the absence of a parameter for setting xst's default geometry values.
-# Requires xdotool.
-
-sleep 0.1
-xdotool windowsize "$(xdotool getwindowfocus)" 710 540
