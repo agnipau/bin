@@ -209,7 +209,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/gruvbox-dark.rasi_' \
            "${HOME}/.Xresources"
 
-    sed -i -e "s/^let g:gruvbox_variant = .*/let g:gruvbox_variant = 'dark'/" \
+    sed -i -e "s/^let g:gruvbox_variant  = .*/let g:gruvbox_variant  = 'dark'/" \
            -e "s/^colorscheme .*/colorscheme gruvbox/" \
            "${HOME}/.config/nvim/init.vim"
 
@@ -246,7 +246,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/gruvbox-light.rasi_' \
            "${HOME}/.Xresources"
 
-    sed -i -e "s/^let g:gruvbox_variant = .*/let g:gruvbox_variant = 'light'/" \
+    sed -i -e "s/^let g:gruvbox_variant  = .*/let g:gruvbox_variant  = 'light'/" \
            -e "s/^colorscheme .*/colorscheme gruvbox/" \
            "${HOME}/.config/nvim/init.vim"
 
