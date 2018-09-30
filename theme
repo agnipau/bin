@@ -207,12 +207,12 @@ refresh_theme() {
     sed -i -e "s/^let g:gruvbox_variant = .*/let g:gruvbox_variant = 'dark'/" \
            "${HOME}/.config/nvim/init.vim"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox.jpg"
+    feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox.png"
 
     cp "${HOME}/progetti/themes/telegram/gruvbox-dark.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/gruvbox.jpg" \
+    cp "${HOME}/progetti/wallpapers/gruvbox.png" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     cp "${HOME}/progetti/themes/netwmpager/gruvbox-dark.config" \
@@ -243,12 +243,12 @@ refresh_theme() {
     sed -i -e "s/^let g:gruvbox_variant = .*/let g:gruvbox_variant = 'light'/" \
            "${HOME}/.config/nvim/init.vim"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox.jpg"
+    feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox.png"
 
     cp "${HOME}/progetti/themes/telegram/gruvbox-light.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/gruvbox.jpg" \
+    cp "${HOME}/progetti/wallpapers/gruvbox.png" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     cp "${HOME}/progetti/themes/netwmpager/gruvbox-dark.config" \
