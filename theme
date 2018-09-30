@@ -25,6 +25,7 @@ refresh_theme() {
            "${HOME}/.Xresources"
 
     sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'default'/" \
+           -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-default.jpg"
@@ -61,6 +62,7 @@ refresh_theme() {
            "${HOME}/.Xresources"
 
     sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'palenight'/" \
+           -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-palenight.jpg"
@@ -97,6 +99,7 @@ refresh_theme() {
            "${HOME}/.Xresources"
 
     sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'darker'/" \
+           -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-darker.jpg"
@@ -133,6 +136,7 @@ refresh_theme() {
            "${HOME}/.Xresources"
 
     sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'ocean'/" \
+           -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-ocean.jpg"
@@ -169,6 +173,7 @@ refresh_theme() {
            "${HOME}/.Xresources"
 
     sed -i -e "s/^let g:material_variant = .*/let g:material_variant = 'lighter'/" \
+           -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-lighter.jpg"
@@ -205,6 +210,7 @@ refresh_theme() {
            "${HOME}/.Xresources"
 
     sed -i -e "s/^let g:gruvbox_variant = .*/let g:gruvbox_variant = 'dark'/" \
+           -e "s/^colorscheme .*/colorscheme gruvbox/" \
            "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox.png"
@@ -241,6 +247,7 @@ refresh_theme() {
            "${HOME}/.Xresources"
 
     sed -i -e "s/^let g:gruvbox_variant = .*/let g:gruvbox_variant = 'light'/" \
+           -e "s/^colorscheme .*/colorscheme gruvbox/" \
            "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox.png"
