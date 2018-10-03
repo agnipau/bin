@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# Update mpd database.
+
+pkill mpd
+rm -f "${HOME}/.mpd/mpd.db"
+mpd 2>/dev/null
