@@ -5,4 +5,4 @@
 convert "$1" \
   -filter Gaussian \
   -blur 0x8 \
-  "${1##.*}-blurred.${1##*.}"
+  "${1%%.*}-blurred.${1##*.}"
