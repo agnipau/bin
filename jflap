@@ -2,4 +2,4 @@
 #
 # Tiny wrapper for JFLAP.
 
-java -jar "${HOME}/java/jflap.jar"
+java -jar "${HOME}/java/jflap.jar" &
