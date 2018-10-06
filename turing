@@ -11,6 +11,8 @@ input_to_tape_array() {
 
 # Convert the "$tape" array to a better looking output.
 tape_array_to_output() {
+  tape_len="${#tape[@]}"
+
   for i in "${!tape[@]}"; do
     if [[ -z "$first_nblank" ]]; then
       if [[ "${tape[$i]}" != '-' ]]; then
@@ -29,7 +31,7 @@ tape_array_to_output() {
     fi
   done
 
-  for ((c=0; c<"${#tape[@]}"; c++)); do
+  for ((c=0; c<"$tape_len"; c++)); do
     output+="${tape[$c]}"
   done
 
@@ -77,6 +79,9 @@ while [[ "$continue" == true ]]; do
         elif [[ "${current_instruction[4]}" == '<' ]]; then
           actual_char="$((actual_char - 1))"
           [[ "$actual_char" -lt 0 ]] && tape=(- "${tape[@]}") && actual_char=0
+        elif [[ "${current_instruction[4]}" == '-' ]]; then
+          continue=false
+          break
         fi
       fi
     fi

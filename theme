@@ -33,7 +33,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/material-default.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/material-default.jpg" \
+    cp "${HOME}/progetti/wallpapers/material-default-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     cp "${HOME}/progetti/themes/netwmpager/material-default.config" \
@@ -70,7 +70,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/material-palenight.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/material-palenight.jpg" \
+    cp "${HOME}/progetti/wallpapers/material-palenight-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     cp "${HOME}/progetti/themes/netwmpager/material-palenight.config" \
@@ -107,7 +107,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/material-darker.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/material-darker.jpg" \
+    cp "${HOME}/progetti/wallpapers/material-darker-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     cp "${HOME}/progetti/themes/netwmpager/material-darker.config" \
@@ -144,7 +144,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/material-ocean.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/material-ocean.jpg" \
+    cp "${HOME}/progetti/wallpapers/material-ocean-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     cp "${HOME}/progetti/themes/netwmpager/material-ocean.config" \
@@ -181,7 +181,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/material-lighter.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/material-lighter.jpg" \
+    cp "${HOME}/progetti/wallpapers/material-lighter-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     cp "${HOME}/progetti/themes/netwmpager/material-lighter.config" \
@@ -218,7 +218,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/gruvbox-dark.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/gruvbox.png" \
+    cp "${HOME}/progetti/wallpapers/gruvbox-blurred.png" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     cp "${HOME}/progetti/themes/netwmpager/gruvbox-dark.config" \
@@ -255,7 +255,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/gruvbox-light.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/gruvbox.png" \
+    cp "${HOME}/progetti/wallpapers/gruvbox-blurred.png" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     cp "${HOME}/progetti/themes/netwmpager/gruvbox-dark.config" \
