@@ -12,7 +12,21 @@ input_to_tape_array() {
 # Convert the "$tape" array to a better looking output.
 tape_array_to_output() {
   for i in "${!tape[@]}"; do
-    [[ "${tape[$i]}" == '-' ]] && unset -v tape["$i"]
+    if [[ -z "$first_nblank" ]]; then
+      if [[ "${tape[$i]}" != '-' ]]; then
+        first_nblank="$i"
+      fi
+    elif [[ -z "$last_nblank" ]]; then
+      for i in $(printf '%s\n' "${!tape[@]}" | rev); do
+        [[ "${tape[$i]}" != '-' ]] && last_nblank="$i"
+      done
+    fi
+  done
+
+  for i in "${!tape[@]}"; do
+    if [[ "${tape[$i]}" == '-' && "$i" -lt "$first_nblank" && "$i" -gt "$last_nblank" ]]; then
+      unset -v tape["$i"]
+    fi
   done
 
   for ((c=0; c<"${#tape[@]}"; c++)); do
