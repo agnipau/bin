@@ -2,10 +2,19 @@
 #
 # Unblur my current desktop wallpaper.
 
-wal="$(printf '%s\n' "$(<"${HOME}/.fehbg")" \
-      | tail -n1 \
-      | awk '{print $3}' \
-      | sed "s/'//g")"
+if [[ "$(<"${HOME}/.current-theme")" == 'M Default' ]]; then
+  wal="${HOME}/progetti/wallpapers/material-default.jpg"
+elif [[ "$(<"${HOME}/.current-theme")" == 'M Palenight' ]]; then
+  wal="${HOME}/progetti/wallpapers/material-palenight.jpg"
+elif [[ "$(<"${HOME}/.current-theme")" == 'M Darker' ]]; then
+  wal="${HOME}/progetti/wallpapers/material-darker.jpg"
+elif [[ "$(<"${HOME}/.current-theme")" == 'M Ocean' ]]; then
+  wal="${HOME}/progetti/wallpapers/material-ocean.jpg"
+elif [[ "$(<"${HOME}/.current-theme")" == 'M Lighter' ]]; then
+  wal="${HOME}/progetti/wallpapers/material-lighter.jpg"
+else
+  wal="${HOME}/progetti/wallpapers/gruvbox.png.jpg"
+fi
 
 # Set the unblurred image as the desktop wallpaper.
 feh --bg-fill "$wal"
