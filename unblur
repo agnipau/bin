@@ -2,5 +2,10 @@
 #
 # Unblur my current desktop wallpaper.
 
+wal="$(printf '%s\n' "$(<"${HOME}/.fehbg")" \
+      | tail -n1 \
+      | awk '{print $3}' \
+      | sed "s/'//g")"
+
 # Set the unblurred image as the desktop wallpaper.
-feh --bg-fill "$(<"${HOME}/.cache/wal/wal")"
+feh --bg-fill "$wal"
