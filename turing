@@ -11,30 +11,34 @@ input_to_tape_array() {
 
 # Convert the "$tape" array to a better looking output.
 tape_array_to_output() {
-  printf '%s' "${tape[@]}"
-  tape_len="${#tape[@]}"
+  tape_len="$((${#tape[@]} - 1))"
 
+  # Save the first non-hyphen element of the array into the tape_nhmin var.
   for i in "${!tape[@]}"; do
-    [[ "${tape[$i]}" != '-' ]] && first_inblank="$i" && break
+    [[ "${tape[$i]}" != '-' ]] && tape_nhmin="$i" && break
   done
 
-  for i in $(printf '%s\n' "${!tape[@]}" | tr '\n' ' ' | rev); do
-    i="$(printf '%s' "$i" | rev)" && [[ "${tape[$i]}" != '-' ]] && last_inblank="$i" && break
+  # Save the last non-hyphen element of the array into the tape_nhmax var.
+  for i in $(printf '%s\n' "${!tape[@]}" | tr '\n' ' ' | rev | sed 's/^ //g'); do
+    i="$(printf '%s' "$i" | rev)" && [[ "${tape[$i]}" != '-' ]] && tape_nhmax="$i" && break
   done
 
-  for i in "${!tape[@]}"; do
-    if [[ "${tape[$i]}" == '-' && "$i" -lt "$first_inblank" || "$i" -gt "$last_inblank" ]]; then
+  # Create a list from 0 to "$tape_len".
+  tarr=0
+  for ((c=1; c<="$tape_len"; c++)); do
+    tarr+=" $c"
+  done
+
+  for i in $tarr; do
+    if [[ "${tape[$i]}" == '-' && "$i" -le "$tape_nhmin" || "$i" -gt "$tape_nhmax" ]]; then
       unset -v tape["$i"]
     fi
-
-    tape_len="${#tape[@]}"
   done
 
-  for ((c=0; c<"$tape_len"; c++)); do
-    output+="${tape[$c]}"
-  done
-
-  printf '%s\n' "$output"
+  printf '%s' "${tape[@]}"
+  printf '\n'
+  #printf '%s ' "${tape[@]}"
+  #printf '\n'
 }
 
 # Parse arguments.
