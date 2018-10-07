@@ -14,21 +14,19 @@ tape_array_to_output() {
   tape_len="${#tape[@]}"
 
   for i in "${!tape[@]}"; do
-    if [[ -z "$first_nblank" ]]; then
-      if [[ "${tape[$i]}" != '-' ]]; then
-        first_nblank="$i"
-      fi
-    elif [[ -z "$last_nblank" ]]; then
-      for i in $(printf '%s\n' "${!tape[@]}" | rev); do
-        [[ "${tape[$i]}" != '-' ]] && last_nblank="$i"
-      done
-    fi
+    [[ "${tape[$i]}" != '-' ]] && first_inblank="$i" && break
+  done
+
+  for i in $(printf '%s\n' "${!tape[@]}" | tr '\n' ' ' | rev); do
+    i="$(printf '%s' "$i" | rev)" && [[ "${tape[$i]}" != '-' ]] && last_inblank="$i" && break
   done
 
   for i in "${!tape[@]}"; do
-    if [[ "${tape[$i]}" == '-' && "$i" -lt "$first_nblank" && "$i" -gt "$last_nblank" ]]; then
+    if [[ "${tape[$i]}" == '-' && "$i" -lt "$first_inblank" || "$i" -gt "$last_inblank" ]]; then
       unset -v tape["$i"]
     fi
+
+    tape_len="${#tape[@]}"
   done
 
   for ((c=0; c<"$tape_len"; c++)); do
