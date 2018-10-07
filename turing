@@ -11,6 +11,7 @@ input_to_tape_array() {
 
 # Convert the "$tape" array to a better looking output.
 tape_array_to_output() {
+  printf '%s' "${tape[@]}"
   tape_len="${#tape[@]}"
 
   for i in "${!tape[@]}"; do
