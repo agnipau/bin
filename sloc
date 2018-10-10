@@ -31,11 +31,14 @@ incremental_count() {
   fi
 }
 
-if [[ -z "$1" ]]; then
+if [[ "$1" == --help || "$1" == -h ]]; then
   printf '%b\n' "\\e[1;31m:: Use the -t|--total parameter to view the total sloc count of the codebase. Don't use any parameter to view the sloc count for every file of the codebase or use the file name you want to view the sloc count of as \$1 parameter.\\e[0m"
   exit 1
 elif [[ "$1" == --total || "$1" == -t ]]; then
   dir="$2"
+  total_count
+elif [[ -z "$1" ]]; then
+  dir="$PWD"
   total_count
 else
   argument="$1"
