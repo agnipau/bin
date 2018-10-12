@@ -2,30 +2,70 @@
 #
 # TERmuxTHeme.
 
-if [[ "$1" == --default ]]; then
+if [[ "$1" == --material-default ]]; then
   cp "${HOME}/progetti/themes/termux/material-default" \
      "${HOME}/.termux/colors.properties"
   termux-reload-settings
-elif [[ "$1" == --palenight ]]; then
+elif [[ "$1" == --material-palenight ]]; then
   cp "${HOME}/progetti/themes/termux/material-palenight" \
      "${HOME}/.termux/colors.properties"
   termux-reload-settings
-elif [[ "$1" == --darker ]]; then
+elif [[ "$1" == --material-darker ]]; then
   cp "${HOME}/progetti/themes/termux/material-darker" \
      "${HOME}/.termux/colors.properties"
   termux-reload-settings
-elif [[ "$1" == --ocean ]]; then
+elif [[ "$1" == --material-ocean ]]; then
   cp "${HOME}/progetti/themes/termux/material-ocean" \
      "${HOME}/.termux/colors.properties"
   termux-reload-settings
-elif [[ "$1" == --lighter ]]; then
+elif [[ "$1" == --material-lighter ]]; then
   cp "${HOME}/progetti/themes/termux/material-lighter" \
      "${HOME}/.termux/colors.properties"
   termux-reload-settings
-elif [[ "$1" == --auto ]]; then
-  # shellcheck disable=SC2002
-  theme="$(basename "$(cat "${HOME}/.config/fish/config.fish" | rg 'material' | tail -n1)")"
-  cp "${HOME}/progetti/themes/termux/${theme/.fish}" \
+elif [[ "$1" == --gruvbox-dark ]]; then
+  cp "${HOME}/progetti/themes/termux/gruvbox-dark" \
      "${HOME}/.termux/colors.properties"
   termux-reload-settings
+elif [[ "$1" == --gruvbox-light ]]; then
+  cp "${HOME}/progetti/themes/termux/gruvbox-light" \
+     "${HOME}/.termux/colors.properties"
+  termux-reload-settings
+elif [[ "$1" == --dark+ ]]; then
+  cp "${HOME}/progetti/themes/termux/dark+" \
+     "${HOME}/.termux/colors.properties"
+  termux-reload-settings
+elif [[ -z "$1" || "$1" == --auto || "$1" == -a ]]; then
+  if [[ "$(<"${HOME}/.current-theme")" == 'M Default' ]]; then
+    cp "${HOME}/progetti/themes/termux/material-default" \
+       "${HOME}/.termux/colors.properties"
+    termux-reload-settings
+  elif [[ "$(<"${HOME}/.current-theme")" == 'M Palenight' ]]; then
+    cp "${HOME}/progetti/themes/termux/material-palenight" \
+       "${HOME}/.termux/colors.properties"
+    termux-reload-settings
+  elif [[ "$(<"${HOME}/.current-theme")" == 'M Darker' ]]; then
+    cp "${HOME}/progetti/themes/termux/material-darker" \
+       "${HOME}/.termux/colors.properties"
+    termux-reload-settings
+  elif [[ "$(<"${HOME}/.current-theme")" == 'M Ocean' ]]; then
+    cp "${HOME}/progetti/themes/termux/material-ocean" \
+       "${HOME}/.termux/colors.properties"
+    termux-reload-settings
+  elif [[ "$(<"${HOME}/.current-theme")" == 'M Lighter' ]]; then
+    cp "${HOME}/progetti/themes/termux/material-lighter" \
+       "${HOME}/.termux/colors.properties"
+    termux-reload-settings
+  elif [[ "$(<"${HOME}/.current-theme")" == 'D+' ]]; then
+    cp "${HOME}/progetti/themes/termux/dark+" \
+       "${HOME}/.termux/colors.properties"
+    termux-reload-settings
+  elif [[ "$(<"${HOME}/.current-theme")" == 'G Dark' ]]; then
+    cp "${HOME}/progetti/themes/termux/gruvbox-dark" \
+       "${HOME}/.termux/colors.properties"
+    termux-reload-settings
+  elif [[ "$(<"${HOME}/.current-theme")" == 'G Light' ]]; then
+    cp "${HOME}/progetti/themes/termux/gruvbox-light" \
+       "${HOME}/.termux/colors.properties"
+    termux-reload-settings
+  fi
 fi

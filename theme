@@ -36,9 +36,6 @@ refresh_theme() {
     cp "${HOME}/progetti/wallpapers/material-default-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
-    cp "${HOME}/progetti/themes/netwmpager/material-default.config" \
-       "${HOME}/.config/netwmpager/config"
-
     printf '%s' "M Default" >"${HOME}/.current-theme"
 
   elif [[ "$option" == --material-palenight ]]; then
@@ -72,9 +69,6 @@ refresh_theme() {
 
     cp "${HOME}/progetti/wallpapers/material-palenight-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
-
-    cp "${HOME}/progetti/themes/netwmpager/material-palenight.config" \
-       "${HOME}/.config/netwmpager/config"
 
     printf '%s' "M Palenight" >"${HOME}/.current-theme"
 
@@ -110,9 +104,6 @@ refresh_theme() {
     cp "${HOME}/progetti/wallpapers/material-darker-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
-    cp "${HOME}/progetti/themes/netwmpager/material-darker.config" \
-       "${HOME}/.config/netwmpager/config"
-
     printf '%s' "M Darker" >"${HOME}/.current-theme"
 
   elif [[ "$option" == --material-ocean ]]; then
@@ -146,9 +137,6 @@ refresh_theme() {
 
     cp "${HOME}/progetti/wallpapers/material-ocean-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
-
-    cp "${HOME}/progetti/themes/netwmpager/material-ocean.config" \
-       "${HOME}/.config/netwmpager/config"
 
     printf '%s' "M Ocean" >"${HOME}/.current-theme"
 
@@ -184,9 +172,6 @@ refresh_theme() {
     cp "${HOME}/progetti/wallpapers/material-lighter-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
-    cp "${HOME}/progetti/themes/netwmpager/material-lighter.config" \
-       "${HOME}/.config/netwmpager/config"
-
     printf '%s' "M Lighter" >"${HOME}/.current-theme"
 
   elif [[ "$option" == --gruvbox-dark ]]; then
@@ -220,9 +205,6 @@ refresh_theme() {
 
     cp "${HOME}/progetti/wallpapers/gruvbox-blurred.png" \
        "${HOME}/.cache/wal-telegram/background.jpg"
-
-    cp "${HOME}/progetti/themes/netwmpager/gruvbox-dark.config" \
-       "${HOME}/.config/netwmpager/config"
 
     printf '%s' "G Dark" >"${HOME}/.current-theme"
 
@@ -258,10 +240,37 @@ refresh_theme() {
     cp "${HOME}/progetti/wallpapers/gruvbox-blurred.png" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
-    cp "${HOME}/progetti/themes/netwmpager/gruvbox-dark.config" \
-       "${HOME}/.config/netwmpager/config"
-
     printf '%s' "G Light" >"${HOME}/.current-theme"
+
+  elif [[ "$option" == --dark+ ]]; then
+    sed -i -e 's/! Source .*/! Source dark+ colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/dark+.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source dark+ colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/dark+.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source dark+ colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/dark+.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme Dark+</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/dark+.rasi_' \
+           "${HOME}/.Xresources"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/dark+.png"
+
+    cp "${HOME}/progetti/themes/telegram/dark+.tdesktop-theme" \
+       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+
+    cp "${HOME}/progetti/wallpapers/dark+-blurred.png" \
+       "${HOME}/.cache/wal-telegram/background.jpg"
+
+    printf '%s' "D+" >"${HOME}/.current-theme"
 
   else
     exit 1
@@ -356,6 +365,8 @@ main() {
     . "${HOME}/progetti/themes/sh/gruvbox-dark.sh"
   elif [[ "$(<"${HOME}/.current-theme")" == "G Light" ]]; then
     . "${HOME}/progetti/themes/sh/gruvbox-light.sh"
+  elif [[ "$(<"${HOME}/.current-theme")" == "D+" ]]; then
+    . "${HOME}/progetti/themes/sh/dark+.sh"
   fi
 
   refresh_dunst
