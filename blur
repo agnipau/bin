@@ -2,19 +2,31 @@
 #
 # Blur my current desktop wallpaper using imagemagick.
 
-# Create some required variables.
-tmpdir="$(mktemp -d)"
-wal="$(printf '%s\n' "$(<"${HOME}/.fehbg")" \
-      | tail -n1 \
-      | awk '{print $3}' \
-      | sed "s/'//g")"
-ext="${wal#*.}"
+blur_wallpaper() {
+  # Create some required variables.
+  tmpdir="$(mktemp -d)"
+  wal="$(printf '%s\n' "$(<"${HOME}/.fehbg")" \
+        | tail -n1 \
+        | awk '{print $3}' \
+        | sed "s/'//g")"
+  ext="${wal#*.}"
 
-# Blur the image.
-convert "$wal" -filter Gaussian -blur 0x8 "${tmpdir}/blurred-image.${ext}"
+  # Blur the image.
+  convert "$wal" -filter Gaussian -blur 0x8 "${tmpdir}/blurred-image.${ext}"
 
-# Set the blurred image as the desktop wallpaper.
-feh --bg-fill "${tmpdir}/blurred-image.${ext}"
+  # Set the blurred image as the desktop wallpaper.
+  feh --bg-fill "${tmpdir}/blurred-image.${ext}"
 
-# Remove the tmpdir where the image is saved.
-rm -rf "${tmpdir}"
+  # Remove the tmpdir where the image is saved.
+  rm -rf "${tmpdir}"
+}
+
+blur_img() {
+  convert "$1" \
+    -filter Gaussian \
+    -blur 0x8 \
+    "${1%%.*}-blurred.${1##*.}"
+}
+
+[[ -z "$1" ]] && blur_wallpaper
+[[ "$1" ]]    && blur_img "$1"
