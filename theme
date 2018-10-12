@@ -262,7 +262,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/dark+.rasi_' \
            "${HOME}/.Xresources"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/dark+-blurred.png"
+    feh --bg-fill "${HOME}/progetti/wallpapers/dark+-blurred.jpg"
 
     cp "${HOME}/progetti/themes/telegram/dark+.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
