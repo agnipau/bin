@@ -28,7 +28,7 @@ refresh_theme() {
            -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/material-default.jpg"
+    feh --bg-fill "${HOME}/progetti/wallpapers/material-default-blurred.jpg"
 
     cp "${HOME}/progetti/themes/telegram/material-default.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
@@ -62,7 +62,7 @@ refresh_theme() {
            -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/material-palenight.jpg"
+    feh --bg-fill "${HOME}/progetti/wallpapers/material-palenight-blurred.jpg"
 
     cp "${HOME}/progetti/themes/telegram/material-palenight.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
@@ -96,7 +96,7 @@ refresh_theme() {
            -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/material-darker.jpg"
+    feh --bg-fill "${HOME}/progetti/wallpapers/material-darker-blurred.jpg"
 
     cp "${HOME}/progetti/themes/telegram/material-darker.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
@@ -130,7 +130,7 @@ refresh_theme() {
            -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/material-ocean.jpg"
+    feh --bg-fill "${HOME}/progetti/wallpapers/material-ocean-blurred.jpg"
 
     cp "${HOME}/progetti/themes/telegram/material-ocean.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
@@ -164,7 +164,7 @@ refresh_theme() {
            -e "s/^colorscheme .*/colorscheme material/" \
            "${HOME}/.config/nvim/init.vim"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/material-lighter.jpg"
+    feh --bg-fill "${HOME}/progetti/wallpapers/material-lighter-blurred.jpg"
 
     cp "${HOME}/progetti/themes/telegram/material-lighter.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
@@ -198,7 +198,7 @@ refresh_theme() {
            -e "s/^colorscheme .*/colorscheme gruvbox/" \
            "${HOME}/.config/nvim/init.vim"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox.png"
+    feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox-blurred.png"
 
     cp "${HOME}/progetti/themes/telegram/gruvbox-dark.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
@@ -232,7 +232,7 @@ refresh_theme() {
            -e "s/^colorscheme .*/colorscheme gruvbox/" \
            "${HOME}/.config/nvim/init.vim"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox.png"
+    feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox-blurred.png"
 
     cp "${HOME}/progetti/themes/telegram/gruvbox-light.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
@@ -262,7 +262,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/dark+.rasi_' \
            "${HOME}/.Xresources"
 
-    feh --bg-fill "${HOME}/progetti/wallpapers/dark+.png"
+    feh --bg-fill "${HOME}/progetti/wallpapers/dark+-blurred.png"
 
     cp "${HOME}/progetti/themes/telegram/dark+.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
