@@ -262,6 +262,9 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/dark+.rasi_' \
            "${HOME}/.Xresources"
 
+    sed -i -e "s/^colorscheme .*/colorscheme dark+/" \
+           "${HOME}/.config/nvim/init.vim"
+
     feh --bg-fill "${HOME}/progetti/wallpapers/dark+-blurred.jpg"
 
     cp "${HOME}/progetti/themes/telegram/dark+.tdesktop-theme" \
