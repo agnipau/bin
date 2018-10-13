@@ -270,7 +270,7 @@ refresh_theme() {
     cp "${HOME}/progetti/themes/telegram/dark+.tdesktop-theme" \
        "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
 
-    cp "${HOME}/progetti/wallpapers/dark+-blurred.png" \
+    cp "${HOME}/progetti/wallpapers/dark+-blurred.jpg" \
        "${HOME}/.cache/wal-telegram/background.jpg"
 
     printf '%s' "D+" >"${HOME}/.current-theme"
