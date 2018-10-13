@@ -6,7 +6,6 @@
 . "${HOME}/.cache/wal/colors.sh"
 
 # Kill sources of distraction.
-killall -9 telegram-desktop \
-           Discord &> /dev/null
+pkill telegram
 
 notify-send "Zen mode activated" "Ora concentrati e porta a termine il tuo obbiettivo."
