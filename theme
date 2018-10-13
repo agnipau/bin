@@ -30,11 +30,11 @@ refresh_theme() {
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-default-blurred.jpg"
 
-    cp "${HOME}/progetti/themes/telegram/material-default.tdesktop-theme" \
-       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+    cp "${HOME}/progetti/themes/telegram/material-default.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
 
     cp "${HOME}/progetti/wallpapers/material-default-blurred.jpg" \
-       "${HOME}/.cache/wal-telegram/background.jpg"
+       "${HOME}/.cache/telegram-palette-gen/background.jpg"
 
     printf '%s' "M Default" >"${HOME}/.current-theme"
 
@@ -64,11 +64,11 @@ refresh_theme() {
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-palenight-blurred.jpg"
 
-    cp "${HOME}/progetti/themes/telegram/material-palenight.tdesktop-theme" \
-       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+    cp "${HOME}/progetti/themes/telegram/material-palenight.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
 
     cp "${HOME}/progetti/wallpapers/material-palenight-blurred.jpg" \
-       "${HOME}/.cache/wal-telegram/background.jpg"
+       "${HOME}/.cache/telegram-palette-gen/background.jpg"
 
     printf '%s' "M Palenight" >"${HOME}/.current-theme"
 
@@ -98,11 +98,11 @@ refresh_theme() {
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-darker-blurred.jpg"
 
-    cp "${HOME}/progetti/themes/telegram/material-darker.tdesktop-theme" \
-       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+    cp "${HOME}/progetti/themes/telegram/material-darker.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
 
     cp "${HOME}/progetti/wallpapers/material-darker-blurred.jpg" \
-       "${HOME}/.cache/wal-telegram/background.jpg"
+       "${HOME}/.cache/telegram-palette-gen/background.jpg"
 
     printf '%s' "M Darker" >"${HOME}/.current-theme"
 
@@ -132,11 +132,11 @@ refresh_theme() {
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-ocean-blurred.jpg"
 
-    cp "${HOME}/progetti/themes/telegram/material-ocean.tdesktop-theme" \
-       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+    cp "${HOME}/progetti/themes/telegram/material-ocean.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
 
     cp "${HOME}/progetti/wallpapers/material-ocean-blurred.jpg" \
-       "${HOME}/.cache/wal-telegram/background.jpg"
+       "${HOME}/.cache/telegram-palette-gen/background.jpg"
 
     printf '%s' "M Ocean" >"${HOME}/.current-theme"
 
@@ -166,11 +166,11 @@ refresh_theme() {
 
     feh --bg-fill "${HOME}/progetti/wallpapers/material-lighter-blurred.jpg"
 
-    cp "${HOME}/progetti/themes/telegram/material-lighter.tdesktop-theme" \
-       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+    cp "${HOME}/progetti/themes/telegram/material-lighter.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
 
     cp "${HOME}/progetti/wallpapers/material-lighter-blurred.jpg" \
-       "${HOME}/.cache/wal-telegram/background.jpg"
+       "${HOME}/.cache/telegram-palette-gen/background.jpg"
 
     printf '%s' "M Lighter" >"${HOME}/.current-theme"
 
@@ -200,11 +200,11 @@ refresh_theme() {
 
     feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox-blurred.png"
 
-    cp "${HOME}/progetti/themes/telegram/gruvbox-dark.tdesktop-theme" \
-       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+    cp "${HOME}/progetti/themes/telegram/gruvbox-dark.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
 
     cp "${HOME}/progetti/wallpapers/gruvbox-blurred.png" \
-       "${HOME}/.cache/wal-telegram/background.jpg"
+       "${HOME}/.cache/telegram-palette-gen/background.jpg"
 
     printf '%s' "G Dark" >"${HOME}/.current-theme"
 
@@ -234,11 +234,11 @@ refresh_theme() {
 
     feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox-blurred.png"
 
-    cp "${HOME}/progetti/themes/telegram/gruvbox-light.tdesktop-theme" \
-       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+    cp "${HOME}/progetti/themes/telegram/gruvbox-light.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
 
     cp "${HOME}/progetti/wallpapers/gruvbox-blurred.png" \
-       "${HOME}/.cache/wal-telegram/background.jpg"
+       "${HOME}/.cache/telegram-palette-gen/background.jpg"
 
     printf '%s' "G Light" >"${HOME}/.current-theme"
 
@@ -267,11 +267,11 @@ refresh_theme() {
 
     feh --bg-fill "${HOME}/progetti/wallpapers/dark+-blurred.jpg"
 
-    cp "${HOME}/progetti/themes/telegram/dark+.tdesktop-theme" \
-       "${HOME}/.cache/wal-telegram/colors.tdesktop-theme"
+    cp "${HOME}/progetti/themes/telegram/dark+.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
 
     cp "${HOME}/progetti/wallpapers/dark+-blurred.jpg" \
-       "${HOME}/.cache/wal-telegram/background.jpg"
+       "${HOME}/.cache/telegram-palette-gen/background.jpg"
 
     printf '%s' "D+" >"${HOME}/.current-theme"
 
