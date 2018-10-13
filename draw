@@ -23,5 +23,5 @@ read -r X Y W H < <(slop -f '%x %y %w %h' -b 4 -t 0 -q)
 
 g="${W}x${H}+${X}+${Y}"
 
-xst -n drawn_terminal -g "$g"
-#urxvt -name drawn_terminal -geometry "$g"
+[[ "$X" && "$Y" && "$W" && "$H" ]] && xst -n drawn_terminal -g "$g"
+#[[ "$X" && "$Y" && "$W" && "$H" ]] && urxvt -name drawn_terminal -geometry "$g"
