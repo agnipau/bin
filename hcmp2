@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# Da in output il complemento a 2 di un numero binario preso in input.
+
+# Aggiungi del padding iniziale se ce n'è il bisogno (per quante cifre "$nbit"
+# specificate).
+aggiungi_padding_nbit() {
+  for ((c=0; c<"$nbit"; c++)); do
+    [[ -z "${bcmp2:$c:1}" ]] && bcmp2="0${bcmp2}"
+  done
+}
+
+# Aggiungi del padding iniziale se ce n'è bisogno (per raggiungere il numero
+# di cifre di "$bnum").
+aggiungi_padding_bnum() {
+  for ((c=0; c<"$bnum_len"; c++)); do
+    [[ -z "${bcmp2:$c:1}" ]] && bcmp2="0${bcmp2}"
+  done
+}
+
+[[ "$1" =~ [g-z] || "$1" =~ [G-Z] ]] && \
+  printf '%b\n' "\\e[1;31m::\\e[0m \\e[1;37mImpara a scrivere e ritenta, sarai più fortunato.\\e[0m" && \
+  exit 1
+
+n="$(printf '%s\n' "$1" \
+    | sed -e 's/a/A/g' \
+          -e 's/b/B/g' \
+          -e 's/c/C/g' \
+          -e 's/d/D/g' \
+          -e 's/e/E/g' \
+          -e 's/f/F/g')"
+
+bnum="$(bc <<<"ibase=16; obase=2; $n")"
+bnum_len="${#1}"
+
+# Salva il numero di bit voluti.
+printf '%b\n%b' "\\e[1;31m::\\e[0m \\e[1;37mInserisca il numero di bit:\\e[0m" \
+                  "\\e[1;31m::\\e[0m "
+read -r nbit
+
+# Calcola il complemento a 1.
+for ((c=0; c<"$bnum_len"; c++)); do
+  if [[ "${bnum:$c:1}" -eq 1 ]]; then
+    bnum_arr+=0
+  else
+    bnum_arr+=1
+  fi
+done
+
+# Converti il complemento a 1 binario in decimale.
+dcmp1="$(bc <<<"ibase=2; $bnum_arr")"
+
+# Aggiungici 1.
+((dcmp1++))
+
+# Riconvertilo in binario.
+bcmp2="$(bc <<<"ibase=10; obase=2; $dcmp1")"
+bcmp2_len="${#bcmp2}"
+
+# Se il nbit è minore di quello voluto dall'utente, risolvi:
+if [[ "$nbit" -gt "$bcmp2_len" ]]; then
+  aggiungi_padding_nbit
+elif [[ -z "$nbit" ]]; then
+  aggiungi_padding_bnum
+fi
+
+printf '%b\n' "\\e[1;34m--> $bcmp2\\e[0m"
