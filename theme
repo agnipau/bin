@@ -275,6 +275,39 @@ refresh_theme() {
 
     printf '%s' "D+" >"${HOME}/.current-theme"
 
+  elif [[ "$option" == --one-dark ]]; then
+    sed -i -e 's/! Source .*/! Source one-dark colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/one-dark.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source one-dark colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/one-dark.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source one-dark colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/one-dark.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme One Dark</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/one-dark.rasi_' \
+           "${HOME}/.Xresources"
+
+    sed -i -e "s/^colorscheme .*/colorscheme one-dark/" \
+           "${HOME}/.config/nvim/init.vim"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/one-dark-blurred.jpg"
+
+    cp "${HOME}/progetti/themes/telegram/one-dark.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
+
+    cp "${HOME}/progetti/wallpapers/one-dark-blurred.jpg" \
+       "${HOME}/.cache/telegram-palette-gen/background.jpg"
+
+    printf '%s' "OD" >"${HOME}/.current-theme"
+
   else
     exit 1
   fi
@@ -370,6 +403,8 @@ main() {
     . "${HOME}/progetti/themes/sh/gruvbox-light.sh"
   elif [[ "$(<"${HOME}/.current-theme")" == "D+" ]]; then
     . "${HOME}/progetti/themes/sh/dark+.sh"
+  elif [[ "$(<"${HOME}/.current-theme")" == "OD" ]]; then
+    . "${HOME}/progetti/themes/sh/one-dark.sh"
   fi
 
   refresh_dunst
