@@ -15,6 +15,10 @@ elif [[ "$(<"${HOME}/.current-theme")" == "G Dark" ]]; then
   . "${HOME}/progetti/themes/sh/gruvbox-dark.sh"
 elif [[ "$(<"${HOME}/.current-theme")" == "G Light" ]]; then
   . "${HOME}/progetti/themes/sh/gruvbox-light.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == "D+" ]]; then
+  . "${HOME}/progetti/themes/sh/dark+.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == "OD" ]]; then
+  . "${HOME}/progetti/themes/sh/one-dark.sh"
 fi
 
 # Take the screenshot.
