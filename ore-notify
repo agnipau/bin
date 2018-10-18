@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Send a notification with the time.
+
+notify-send " $(date +%H:%M:%S)"
