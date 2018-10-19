@@ -59,6 +59,10 @@ elif [[ -z "$1" || "$1" == --auto || "$1" == -a ]]; then
     cp "${HOME}/progetti/themes/termux/dark+" \
        "${HOME}/.termux/colors.properties"
     termux-reload-settings
+  elif [[ "$(<"${HOME}/.current-theme")" == 'OD' ]]; then
+    cp "${HOME}/progetti/themes/termux/one-dark" \
+       "${HOME}/.termux/colors.properties"
+    termux-reload-settings
   elif [[ "$(<"${HOME}/.current-theme")" == 'G Dark' ]]; then
     cp "${HOME}/progetti/themes/termux/gruvbox-dark" \
        "${HOME}/.termux/colors.properties"
