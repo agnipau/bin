@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# Stop ffscreencast.
+
+pkill ffmpeg
+
+notify-send --expire-time=3000 "Stopping ffscreencast..."
