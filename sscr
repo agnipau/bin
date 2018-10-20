@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# A simple script to take screenshots using scrot (without selecting area).
+# A simple script to take screenshots using scrot (selecting area).
 
 # Source the colors.
 if [[ "$(<"${HOME}/.current-theme")" == "M Default" ]]; then
