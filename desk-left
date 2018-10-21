@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# Uses to xdotool to set the desktop to "$((desktop - 1))".
+
+desknum="$(( "$(xdotool get_desktop)" - 1 ))"
+
+[[ "$desknum" -lt 0 ]] && desknum=5
+
+xdotool set_desktop "$desknum"
