@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Generate pdfs from markdown files using pandoc.
+
+for text in *; do
+  if [[ "${text##*.}" == md || "${text##*.}" == txt || ! "$text" =~ \. ]]; then
+    if [[ "${text##*.}" == md ]]; then
+      tpdf="${text/.md/.pdf}"
+    elif [[ "${text##*.}" == txt ]]; then
+      tpdf="${text/.txt/.pdf}"
+    else
+      tpdf="${text}.pdf"
+    fi
+
+    pandoc -s -o "$tpdf" "$text"
+  fi
+done
