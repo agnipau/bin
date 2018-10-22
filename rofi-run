@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#
+# A script that I use to run Rofi with some custom options.
+
+rofi -sidebar-mode \
+  -modi run,drun,window \
+  -lines 12 \
+  -padding 18 \
+  -width 60 \
+  -location 2 \
+  -show drun \
+  -columns 3 \
+  -font "Iosevka Term SS07 14"

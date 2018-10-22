@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# Show polybar and tint2.
+
+polybar bar &
+tint2 &

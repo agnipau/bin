@@ -7,4 +7,4 @@ sleep 1
 netwmpager &
 sleep 3
 killall -q netwmpager
-polybar bar-bottom &
+polybar bar &

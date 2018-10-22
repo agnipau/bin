@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Hide polybar and tint2.
+
+killall -q polybar tint2

@@ -373,7 +373,7 @@ reload_openbox() {
 restart_polybar() {
   if pgrep -x polybar; then
     killall -q polybar
-    polybar bar-bottom &
+    polybar bar &
   fi
 }
 

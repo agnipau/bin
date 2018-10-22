@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#
+# Update my drive folder.
+
+# Clean.
+rm -rf ~/drive/Scuola/Informatica/*
+rm -rf ~/drive/Scuola/Italiano/*
+rm -rf ~/drive/Scuola/Sistemi\ e\ Reti/*
+rm -rf ~/drive/Scuola/Telecomunicazioni/*
+rm -rf ~/drive/Scuola/TPSIT/*
+
+# Update.
+rsync -ah --progress ~/progetti/scuola/inf/*   ~/drive/Scuola/Informatica/
+rsync -ah --progress ~/progetti/scuola/ita/*   ~/drive/Scuola/Italiano/
+rsync -ah --progress ~/progetti/scuola/sis/*   ~/drive/Scuola/Sistemi\ e\ Reti/
+rsync -ah --progress ~/progetti/scuola/tele/*  ~/drive/Scuola/Telecomunicazioni/
+rsync -ah --progress ~/progetti/scuola/tpsit/* ~/drive/Scuola/TPSIT/
+
+# Push.
+cd "${HOME}/drive" || exit 1
+drive push
