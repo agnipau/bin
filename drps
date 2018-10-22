@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Push using drive.
+
+drive push
