@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# Script for testing large amounts of wallpapers.
+
+clear
+
+for wal in *; do
+  if [[ "${wal##*.}" == png || "${wal##*.}" == jpg || "${wal##*.}" == jpeg ]]; then
+    feh --bg-fill "$wal"
+    printf '%b' "\\e[1;31m::\\e[0m $wal "
+    read -r in
+    if [[ "$in" == d ]]; then
+      rm -f "$wal"
+    fi
+  fi
+done
