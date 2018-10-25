@@ -16,6 +16,7 @@ rsync -ah --progress ~/progetti/scuola/sis/*     ~/drive/Scuola/Sistemi\ e\ Reti
 rsync -ah --progress ~/progetti/scuola/tele/*    ~/drive/Scuola/Telecomunicazioni/
 rsync -ah --progress ~/progetti/scuola/tpsit/*   ~/drive/Scuola/TPSIT/
 rsync -ah --progress ~/progetti/scuola/motoria/* ~/drive/Scuola/Motoria/
+rsync -ah --progress ~/progetti/scuola/mat/*     ~/drive/Scuola/Matematica/
 
 # Push.
 cd "${HOME}/drive" || exit 1
