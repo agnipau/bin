@@ -10,12 +10,12 @@ mkdir -p ./downloaded_music
 
 # Set some variables for the if block.
 [[ "$#" -eq 5 && "$1" == --title || "$1" == -t ]]  && title="$2" \
-	                                           && artist="$4" \
-						   && link="$5"
+                                                   && artist="$4" \
+                                                   && link="$5"
 
 [[ "$#" -eq 5 && "$1" == --artist || "$1" == -a ]] && artist="$2" \
-	                                           && title="$4" \
-						   && link="$5"
+                                                   && title="$4" \
+                                                   && link="$5"
 
 [[ "$#" -eq 1 ]] && link="$1"
 
