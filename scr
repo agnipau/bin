@@ -4,23 +4,7 @@
 # Originally written by Dylan Araps.
 
 # Source the colors.
-if [[ "$(<"${HOME}/.current-theme")" == "M Default" ]]; then
-  . "${HOME}/progetti/themes/sh/material-default.sh"
-elif [[ "$(<"${HOME}/.current-theme")" == "M Palenight" ]]; then
-  . "${HOME}/progetti/themes/sh/material-palenight.sh"
-elif [[ "$(<"${HOME}/.current-theme")" == "M Darker" ]]; then
-  . "${HOME}/progetti/themes/sh/material-darker.sh"
-elif [[ "$(<"${HOME}/.current-theme")" == "M Ocean" ]]; then
-  . "${HOME}/progetti/themes/sh/material-ocean.sh"
-elif [[ "$(<"${HOME}/.current-theme")" == "G Dark" ]]; then
-  . "${HOME}/progetti/themes/sh/gruvbox-dark.sh"
-elif [[ "$(<"${HOME}/.current-theme")" == "G Light" ]]; then
-  . "${HOME}/progetti/themes/sh/gruvbox-light.sh"
-elif [[ "$(<"${HOME}/.current-theme")" == "D+" ]]; then
-  . "${HOME}/progetti/themes/sh/dark+.sh"
-elif [[ "$(<"${HOME}/.current-theme")" == "OD" ]]; then
-  . "${HOME}/progetti/themes/sh/one-dark.sh"
-fi
+. "${HOME}/progetti/themes/sh/one-dark.sh"
 
 # Store the time as variable.
 printf -v time "%(%H:%M:%S)T" "-1"
