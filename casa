@@ -2,5 +2,5 @@
 #
 # Connect to home Wi-Fi.
 
-sudo -p "$(tput bold)$(tput setaf 1)~~> $(tput sgr0)" netctl stop hotspot
-sudo -p "$(tput bold)$(tput setaf 1)~~> $(tput sgr0)" netctl start casa
+sudo -p "$(tput bold)$(tput setaf 1)>> $(tput sgr0)" netctl stop hotspot
+sudo -p "$(tput bold)$(tput setaf 1)>> $(tput sgr0)" netctl start casa
