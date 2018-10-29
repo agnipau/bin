@@ -4,35 +4,67 @@
 
 # Change the terminal colors to source.
 refresh_theme() {
-  sed -i -e 's/! Source .*/! Source one-dark colors\./' \
-         -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/one-dark.Xresources"_' \
-         "${HOME}/.Xresources"
+  if [[ "$1" == --one-dark ]]; then
+    sed -i -e 's/! Source .*/! Source one-dark colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/one-dark.Xresources"_' \
+           "${HOME}/.Xresources"
 
-  # shellcheck disable=SC2016
-  sed -i -e 's/# Source .*/# Source one-dark colors./' \
-         -e 's_^\. .*_\. $HOME/progetti/themes/sh/one-dark.fish_' \
-         "${HOME}/.config/fish/config.fish"
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source one-dark colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/one-dark.fish_' \
+           "${HOME}/.config/fish/config.fish"
 
-  sed -i -e 's/# Source .*/# Source one-dark colors\./' \
-         -e 's_include .*_include "/home/matte/progetti/themes/zathura/one-dark.zathura"_' \
-         "${HOME}/.config/zathura/zathurarc"
+    sed -i -e 's/# Source .*/# Source one-dark colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/one-dark.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
 
-  sed -i -e 's_^  <name>Theme .*_  <name>Theme One Dark</name>_' \
-         "${HOME}/.config/openbox/rc.xml"
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme One Dark</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
 
-  sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/one-dark.rasi_' \
-         "${HOME}/.Xresources"
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/one-dark.rasi_' \
+           "${HOME}/.Xresources"
 
-  sed -i -e "s/^colorscheme .*/colorscheme one-dark/" \
-         "${HOME}/.config/nvim/init.vim"
+    sed -i -e "s/^colorscheme .*/colorscheme one-dark/" \
+           "${HOME}/.config/nvim/init.vim"
 
-  feh --bg-fill "${HOME}/progetti/wallpapers/one-dark.png"
+    feh --bg-fill "${HOME}/progetti/wallpapers/one-dark.png"
 
-  cp "${HOME}/progetti/themes/telegram/one-dark.tdesktop-palette" \
-     "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
+    cp "${HOME}/progetti/themes/telegram/one-dark.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
 
-  cp "${HOME}/progetti/wallpapers/one-dark.png" \
-     "${HOME}/.cache/telegram-palette-gen/background.png"
+    cp "${HOME}/progetti/wallpapers/one-dark.png" \
+       "${HOME}/.cache/telegram-palette-gen/background.png"
+  elif [[ "$1" == --one-light ]]; then
+    sed -i -e 's/! Source .*/! Source one-light colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/one-light.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source one-light colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/one-light.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source one-light colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/one-light.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme One Light</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/one-light.rasi_' \
+           "${HOME}/.Xresources"
+
+    sed -i -e "s/^colorscheme .*/colorscheme one-light/" \
+           "${HOME}/.config/nvim/init.vim"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/one-light.png"
+
+    cp "${HOME}/progetti/themes/telegram/one-light.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
+
+    cp "${HOME}/progetti/wallpapers/one-light.png" \
+       "${HOME}/.cache/telegram-palette-gen/background.png"
+  fi
 }
 
 # Reload .Xresources.
@@ -53,6 +85,27 @@ refresh_dunst() {
     -lfr "$color0" \
     -nfr "$color0" \
     -cfr "$color1" &
+}
+
+# Apply colors to tint2.
+refresh_tint2() {
+  sed -i -e "s/background_color = .*/background_color = ${color0} 100/" \
+         -e "s/background_color_hover = .*/background_color_hover = ${color13} 100/" \
+         -e "s/task_active_font_color = .*/task_active_font_color = ${color2} 100/" \
+         -e "s/task_font_color = .*/task_font_color = ${color8} 100/" \
+         "${HOME}/.config/tint2/tint2rc"
+}
+
+# Change some 'hardcoded' colors in the i3 config file.
+refresh_i3() {
+  #shellcheck disable=SC2016
+  if [[ "$option" == --one-dark ]]; then
+    sed -i -e 's/set               $dark .*/set               $dark #21252b/' \
+           "${HOME}/.config/i3/config"
+  elif [[ "$option" == --one-light ]]; then
+    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+           "${HOME}/.config/i3/config"
+  fi
 }
 
 # Change some color values for pqiv in rifle's rifle.conf config file.
@@ -107,12 +160,18 @@ refresh_terminals() {
 }
 
 main() {
-  refresh_theme
+  refresh_theme "$option"
   reload_xres
 
-  . "${HOME}/progetti/themes/sh/one-dark.sh"
+  if [[ "$option" == --one-dark ]]; then
+    . "${HOME}/progetti/themes/sh/one-dark.sh"
+  elif [[ "$option" == --one-light ]]; then
+    . "${HOME}/progetti/themes/sh/one-light.sh"
+  fi
 
   refresh_dunst
+  refresh_tint2
+  refresh_i3
   refresh_rifle
   refresh_alacritty
   reload_openbox
@@ -120,4 +179,5 @@ main() {
   refresh_terminals
 }
 
+option="$1"
 main
