@@ -315,22 +315,22 @@ refresh_i3() {
     sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
            "${HOME}/.config/i3/config"
   elif [[ "$option" == --material-default ]]; then
-    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+    sed -i -e 's/set               $dark .*/set               $dark #192227/' \
            "${HOME}/.config/i3/config"
   elif [[ "$option" == --material-palenight ]]; then
-    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+    sed -i -e 's/set               $dark .*/set               $dark #1b1e2b/' \
            "${HOME}/.config/i3/config"
   elif [[ "$option" == --material-darker ]]; then
-    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+    sed -i -e 's/set               $dark .*/set               $dark #1a1a1a/' \
            "${HOME}/.config/i3/config"
   elif [[ "$option" == --material-ocean ]]; then
-    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+    sed -i -e 's/set               $dark .*/set               $dark #090b10/' \
            "${HOME}/.config/i3/config"
   elif [[ "$option" == --gruvbox-dark ]]; then
-    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+    sed -i -e 's/set               $dark .*/set               $dark #252526/' \
            "${HOME}/.config/i3/config"
   elif [[ "$option" == --dark-plus ]]; then
-    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+    sed -i -e 's/set               $dark .*/set               $dark #252526/' \
            "${HOME}/.config/i3/config"
   fi
 }
