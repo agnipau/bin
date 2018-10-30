@@ -34,6 +34,9 @@ refresh_theme() {
 
     cp "${HOME}/progetti/wallpapers/one-dark.png" \
        "${HOME}/.cache/telegram-palette-gen/background.png"
+
+    printf '%s\n' "OD" >"${HOME}/.current-theme"
+
   elif [[ "$1" == --one-light ]]; then
     sed -i -e 's/! Source .*/! Source one-light colors\./' \
            -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/one-light.Xresources"_' \
@@ -64,6 +67,212 @@ refresh_theme() {
 
     cp "${HOME}/progetti/wallpapers/one-light.png" \
        "${HOME}/.cache/telegram-palette-gen/background.png"
+
+    printf '%s\n' "OL" >"${HOME}/.current-theme"
+
+  elif [[ "$1" == --material-default ]]; then
+    sed -i -e 's/! Source .*/! Source material-default colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-default.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-default colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-default.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-default colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-default.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme Material Default</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-default.rasi_' \
+           "${HOME}/.Xresources"
+
+    sed -i -e "s/^colorscheme .*/colorscheme material-default/" \
+           -e "s/^let g:material_variant = .*/let g:material_variant = 'default'/" \
+           "${HOME}/.config/nvim/init.vim"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/material-default.png"
+
+    cp "${HOME}/progetti/themes/telegram/material-default.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
+
+    cp "${HOME}/progetti/wallpapers/material-default.png" \
+       "${HOME}/.cache/telegram-palette-gen/background.png"
+
+    printf '%s\n' "M Default" >"${HOME}/.current-theme"
+
+  elif [[ "$1" == --material-palenight ]]; then
+    sed -i -e 's/! Source .*/! Source material-palenight colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-palenight.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-palenight colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-palenight.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-palenight colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-palenight.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme Material Palenight</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-palenight.rasi_' \
+           "${HOME}/.Xresources"
+
+    sed -i -e "s/^colorscheme .*/colorscheme material-palenight/" \
+           -e "s/^let g:material_variant = .*/let g:material_variant = 'palenight'/" \
+           "${HOME}/.config/nvim/init.vim"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/material-palenight.png"
+
+    cp "${HOME}/progetti/themes/telegram/material-palenight.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
+
+    cp "${HOME}/progetti/wallpapers/material-palenight.png" \
+       "${HOME}/.cache/telegram-palette-gen/background.png"
+
+    printf '%s\n' "M Palenight" >"${HOME}/.current-theme"
+
+  elif [[ "$1" == --material-darker ]]; then
+    sed -i -e 's/! Source .*/! Source material-darker colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-darker.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-darker colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-darker.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-darker colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-darker.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme Material Darker</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-darker.rasi_' \
+           "${HOME}/.Xresources"
+
+    sed -i -e "s/^colorscheme .*/colorscheme material-darker/" \
+           -e "s/^let g:material_variant = .*/let g:material_variant = 'darker'/" \
+           "${HOME}/.config/nvim/init.vim"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/material-darker.png"
+
+    cp "${HOME}/progetti/themes/telegram/material-darker.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
+
+    cp "${HOME}/progetti/wallpapers/material-darker.png" \
+       "${HOME}/.cache/telegram-palette-gen/background.png"
+
+    printf '%s\n' "M Darker" >"${HOME}/.current-theme"
+
+  elif [[ "$1" == --material-ocean ]]; then
+    sed -i -e 's/! Source .*/! Source material-ocean colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/material-ocean.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source material-ocean colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/material-ocean.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source material-ocean colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/material-ocean.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme Material Ocean</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-ocean.rasi_' \
+           "${HOME}/.Xresources"
+
+    sed -i -e "s/^colorscheme .*/colorscheme material-ocean/" \
+           -e "s/^let g:material_variant = .*/let g:material_variant = 'ocean'/" \
+           "${HOME}/.config/nvim/init.vim"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/material-ocean.png"
+
+    cp "${HOME}/progetti/themes/telegram/material-ocean.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
+
+    cp "${HOME}/progetti/wallpapers/material-ocean.png" \
+       "${HOME}/.cache/telegram-palette-gen/background.png"
+
+    printf '%s\n' "M Ocean" >"${HOME}/.current-theme"
+
+  elif [[ "$1" == --gruvbox-dark ]]; then
+    sed -i -e 's/! Source .*/! Source gruvbox-dark colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/gruvbox-dark.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source gruvbox-dark colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/gruvbox-dark.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source gruvbox-dark colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/gruvbox-dark.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme Gruvbox Dark</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/gruvbox-dark.rasi_' \
+           "${HOME}/.Xresources"
+
+    sed -i -e "s/^colorscheme .*/colorscheme gruvbox-dark/" \
+           -e "s/^let g:gruvbox_variant = .*/let g:gruvbox_variant = 'dark'/" \
+           "${HOME}/.config/nvim/init.vim"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/gruvbox-dark.png"
+
+    cp "${HOME}/progetti/themes/telegram/gruvbox-dark.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
+
+    cp "${HOME}/progetti/wallpapers/gruvbox-dark.png" \
+       "${HOME}/.cache/telegram-palette-gen/background.png"
+
+    printf '%s\n' "GD" >"${HOME}/.current-theme"
+
+  elif [[ "$1" == --dark-plus ]]; then
+    sed -i -e 's/! Source .*/! Source dark-plus colors\./' \
+           -e 's_#include .*_#include "/home/matte/progetti/themes/xresources/dark-plus.Xresources"_' \
+           "${HOME}/.Xresources"
+
+    # shellcheck disable=SC2016
+    sed -i -e 's/# Source .*/# Source dark-plus colors./' \
+           -e 's_^\. .*_\. $HOME/progetti/themes/sh/dark-plus.fish_' \
+           "${HOME}/.config/fish/config.fish"
+
+    sed -i -e 's/# Source .*/# Source dark-plus colors\./' \
+           -e 's_include .*_include "/home/matte/progetti/themes/zathura/dark-plus.zathura"_' \
+           "${HOME}/.config/zathura/zathurarc"
+
+    sed -i -e 's_^  <name>Theme .*_  <name>Theme Dark Plus</name>_' \
+           "${HOME}/.config/openbox/rc.xml"
+
+    sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/dark-plus.rasi_' \
+           "${HOME}/.Xresources"
+
+    sed -i -e "s/^colorscheme .*/colorscheme dark-plus/" \
+           "${HOME}/.config/nvim/init.vim"
+
+    feh --bg-fill "${HOME}/progetti/wallpapers/dark-plus.png"
+
+    cp "${HOME}/progetti/themes/telegram/dark-plus.tdesktop-palette" \
+       "${HOME}/.cache/telegram-palette-gen/colors.tdesktop-palette"
+
+    cp "${HOME}/progetti/wallpapers/dark-plus.png" \
+       "${HOME}/.cache/telegram-palette-gen/background.png"
+
+    printf '%s\n' "DP" >"${HOME}/.current-theme"
+
   fi
 }
 
@@ -103,6 +312,24 @@ refresh_i3() {
     sed -i -e 's/set               $dark .*/set               $dark #21252b/' \
            "${HOME}/.config/i3/config"
   elif [[ "$option" == --one-light ]]; then
+    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+           "${HOME}/.config/i3/config"
+  elif [[ "$option" == --material-default ]]; then
+    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+           "${HOME}/.config/i3/config"
+  elif [[ "$option" == --material-palenight ]]; then
+    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+           "${HOME}/.config/i3/config"
+  elif [[ "$option" == --material-darker ]]; then
+    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+           "${HOME}/.config/i3/config"
+  elif [[ "$option" == --material-ocean ]]; then
+    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+           "${HOME}/.config/i3/config"
+  elif [[ "$option" == --gruvbox-dark ]]; then
+    sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
+           "${HOME}/.config/i3/config"
+  elif [[ "$option" == --dark-plus ]]; then
     sed -i -e 's/set               $dark .*/set               $dark #eaeaeb/' \
            "${HOME}/.config/i3/config"
   fi
@@ -167,6 +394,18 @@ main() {
     . "${HOME}/progetti/themes/sh/one-dark.sh"
   elif [[ "$option" == --one-light ]]; then
     . "${HOME}/progetti/themes/sh/one-light.sh"
+  elif [[ "$option" == --material-default ]]; then
+    . "${HOME}/progetti/themes/sh/material-default.sh"
+  elif [[ "$option" == --material-palenight ]]; then
+    . "${HOME}/progetti/themes/sh/material-palenight.sh"
+  elif [[ "$option" == --material-darker ]]; then
+    . "${HOME}/progetti/themes/sh/material-darker.sh"
+  elif [[ "$option" == --material-ocean ]]; then
+    . "${HOME}/progetti/themes/sh/material-ocean.sh"
+  elif [[ "$option" == --gruvbox-dark ]]; then
+    . "${HOME}/progetti/themes/sh/gruvbox-dark.sh"
+  elif [[ "$option" == --dark-plus ]]; then
+    . "${HOME}/progetti/themes/sh/dark-plus.sh"
   fi
 
   refresh_dunst

@@ -4,7 +4,23 @@
 # Originally written by Dylan Araps.
 
 # Source the colors.
-. "${HOME}/progetti/themes/sh/one-dark.sh"
+if [[ "$(<"${HOME}/.current-theme")" == OD ]]; then
+  . "${HOME}/progetti/themes/sh/one-dark.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == OL ]]; then
+  . "${HOME}/progetti/themes/sh/one-light.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == "M Default" ]]; then
+  . "${HOME}/progetti/themes/sh/material-default.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == "M Palenight" ]]; then
+  . "${HOME}/progetti/themes/sh/material-palenight.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == "M Darker" ]]; then
+  . "${HOME}/progetti/themes/sh/material-darker.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == "M Ocean" ]]; then
+  . "${HOME}/progetti/themes/sh/material-ocean.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == GD ]]; then
+  . "${HOME}/progetti/themes/sh/gruvbox-dark.sh"
+elif [[ "$(<"${HOME}/.current-theme")" == DP ]]; then
+  . "${HOME}/progetti/themes/sh/dark-plus.sh"
+fi
 
 # Store the time as variable.
 printf -v time "%(%H:%M:%S)T" "-1"
