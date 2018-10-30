@@ -260,7 +260,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/dark-plus.rasi_' \
            "${HOME}/.Xresources"
 
-    sed -i -e "s/^colorscheme .*/colorscheme dark-plus/" \
+    sed -i -e "s/^colorscheme .*/colorscheme dark+/" \
            "${HOME}/.config/nvim/init.vim"
 
     feh --bg-fill "${HOME}/progetti/wallpapers/dark-plus.png"
