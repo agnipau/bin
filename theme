@@ -90,7 +90,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-default.rasi_' \
            "${HOME}/.Xresources"
 
-    sed -i -e "s/^colorscheme .*/colorscheme material-default/" \
+    sed -i -e "s/^colorscheme .*/colorscheme material/" \
            -e "s/^let g:material_variant = .*/let g:material_variant = 'default'/" \
            "${HOME}/.config/nvim/init.vim"
 
@@ -124,7 +124,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-palenight.rasi_' \
            "${HOME}/.Xresources"
 
-    sed -i -e "s/^colorscheme .*/colorscheme material-palenight/" \
+    sed -i -e "s/^colorscheme .*/colorscheme material/" \
            -e "s/^let g:material_variant = .*/let g:material_variant = 'palenight'/" \
            "${HOME}/.config/nvim/init.vim"
 
@@ -158,7 +158,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-darker.rasi_' \
            "${HOME}/.Xresources"
 
-    sed -i -e "s/^colorscheme .*/colorscheme material-darker/" \
+    sed -i -e "s/^colorscheme .*/colorscheme material/" \
            -e "s/^let g:material_variant = .*/let g:material_variant = 'darker'/" \
            "${HOME}/.config/nvim/init.vim"
 
@@ -192,7 +192,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/material-ocean.rasi_' \
            "${HOME}/.Xresources"
 
-    sed -i -e "s/^colorscheme .*/colorscheme material-ocean/" \
+    sed -i -e "s/^colorscheme .*/colorscheme material/" \
            -e "s/^let g:material_variant = .*/let g:material_variant = 'ocean'/" \
            "${HOME}/.config/nvim/init.vim"
 
@@ -226,7 +226,7 @@ refresh_theme() {
     sed -i -e 's_^rofi.theme: .*_rofi.theme:             progetti/themes/rofi/gruvbox-dark.rasi_' \
            "${HOME}/.Xresources"
 
-    sed -i -e "s/^colorscheme .*/colorscheme gruvbox-dark/" \
+    sed -i -e "s/^colorscheme .*/colorscheme gruvbox/" \
            -e "s/^let g:gruvbox_variant = .*/let g:gruvbox_variant = 'dark'/" \
            "${HOME}/.config/nvim/init.vim"
 
