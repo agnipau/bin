@@ -2,7 +2,7 @@
 #
 # Clear pacman cache.
 
-alias sudo='sudo -p "$(tput bold)$(tput setaf 1)~~> $(tput sgr0)"'
+alias sudo='sudo -p "$(tput bold)$(tput setaf 1)>> $(tput sgr0)"'
 
 garbage_size="$(du -h /var/cache/pacman/pkg \
                | tail -n1 \

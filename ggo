@@ -2,10 +2,10 @@
 #
 # Basically git add -A and git commit (when offline).
 
+git add -A
+
 if [[ "$1" ]]; then
-  git add -A
   git commit -m "$1"
 else
-  git add -A
   git commit -m "update"
 fi

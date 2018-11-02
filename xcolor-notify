@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# Send a notification with the color returned by xcolor.
+
+color="$(xcolor)"
+ico="$(printf '%b' "\\uf1fb")"
+
+notify-send --expire-time=8000 "$ico  $color"

@@ -2,5 +2,5 @@
 #
 # Connect to my smartphone's hotspot.
 
-sudo -p "$(tput bold)$(tput setaf 1)~~> $(tput sgr0)" netctl stop casa
-sudo -p "$(tput bold)$(tput setaf 1)~~> $(tput sgr0)" netctl start hotspot
+sudo -p "$(tput bold)$(tput setaf 1)>> $(tput sgr0)" netctl stop casa
+sudo -p "$(tput bold)$(tput setaf 1)>> $(tput sgr0)" netctl start hotspot

@@ -5,10 +5,10 @@
 if pgrep -x cmus &>/dev/null; then
   title_gre="$(cmus-remote -Q | grep '^tag title')"
   title="${title_gre/'tag title '}"
-  
+
   artist_gre="$(cmus-remote -Q | grep '^tag artist')"
   artist="${artist_gre/'tag artist '}"
-  
-  ico="$(printf '%b' '\uf001')"
+
+  ico="$(printf '%b' "\\uf025")"
   notify-send --expire-time=3000 "${ico}   ${artist} - ${title}"
 fi

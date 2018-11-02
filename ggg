@@ -2,12 +2,12 @@
 #
 # Basically git add -A, git commit, git push (when online).
 
+git add -A
+
 if [[ "$1" ]]; then
-  git add -A
   git commit -m "$1"
-  git push -u origin master
 else
-  git add -A
   git commit -m "update"
-  git push -u origin master
 fi
+
+git push -u origin master

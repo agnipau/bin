@@ -8,6 +8,8 @@ rm -rf ~/drive/Scuola/Italiano/*
 rm -rf ~/drive/Scuola/Sistemi\ e\ Reti/*
 rm -rf ~/drive/Scuola/Telecomunicazioni/*
 rm -rf ~/drive/Scuola/TPSIT/*
+rm -rf ~/drive/Scuola/Motoria/*
+rm -rf ~/drive/Scuola/Matematica/*
 
 # Update.
 rsync -ah --progress ~/progetti/scuola/inf/*     ~/drive/Scuola/Informatica/

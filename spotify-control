@@ -43,8 +43,8 @@ next() {
             &>/dev/null
 }
 
-[[ "$1" == --play ]]   && play
-[[ "$1" == --pause ]]  && pause
-[[ "$1" == --toggle ]] && toggle
-[[ "$1" == --prev ]]   && prev
-[[ "$1" == --next ]]   && next
+[[ "$1" == --play   || "$1" == -pl ]] && play
+[[ "$1" == --pause  || "$1" == -pa ]] && pause
+[[ "$1" == --toggle || "$1" == -t  ]] && toggle
+[[ "$1" == --prev   || "$1" == -p  ]] && prev
+[[ "$1" == --next   || "$1" == -n  ]] && next

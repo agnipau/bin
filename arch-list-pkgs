@@ -10,7 +10,7 @@ pacman -Qq > "$fname"
 
 # Remove pkgs installed from the AUR.
 for word in $(pacman -Qqm); do
-  sed -i -e "s/$word//" \
+  sed -i -e "s/^$word$//" \
          "$fname"
 done
 
