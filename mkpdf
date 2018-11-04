@@ -12,6 +12,10 @@ for text in *; do
       tpdf="${text}.pdf"
     fi
 
-    pandoc -s -o "$tpdf" "$text"
+    if [[ "$1" == ottimale ]]; then
+      pandoc -o "$tpdf" "$text"
+    else
+      pandoc -f markdown-implicit_figures -o "$tpdf" "$text"
+    fi
   fi
 done
