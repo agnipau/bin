@@ -3,7 +3,9 @@
 # Generate pdfs from markdown files using pandoc.
 
 for text in *; do
-  if [[ -f "$text" && "${text##*.}" == md || "${text##*.}" == txt || ! "$text" =~ \. ]]; then
+  [[ -d "$text" ]] && continue
+
+  if [[ "${text##*.}" == md || "${text##*.}" == txt || ! "$text" =~ \. ]]; then
     formatta() {
       if [[ "${text##*.}" == md ]]; then
         tpdf="${text/.md/.pdf}"
@@ -16,18 +18,14 @@ for text in *; do
 
     formatta
 
-    if [[ "$1" == ottimale ]]; then
-      pandoc -o "$tpdf" "$text"
-    elif [[ "$1" && -z "$2" ]]; then
-      text="$1"
-      formatta
-      pandoc -f markdown-implicit_figures -o "$tpdf" "$text"
-    elif [[ "$1" && "$2" == ottimale ]]; then
-      text="$1"
-      formatta
-      pandoc -o "$tpdf" "$text"
+    if [[ "$1" == --no-sminchiato ]]; then
+      pandoc -V lang=it -f markdown-implicit_figures -o "$tpdf" "$text"
+    elif [[ "$1" == --no-sminchiato-toc ]]; then
+      pandoc -V lang=it -s --toc -f markdown-implicit_figures -o "$tpdf" "$text"
+    elif [[ "$1" == --toc ]]; then
+      pandoc -V lang=it -s --toc -o "$tpdf" "$text"
     else
-      pandoc -f markdown-implicit_figures -o "$tpdf" "$text"
+      pandoc -V lang=it -o "$tpdf" "$text"
     fi
   fi
 done
