@@ -3,16 +3,28 @@
 # Generate pdfs from markdown files using pandoc.
 
 for text in *; do
-  if [[ "${text##*.}" == md || "${text##*.}" == txt || ! "$text" =~ \. ]]; then
-    if [[ "${text##*.}" == md ]]; then
-      tpdf="${text/.md/.pdf}"
-    elif [[ "${text##*.}" == txt ]]; then
-      tpdf="${text/.txt/.pdf}"
-    else
-      tpdf="${text}.pdf"
-    fi
+  if [[ -f "$text" && "${text##*.}" == md || "${text##*.}" == txt || ! "$text" =~ \. ]]; then
+    formatta() {
+      if [[ "${text##*.}" == md ]]; then
+        tpdf="${text/.md/.pdf}"
+      elif [[ "${text##*.}" == txt ]]; then
+        tpdf="${text/.txt/.pdf}"
+      else
+        tpdf="${text}.pdf"
+      fi
+    }
+
+    formatta
 
     if [[ "$1" == ottimale ]]; then
+      pandoc -o "$tpdf" "$text"
+    elif [[ "$1" && -z "$2" ]]; then
+      text="$1"
+      formatta
+      pandoc -f markdown-implicit_figures -o "$tpdf" "$text"
+    elif [[ "$1" && "$2" == ottimale ]]; then
+      text="$1"
+      formatta
       pandoc -o "$tpdf" "$text"
     else
       pandoc -f markdown-implicit_figures -o "$tpdf" "$text"
