@@ -2,4 +2,4 @@
 #
 # Tiny wrapper for AlgoBuild.
 
-java -jar "${HOME}/java/algo.jar" &
+java -jar "${HOME}/roba/jar/algo.jar" &

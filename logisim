@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Tiny wrapper for Logisim.
+
+java -jar "${HOME}/roba/jar/logisim-generic-2.7.1.jar" &
