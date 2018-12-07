@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# Create a backup of KDE Plasma config files (.tar.gz archive).
+
+backup()
+{
+  mkdir -p ~/bakde/k
+  mkdir -p ~/bakde/plasma
+  mkdir -p ~/bakde/kde4
+
+  cp -r ~/.config/k* ~/bakde/k
+  cp -r ~/.config/plasma* ~/bakde/plasma
+  cp -r ~/.kde4 ~/bakde/kde4
+
+  tar -czvf bakde.tar.gz ~/bakde
+  rm -rf ~/bakde
+}
+
+recover()
+{
+  cp "$1" ~
+  tar xvf "${HOME}/$1"
+  rm -f "${HOME}/$1"
+  mv "${HOME}/bakde" .
+}
+
+main()
+{
+  [[ "$1" == --backup ]]  && backup
+  [[ "$1" == --recover ]] && recover "$2"
+}
