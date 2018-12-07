@@ -30,8 +30,8 @@ recover()
 
 main()
 {
-  [[ "$1" == --create ]]  && create
-  [[ "$1" == --recover ]] && recover "$2"
+  [[ "$1" == --create || -z "$1" ]]  && create
+  [[ "$1" == --recover ]]            && recover "$2"
 }
 
 main "$@"
