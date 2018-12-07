@@ -2,26 +2,28 @@
 #
 # Create a backup of KDE Plasma config files (.tar.gz archive).
 
+tmpdir="$(mktemp -d)"
+
 backup()
 {
-  mkdir -p ~/bakde/k
-  mkdir -p ~/bakde/plasma
-  mkdir -p ~/bakde/kde4
+  mkdir -p "${tmpdir}/bakde/k"
+  mkdir -p "${tmpdir}/bakde/plasma"
+  mkdir -p "${tmpdir}/bakde/kde4"
 
-  cp -r ~/.config/k* ~/bakde/k
-  cp -r ~/.config/plasma* ~/bakde/plasma
-  cp -r ~/.kde4 ~/bakde/kde4
+  cp -r ~/.config/k* "${tmpdir}/bakde/k"
+  cp -r ~/.config/plasma* "${tmpdir}/bakde/plasma"
+  cp -r ~/.kde4 "${tmpdir}/bakde/kde4"
 
-  tar -czvf bakde.tar.gz ~/bakde
-  rm -rf ~/bakde
+  tar -czvf bakde.tar.gz "${tmpdir}/bakde"
+  rm -rf "$tmpdir"
 }
 
 recover()
 {
-  cp "$1" ~
-  tar xvf "${HOME}/$1"
-  rm -f "${HOME}/$1"
-  mv "${HOME}/bakde" .
+  cp "$1" "$tmpdir"
+  tar xvf "${tmpdir}/$1"
+  mv "${tmpdir}/bakde" .
+  rm -rf "$tmpdir"
 }
 
 main()
