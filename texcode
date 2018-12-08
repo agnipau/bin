@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#
+# LaTeX template for code.
+
+# cat <<EOF ... EOF>"./{PWD##*/}.md" doesn't work here.
+printf '%s\n' '---' >"./${PWD##*/}.md"
+printf '%s\n' 'header-includes:' >>"./${PWD##*/}.md"
+printf '%s\n' ' - \usepackage{fvextra}' >>"./${PWD##*/}.md"
+printf '%s\n' ' - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}' >>"./${PWD##*/}.md"
+printf '%s\n' '---' >>"./${PWD##*/}.md"
+printf '%s\n' '' >>"./${PWD##*/}.md"
+printf '%s\n' '```{.cs .numberLines}' >>"./${PWD##*/}.md"
+printf '%s\n' '```' >>"./${PWD##*/}.md"
