@@ -2,6 +2,8 @@
 #
 # New version of mkcs.
 
+set -x
+
 Nuovo()
 {
   dotnet new console
@@ -22,7 +24,7 @@ Esistente()
 Main()
 {
   [[ -z "$1" ]] && Nuovo
-  [[ "$1" ]]    && Esistente
+  [[ "$1" ]]    && Esistente "$1"
 }
 
-Main
+Main "$@"
