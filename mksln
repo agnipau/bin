@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+#
+# Make a template for a C# prog_name.
+
+# General
+general() {
+  mkdir -p "$prog_name"/{src,test}
+  cd "$prog_name" || exit 1
+  dotnet new sln
+}
+
+# ConsoleApp
+console_app() {
+  mkdir "./src/$prog_name.ConsoleApp"
+  cd "./src/$prog_name.ConsoleApp" || exit 1
+  dotnet new console
+  cd .. || exit 1
+}
+
+# ClassLibrary
+class_library() {
+  mkdir "./$prog_name.ClassLib"
+  cd "./$prog_name.ClassLib" || exit 1
+  dotnet new classlib
+  cd .. || exit 1; cd .. || exit 1
+}
+
+# Set-up for testing
+testing() {
+  mkdir "./test/$prog_name.Tests"
+  cd "./test/$prog_name.Tests" || exit 1
+  dotnet new xunit
+  cd .. || exit 1; cd .. || exit 1
+}
+
+# Reference the projects in the solution file
+solution() {
+  dotnet sln add "./src/$prog_name.ConsoleApp/$prog_name.ConsoleApp.csproj"
+  dotnet sln add "./src/$prog_name.ClassLib/$prog_name.ClassLib.csproj"
+
+  cd "./src/$prog_name.ConsoleApp" || exit 1
+  dotnet add reference "../$prog_name.ClassLib/$prog_name.ClassLib.csproj"
+  cd .. || exit 1; cd .. || exit 1
+
+  # Reference for testing
+  cd "./test/$prog_name.Tests" || exit 1
+  dotnet add reference "../../src/$prog_name.ClassLib/$prog_name.ClassLib.csproj"
+  cd .. || exit 1; cd .. || exit 1
+
+  dotnet sln add "./test/$prog_name.Tests/$prog_name.Tests.csproj"
+}
+
+main() {
+  prog_name="$1"
+  general
+  console_app
+  class_library
+  testing
+  solution
+}
+
+main "$1"
