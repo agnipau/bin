@@ -24,3 +24,5 @@ Main()
   [[ -z "$1" ]] && Nuovo
   [[ "$1" ]]    && Esistente
 }
+
+Main
