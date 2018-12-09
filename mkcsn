@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+#
+# New version of mkcs.
+
 Nuovo()
 {
   dotnet new console
