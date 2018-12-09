@@ -2,6 +2,7 @@
 #
 # Agnipau, Hasdof, Pastorboe.
 
+setxkbmap it
 xset b off
 xset s off
 xset m 1/1

@@ -1,0 +1,22 @@
+Nuovo()
+{
+  dotnet new console
+  dotnet build
+  csc Program.cs
+}
+
+Esistente()
+{
+  mv "$1" "$1.bak"
+  dotnet new console
+  dotnet build
+  rm Program.cs
+  mv "$1.bak" "$1"
+  csc "$1"
+}
+
+Main()
+{
+  [[ -z "$1" ]] && Nuovo
+  [[ "$1" ]]    && Esistente
+}
