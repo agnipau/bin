@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Agnipau, Hasdof, Pastorboe.
+
+xset r rate 200 40
