@@ -21,10 +21,10 @@ for project in ~/progetti/*; do
 
   if [[ "$site" == github.com ]]; then
     cd "$project" || exit 1
-    git remote set-url origin "git@github.com:matteoguarda/${project##*/}.git"
+    git remote set-url origin "git@github.com:matgua/${project##*/}.git"
   elif [[ "$site" == gitlab.com ]]; then
     cd "$project" || exit 1
-    git remote set-url origin "git@gitlab.com:matteoguarda/${project##*/}.git"
+    git remote set-url origin "git@gitlab.com:matgua/${project##*/}.git"
   fi
 done
 
