@@ -2,8 +2,8 @@
 #
 # Generate a list of installed pkgs from official repos in Arch Linux.
 
- [[ "$1" == --dell ]] && fname="dell_arch_installed_pkgs"
- [[ "$1" == --asus ]] && fname="asus_arch_installed_pkgs"
+ [[ "$1" == --dell ]] && fname="dell-arch-installed-pkgs"
+ [[ "$1" == --asus ]] && fname="asus-arch-installed-pkgs"
 
 # Create a file with the list of the installed pkgs from the official repos.
 pacman -Qq > "$fname"

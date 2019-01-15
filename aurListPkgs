@@ -2,8 +2,8 @@
 #
 # Generate a list of installed pkgs from the AUR in Arch Linux.
 
-[[ "$1" == --dell ]] && fname="dell_aur_installed_pkgs"
-[[ "$1" == --asus ]] && fname="asus_aur_installed_pkgs"
+[[ "$1" == --dell ]] && fname="dell-aur-installed-pkgs"
+[[ "$1" == --asus ]] && fname="asus-aur-installed-pkgs"
 
 # Create a file with the list of installed pkgs from the AUR.
 pacman -Qqm > "$fname"
