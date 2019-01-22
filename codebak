@@ -2,4 +2,4 @@
 #
 # Make a backup of the Code - OSS extensions.
 
-tar -cvpJf code-oss-extensions.tar.xz ~/vscode-oss/extensions
+tar -cvpJf code-oss-extensions.tar.xz ~/.vscode-oss/extensions
