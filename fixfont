@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# Fix font problem in KDE Plasma (bold variant doesn't work)
+
+sed -i -e 's/,Regular//g' "${HOME}/.config/Trolltech.conf"
+sed -i -e 's/,Regular//g' "${HOME}/.config/kdeglobals"
+sed -i -e 's/,Regular//g' "${HOME}/.kde4/share/config/kdeglobals"

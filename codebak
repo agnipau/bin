@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+# Make a backup of the Code - OSS extensions.
+
+tar -cvpJf code-oss-extensions.tar.xz ~/.config/vscode-oss/extensions
