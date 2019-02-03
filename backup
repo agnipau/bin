@@ -2,6 +2,8 @@
 #
 # A script that I use to backup my Arch Linux.
 
+mkdir -p ~/backup
+
 [[ ! -e /run/media/matte/ToshibaHDD ]] && printf '%s\n' "==> HDD not connected" && exit 1
 
-sudo rsync -aAXvh --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude="swapfile" --exclude="lost+found" --exclude=".cache" --exclude="video" --exclude=".VirtualBoxVMs" --exclude=".ecryptfs" / /run/media/matte/ToshibaHDD/backup/system/
+sudo rsync -aAXvh --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude="swapfile" --exclude="lost+found" --exclude=".cache" --exclude="video" --exclude=".VirtualBoxVMs" --exclude=".ecryptfs" / ~/backup

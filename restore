@@ -2,4 +2,4 @@
 #
 # Restore a backup made with backup script.
 
-sudo rsync -aAXvh --delete --exclude="lost+found" /media/ToshibaHDD/backup/linux /
+sudo rsync -aAXvh --delete --exclude="lost+found" /backup /
