@@ -2,6 +2,4 @@
 #
 # A script that I use to backup my Arch Linux.
 
-mkdir -p ~/backup
-
-sudo rsync -aAXvh --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude="swapfile" --exclude="lost+found" --exclude=".cache" --exclude="video" --exclude=/home/matte/backup --exclude=".VirtualBoxVMs" --exclude=".ecryptfs" / ~/backup
+sudo rsync -aAXvh --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude="swapfile" --exclude="lost+found" --exclude=".cache" --exclude="video" --exclude=".VirtualBoxVMs" --exclude=".ecryptfs" / /run/media/matte/Kingston64/backup/
