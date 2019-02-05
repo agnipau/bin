@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 #
-# Generate a list of installed pkgs from official repos in Arch Linux.
+# Generate a list of explicitly installed pkgs from official repos in Arch Linux.
 
  [[ "$1" == --dell ]] && fname="dell-arch-installed-pkgs"
  [[ "$1" == --asus ]] && fname="asus-arch-installed-pkgs"
 
-# Create a file with the list of the installed pkgs from the official repos.
-pacman -Qq > "$fname"
+# Create a file with the list of the explicitly installed pkgs from the official repos.
+pacman -Qqe > "$fname"
 
-# Remove pkgs installed from the AUR.
+# Remove pkgs explicitly installed from the AUR.
 for word in $(pacman -Qqm); do
   sed -i -e "s/^$word$//" \
          "$fname"
@@ -18,8 +18,8 @@ done
 sed -i -e '/^\s*$/d' \
        "$fname"
 
-# Calculate the number of installed pkgs.
+# Calculate the number of explicitly installed pkgs.
 n_pkgs="$(wc -l "$fname" | cut -d' ' -f1)"
 
-# Print the number of installed pkgs.
-printf '%s\n' "==> You have installed $n_pkgs packages from the official repos."
+# Print the number of explicitly installed pkgs.
+printf '%s\n' "==> You have explicitly installed $n_pkgs packages from the official repos."

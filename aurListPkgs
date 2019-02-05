@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 #
-# Generate a list of installed pkgs from the AUR in Arch Linux.
+# Generate a list of explicitly installed pkgs from the AUR in Arch Linux.
 
 [[ "$1" == --dell ]] && fname="dell-aur-installed-pkgs"
 [[ "$1" == --asus ]] && fname="asus-aur-installed-pkgs"
 
-# Create a file with the list of installed pkgs from the AUR.
-pacman -Qqm > "$fname"
+# Create a file with the list of explicitly installed pkgs from the AUR.
+pacman -Qqme > "$fname"
 
 # Remove some garbage.
 sed -i -e '/libc++abi/d' \
        -e '/libc++experimental/d' \
        "$fname"
 
-# Calculate the number of installed pkgs.
+# Calculate the number of explicitly installed pkgs.
 n_pkgs="$(wc -l "$fname" | cut -d' ' -f1)"
 
-# Print the number of installed pkgs.
-printf '%s\n' "==> You have installed $n_pkgs packages from the AUR."
+# Print the number of explicitly installed pkgs.
+printf '%s\n' "==> You have explicitly installed $n_pkgs packages from the AUR."
