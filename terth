@@ -2,6 +2,6 @@
 #
 # TERmuxTHeme.
 
-cp "${HOME}/progetti/themes/termux/material-darker" \
+cp "${HOME}/progetti/themes/termux/material-default" \
    "${HOME}/.termux/colors.properties"
 termux-reload-settings
