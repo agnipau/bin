@@ -6,3 +6,18 @@ SC15C::PrintScreen
 ^SC041::Media_Prev
 ^SC042::Media_Play_Pause
 ^SC043::Media_Next
+^SC027::
+{
+  Send, ''{Left 1}
+  Return
+}
+^SC028::
+{
+  Send, ""{Left 1}
+  Return
+}
+^SC02B::
+{
+  Send, {U+201C}{U+201D}{Left 1}
+  Return
+}
