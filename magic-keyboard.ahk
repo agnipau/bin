@@ -11,6 +11,12 @@ SC15C::PrintScreen
   Send, ''{Left 1}
   Return
 }
+^+SC027::
+{
+  ; Enters ``
+  Send, {U+0060}{U+0060}{Left 1}
+  Return
+}
 ^SC028::
 {
   Send, ""{Left 1}
@@ -18,6 +24,7 @@ SC15C::PrintScreen
 }
 ^SC02B::
 {
+  ; Enters “”
   Send, {U+201C}{U+201D}{Left 1}
   Return
 }
