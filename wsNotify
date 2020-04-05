@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# Uses another script that I've written, so you need that as well.
-
-notify-send -t 3000 "$("${HOME}/bin/polybar-workspaces")"

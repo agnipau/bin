@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-# TERmuxTHeme.
-
-cp "${HOME}/progetti/themes/termux/material-default" \
-   "${HOME}/.termux/colors.properties"
-termux-reload-settings

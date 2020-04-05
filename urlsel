@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+re='https?://(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)'
+selected_url="$(rg -o "$re" "$@" | rofi -dmenu -prompt urlsel)"
+"$BROWSER" "$selected_url"
+

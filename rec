@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-# Start ffscreencast.
-
-notify-send --expire-time=3000 "Starting ffscreencast..."
-
-ffscreencast

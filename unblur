@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-#
-# Unblur my current desktop wallpaper.
-
-wal="${HOME}/progetti/wallpapers/one-dark.png"
-
-# Set the unblurred image as the desktop wallpaper.
-feh --bg-fill "$wal"

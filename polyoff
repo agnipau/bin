@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# A script to stop polybar.
-
-killall -q polybar

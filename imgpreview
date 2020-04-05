@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+file_paths=()
+
+while IFS= read -r line; do
+    line_is_url="$(printf '%s\n' "$line" | isurl)"
+    [[ "$line_is_url" == true ]] && {
+        file_path="$(mktemp)"
+        curl -Lo "$file_path" -C- "$line"
+        file_paths+=("$file_path")
+    } || file_paths+=("$line")
+done < ${1:-/dev/stdin}
+
+sxiv ${file_paths[@]}
+

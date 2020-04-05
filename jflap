@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# Tiny wrapper for JFLAP.
-
-java -jar "${HOME}/roba/jar/JFLAP.jar" &

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+ram_usage="$(free | rg Mem | awk '{print $3/$2 * 100.0}')%"
+
+notify-send -u low "RAM usage" "$ram_usage"
+

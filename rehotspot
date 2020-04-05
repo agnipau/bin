@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-#
-# Reconnect to my smartphone's hotspot.
-
-sudo -p "$(tput bold)$(tput setaf 1)>> $(tput sgr0)" netctl stop hotspot
-sudo -p "$(tput bold)$(tput setaf 1)>> $(tput sgr0)" netctl start hotspot

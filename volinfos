@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+dunstify -r 991052 -u low "$(volstatus)" "$(vollevel)%"
+

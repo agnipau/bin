@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# Restore a backup made with backup script.
-
-sudo rsync -aAXvh --delete --exclude="lost+found" /run/media/matte/Kingston64/backup/ /

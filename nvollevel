@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+dunstify -r 991049 -u low "Volume" "$(vollevel)%"
+

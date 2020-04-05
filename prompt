@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+[[ "$(echo -e "si\nno" | rofi -dmenu -p "$1")" == si ]] && eval "$2"
+

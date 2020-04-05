@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+pactl set-source-mute @DEFAULT_SINK@ toggle
+

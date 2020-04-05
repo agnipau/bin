@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# Requires xdotool.
-
-xdotool windowmove "$(xdotool getwindowfocus)" 330 -30

@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-#
-# Useful script for resizing and dragging windows in Deepin DE.
-
-gsettings set com.deepin.wrap.gnome.desktop.wm.preferences mouse-button-modifier '<Super>'
-gsettings set com.deepin.wrap.gnome.desktop.wm.preferences resize-with-right-button true

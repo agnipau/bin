@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+active_desktops=""
+for i in $(seq 0 8); do
+    lines_no="$(xdotool search --desktop "$i" '.*' 2>/dev/null | wc -l)"
+    [[ "$lines_no" -gt 0 ]] && active_desktops+="$((i + 1)) "
+done
+dunstify -r 991051 -u low "Active desktops" "$active_desktops"
+

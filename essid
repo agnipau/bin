@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# One liner that shows the essid of the network I'm connect to via notification.
-
-notify-send "$(iwgetid -r)"

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+notify-send -u low "$(date +"%A")" "$(date +"%d %B %Y - %H:%M:%S")"
+

@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-# Pull using drive.
-
-cd "${HOME}/drive" || exit 1
-
-drive pull

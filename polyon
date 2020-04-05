@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# A script to launch my bottom polybar bar.
-
-polybar bar &

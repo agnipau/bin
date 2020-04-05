@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+notify-send -u low "Active window" "$(xdotool getwindowname "$(xdotool getactivewindow)")"
+

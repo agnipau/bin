@@ -1,0 +1,89 @@
+#!/usr/bin/bash
+
+desktops() {
+    focused_desktop="$(xdotool get_desktop)"
+    active_desktops=""
+    for i in $(seq 0 8); do
+        lines_no="$(xdotool search --desktop "$i" '.*' 2>/dev/null | wc -l)"
+
+        desk="$((i + 1))"
+        active_desktops+="%{A:bspc desktop -f focused\:'^$desk':}"
+
+        [[ "$i" -eq "$focused_desktop" ]] && {
+            active_desktops+="%{F#b8bb26}$desk"
+        } || {
+            [[ "$lines_no" -gt 0 ]] && active_desktops+="%{F#ebdbb2}$desk" \
+                || active_desktops+="%{F#665c54}$desk"
+        }
+
+        active_desktops+="%{F-}%{A} "
+    done
+    printf '%s' "$active_desktops"
+}
+
+clock() {
+    printf '%s' "$(date +"%A %d %H:%M")"
+}
+
+window_title() {
+    printf '%s' "$(xdotool getwindowname "$(xdotool getactivewindow)")"
+}
+
+ram_usage() {
+    printf '%s %s%s' \
+        "%{F#665c54}RAM" \
+        "%{F#ebdbb2}$(free | rg Mem | awk '{print $3/$2 * 100.0}' | cut -c1-4)%" \
+        "%{F-}"
+}
+
+cpu_usage() {
+    printf '%s %s%s' \
+        "%{F#665c54}CPU" \
+        "%{F#ebdbb2}$(rg 'cpu ' /proc/stat \
+            | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}' \
+            | cut -c1-4)%" \
+        "%{F-}"
+}
+
+volume_level() {
+    printf "%s %s%s" \
+        "%{F#665c54}Volume" \
+        "%{F#ebdbb2}$(pacmd list-sinks \
+            | grep -A 15 '* index' \
+            | awk '/volume: front/{ print $5 }' \
+            | sed 's/[%|,]//g')%" \
+        "%{F-}"
+}
+
+ssid() {
+    printf '%s %s%s' \
+        "%{F#665c54}Connected to" \
+        "%{F#ebdbb2}$(nmcli | rg 'connected\sto\s(.+)' -r '$1' -o --color never \
+            || printf '%s' "Nothing")" \
+        "%{F-}"
+}
+
+battery() {
+    FULL_AT=92
+
+    now="$(</sys/class/power_supply/BAT0/energy_now)"
+    full="$(</sys/class/power_supply/BAT0/energy_full)"
+    percentage="$((now * 100 / full))"
+    relative_percentage="$((percentage * 100 / FULL_AT))%"
+
+    printf '%s %s%s' \
+        "%{F#665c54}Battery" \
+        "%{F#ebdbb2}$relative_percentage" \
+        "%{F-}"
+}
+
+while true; do
+    printf '%s%s%s%s%s' \
+        "  %{A:today:}$(clock)%{A}  " \
+        "%{A4:bspc desktop -f next.local:}%{A5:bspc desktop -f prev.local:}$(desktops)%{A}%{A}" \
+        " $(window_title) " \
+        " %{r} $(ssid)  %{A4:volup:}%{A5:voldown:}$(volume_level)%{A}%{A}" \
+        "  $(cpu_usage)  $(ram_usage)  $(battery)  "
+    sleep 0.6
+done
+

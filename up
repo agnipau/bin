@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-#
-# Upload images to 0x0.st using cURL.
-
-curl -F"file=@$1" https://0x0.st

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sleep .2
+killall -9 flameshot
+flameshot &
+flameshot gui
+

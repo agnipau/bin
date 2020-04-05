@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+while IFS= read -r url; do
+    file_name="$(printf '%s' "$url" | fname-from-url)"
+    curl -Lo "$file_name" -C- "$url"
+done < "${1:-/dev/stdin}"
+

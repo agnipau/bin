@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-#
-# Push using drive.
-
-cd "${HOME}/drive" || exit 1
-
-drive push

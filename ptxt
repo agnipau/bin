@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-#
-# Convert a pdf into a text file and open it in NeoVim.
-
-pdftotext "$1"
-nvim "${1/pdf/txt}"

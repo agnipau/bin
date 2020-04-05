@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# shellcheck disable=SC2016
+for file in $(fd -t f -H -X file -i | rg '(.+):\s+text' -r '$1' -o); do
+    re='(?:\s|/)(?:bash|sh|dash|ksh)$'
+    [[ "$(head -n1 "$file" | rg -c "$re")" -gt 0 ]] && (
+        printf '%s\n' "Checking \`$file\`"
+        shellcheck "$file"
+    )
+done
+

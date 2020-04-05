@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-#
-# A small script for voting for every package I've installed from the Arch User
-# Repository.
-
-for aur_package in $(pacman -Qqm); do
-  aurvote --vote "$aur_package"
-done

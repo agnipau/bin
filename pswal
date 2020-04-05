@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-#
-# Uses pscircle to create the wallpaper, feh to set it (refresh every 10s).
-
-while true; do
-  pscircle --output="${HOME}/immagini/psimg"
-  feh --bg-fill "${HOME}/immagini/psimg"
-  sleep 10s
-done

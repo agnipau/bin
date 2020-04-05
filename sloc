@@ -1,46 +1,22 @@
-#!/usr/bin/env bash
-#
-# A bash script for calculating the sloc count of a codebase.
+#!/usr/bin/env python3
 
-total_count() {
-  if [[ -z "$dir" ]]; then
-    # shellcheck disable=SC2044
-    for file in $(find . -path ./.git -prune -o -print); do
-      [[ -f "$file" ]] && sloccount="$(( sloccount + $(wc -l "$file" | awk '{print $1}') ))"
-    done
-    printf '%b\n' "\\e[1;31m:: \\e[1;37m$sloccount total sloc\\e[0m"
-  else
-    # shellcheck disable=SC2044
-    for file in $(find "$dir" -path ./.git -prune -o -print); do
-      [[ -f "$file" ]] && sloccount="$(( sloccount + $(wc -l "$file" | awk '{print $1}') ))"
-    done
-    printf '%b\n' "\\e[1;31m:: \\e[1;37m$sloccount total sloc\\e[0m"
-  fi
-}
+import os
+import sys
 
-incremental_count() {
-  if [[ -f "$argument" ]]; then
-    printf '%b\n' "\\e[1;31m:: \\e[1;37m$(wc -l "$argument" | awk '{print $1}') sloc ($argument)\\e[0m"
-  elif [[ -d "$argument" ]]; then
-  # shellcheck disable=SC2044
-    for file in $(find "$argument" -path ./.git -prune -o -print); do
-      [[ -f "$file" ]] && \
-        sloccount="$(wc -l "$file" | awk '{print $1}')" && \
-        printf '%b\n' "\\e[1;31m:: \\e[1;37m$sloccount sloc (${file/.\/})\\e[0m"
-    done
-  fi
-}
 
-if [[ "$1" == --help || "$1" == -h ]]; then
-  printf '%b\n' "\\e[1;31m:: Use the -t|--total parameter to view the total sloc count of the codebase. Don't use any parameter to view the sloc count for every file of the codebase or use the file name you want to view the sloc count of as \$1 parameter.\\e[0m"
-  exit 1
-elif [[ "$1" == --total || "$1" == -t ]]; then
-  dir="$2"
-  total_count
-elif [[ -z "$1" ]]; then
-  dir="$PWD"
-  total_count
-else
-  argument="$1"
-  incremental_count
-fi
+def main():
+    args = sys.argv[1:]
+    if len(args) != 1:
+        print('Usage: python3 sloc.py /path/to/dir')
+        exit(1)
+    path = args[0]
+
+    sloc = 0
+    for root, _, files in os.walk(path):
+        for f in files:
+            sloc += sum(1 for _ in open(os.path.join(root, f)))
+    print(sloc)
+
+
+if __name__ == '__main__':
+    main()
