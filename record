@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+check-requirements-wrapper simplescreenrecorder picom
+
 killall -9 picom
 simplescreenrecorder
 picom &

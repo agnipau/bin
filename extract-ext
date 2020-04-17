@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 while IFS= read -r line; do
-    [[ "$(isurl <<<"$line")" == true ]] && {
-        fname="$(fname-from-url <<<"$line")"
-    } || fname="$line"
+    if [[ "$(isurl <<<"${line}")" == true ]]; then
+        fname="$(fname-from-url <<<"${line}")"
+    else
+        fname="${line}"
+    fi
 
-    printf '%s\n' "$(rev <<<"$fname" | cut -d. -f1 | rev)"
-done < ${1:-/dev/stdin}
+    printf '%s\n' "$(rev <<<"${fname}" | cut -d. -f1 | rev)"
+done < "${1:-/dev/stdin}"
 

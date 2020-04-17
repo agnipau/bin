@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
+browser="${BROWSER:-chromium}"
+check-requirements-wrapper "${browser}" rofi rg
+
 re='https?://(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)'
-selected_url="$(rg -o "$re" "$@" | rofi -dmenu -prompt urlsel)"
-"$BROWSER" "$selected_url"
+selected_url="$(rg -o "${re}" "$@" | rofi -dmenu -prompt urlsel)"
+"${browser}" "${selected_url}"
 

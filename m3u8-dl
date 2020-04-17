@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+check-requirements-wrapper ffmpeg
+
 ffmpeg -n \
     -protocol_whitelist file,http,https,tcp,tls,crypto \
     -i "$1" \

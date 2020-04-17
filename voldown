@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
+check-requirements-wrapper pactl
+
 pactl set-sink-volume @DEFAULT_SINK@ -10%
 nvollevel
+

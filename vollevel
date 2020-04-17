@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+check-requirements-wrapper grep awk sed pacmd
+
 printf '%s\n' "$(pacmd list-sinks \
     | grep -A 15 '* index' \
     | awk '/volume: front/{ print $5 }' \

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+successful=true
+
+for requirement in "${@}"; do
+    command -v "${requirement}" >/dev/null || {
+        successful=false
+        printf '%s\n' "${requirement}"
+    }
+done
+
+[[ "${successful}" == false ]] && exit 1 || exit
+

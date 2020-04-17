@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+check-requirements-wrapper shellcheck fd rg
+
 # shellcheck disable=SC2016
-for file in $(fd -t f -H -X file -i | rg '(.+):\s+text' -r '$1' -o); do
+for file in $(fd --exclude .git -t f -H -X file -i | rg '(.+):\s+text' -r '$1' -o); do
     re='(?:\s|/)(?:bash|sh|dash|ksh)$'
-    [[ "$(head -n1 "$file" | rg -c "$re")" -gt 0 ]] && (
-        printf '%s\n' "Checking \`$file\`"
-        shellcheck "$file"
+    [[ "$(head -n1 "${file}" | rg -c "${re}")" -gt 0 ]] && (
+        printf '%s\n' "Checking \`${file}\`"
+        shellcheck --enable=all "${file}"
     )
 done
 

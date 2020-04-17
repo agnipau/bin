@@ -1,24 +1,29 @@
 #!/usr/bin/bash
 
+check-requirements-wrapper xdotool date rg free awk cut pacmd grep sed
+
 desktops() {
     focused_desktop="$(xdotool get_desktop)"
     active_desktops=""
     for i in $(seq 0 8); do
-        lines_no="$(xdotool search --desktop "$i" '.*' 2>/dev/null | wc -l)"
+        lines_no="$(xdotool search --desktop "${i}" '.*' 2>/dev/null | wc -l)"
 
         desk="$((i + 1))"
-        active_desktops+="%{A:bspc desktop -f focused\:'^$desk':}"
+        active_desktops+="%{A:bspc desktop -f focused\:'^${desk}':}"
 
-        [[ "$i" -eq "$focused_desktop" ]] && {
-            active_desktops+="%{F#b8bb26}$desk"
-        } || {
-            [[ "$lines_no" -gt 0 ]] && active_desktops+="%{F#ebdbb2}$desk" \
-                || active_desktops+="%{F#665c54}$desk"
-        }
+        if [[ "${i}" -eq "${focused_desktop}" ]]; then
+            active_desktops+="%{F#b8bb26}${desk}"
+        else
+            if [[ "${lines_no}" -gt 0 ]]; then
+                active_desktops+="%{F#ebdbb2}${desk}"
+            else
+                active_desktops+="%{F#665c54}${desk}"
+            fi
+        fi
 
         active_desktops+="%{F-}%{A} "
     done
-    printf '%s' "$active_desktops"
+    printf '%s' "${active_desktops}"
 }
 
 clock() {
@@ -56,6 +61,7 @@ volume_level() {
 }
 
 ssid() {
+    # shellcheck disable=SC2016
     printf '%s %s%s' \
         "%{F#665c54}Connected to" \
         "%{F#ebdbb2}$(nmcli | rg 'connected\sto\s(.+)' -r '$1' -o --color never \
@@ -73,7 +79,7 @@ battery() {
 
     printf '%s %s%s' \
         "%{F#665c54}Battery" \
-        "%{F#ebdbb2}$relative_percentage" \
+        "%{F#ebdbb2}${relative_percentage}" \
         "%{F-}"
 }
 

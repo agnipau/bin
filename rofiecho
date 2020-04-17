@@ -1,16 +1,22 @@
 #!/usr/bin/env bash
 
+check-requirements-wrapper rofi
+
 trim_string() {
     : "${1#"${1%%[![:space:]]*}"}"
     : "${_%"${_##*[![:space:]]}"}"
-    printf '%s\n' "$_"
+    printf '%s\n' "${_}"
 }
 
 remove_trailing_colon() {
-    [[ "${1: -1}" == ':' ]] && printf '%s\n' "${1::-1}" || printf '%s\n' "$1"
+    if [[ "${1: -1}" == ':' ]]; then
+        printf '%s\n' "${1::-1}"
+    else
+        printf '%s\n' "$1"
+    fi
 }
 
 : "$(trim_string "$1")"
-: "$(remove_trailing_colon "$_")"
-rofi -dmenu -p "$_"
+: "$(remove_trailing_colon "${_}")"
+rofi -dmenu -p "${_}"
 

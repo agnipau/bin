@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 
+check-requirements-wrapper curl sxiv
+
 file_paths=()
 
 while IFS= read -r line; do
-    line_is_url="$(printf '%s\n' "$line" | isurl)"
-    [[ "$line_is_url" == true ]] && {
+    line_is_url="$(printf '%s\n' "${line}" | isurl)"
+    if [[ "${line_is_url}" == true ]]; then
         file_path="$(mktemp)"
-        curl -Lo "$file_path" -C- "$line"
-        file_paths+=("$file_path")
-    } || file_paths+=("$line")
-done < ${1:-/dev/stdin}
+        curl -Lo "${file_path}" -C- "${line}"
+        file_paths+=("${file_path}")
+    else
+        file_paths+=("${line}")
+    fi
+done < "${1:-/dev/stdin}"
 
-sxiv ${file_paths[@]}
+sxiv "${file_paths[@]}"
 

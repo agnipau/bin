@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+check-requirements-wrapper grep awk pacmd
+
 muted="$(pacmd list-sinks | grep -A 15 '* index' | awk '/muted/ { print $2 }')"
-printf '%s\n' "$([[ "$muted" == yes ]] && printf '%s\n' "Muted" || printf '%s\n' "Non muted")"
+if [[ "${muted}" == yes ]]; then
+    printf '%s\n' "Muted"
+else
+    printf '%s\n' "Non muted"
+fi
 

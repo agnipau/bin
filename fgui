@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+check-requirements-wrapper flameshot
+
 sleep .2
 killall -9 flameshot
 flameshot &
