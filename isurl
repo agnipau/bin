@@ -3,8 +3,8 @@
 check-requirements-wrapper rg
 
 while IFS= read -r line; do
-    if [[ "$(printf '%s' "${line}" | \
-        rg 'https?://(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)' >/dev/null 2>&1)" ]]; then
+    if printf '%s' "${line}" | \
+        rg 'https?://(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)' >/dev/null 2>&1; then
         echo true
     else
         echo false
