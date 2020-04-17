@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+for path in "$@"; do
+    zip -r "${path}.zip" "${path}"
+done
+
