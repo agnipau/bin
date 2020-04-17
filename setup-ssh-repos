@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+check-requirements-wrapper git basename
+
+repos_path="${1:-/home/matte/progetti}"
+github_username="${2:-matgua}"
+
+for repo in "${repos_path}/"*; do
+    [[ -d "${repo}" ]] && {
+        (
+            cd -- "$repo/" || exit
+            git remote set-url origin \
+                "git@github.com:${github_username}/$(basename "${repo}").git"
+        )
+    }
+done
+
