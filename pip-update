@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+pip list --outdated | cut -d' ' -f1 | tail -n +3 | xargs pip install --upgrade
+
