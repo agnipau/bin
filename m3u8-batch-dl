@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+check-requirements-wrapper fd xargs
+
+fd . "$1" --extension m3u8 | xargs m3u8-dl
+
