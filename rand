@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+curl -X GET \
+    "https://www.random.org/integers/?num=${1:-1}&min=${2:-1}&max=${3:-100}&col=${4:-1}&base=${5:-10}&format=plain&rnd=new"
+
