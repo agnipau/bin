@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-page=0
+page=1
 while :; do
     data="$(curl -s -X GET \
         -u "matgua:$1" \
