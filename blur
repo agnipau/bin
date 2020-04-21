@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+magick convert "$1" -filter Gaussian -blur 0x8 "$2"
+
