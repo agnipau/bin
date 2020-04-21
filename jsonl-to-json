@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/,/g' "$1" \
+    | sed 's/n/,/' \
+    | sed 's/^/[/'\
+    | sed 's/$/]/' > "$2"
+

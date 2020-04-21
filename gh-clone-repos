@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+for repo in $(gh-repo-list "$1" | fx '.map(x => x.ssh_url).join("\n")'); do
+    git clone "${@:2}" "${repo}"
+done
+

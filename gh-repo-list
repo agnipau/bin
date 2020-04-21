@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+page=0
+while :; do
+    data="$(curl -s -X GET \
+        -u "matgua:$1" \
+    "https://api.github.com/user/repos?page=${page}&per_page100&type=all")"
+    [[ "$(printf '%s\n' "${data}" | fx .length)" == 0 ]] && break
+    printf '%s\n' "${data}"
+    page="$((page + 1))"
+done
+
