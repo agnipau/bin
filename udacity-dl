@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+check-requirements-wrapper curl
+
+for course_id in "$@"; do
+    curl -X POST \
+        -H 'Content-Type: application/json' \
+        -d \
+        "{
+            \"query\": \"query CourseQuery { course(key: \\\"${course_id}\\\" version: \\\"1.0.0\\\" locale: \\\"en-us\\\") { resources { files { name uri } } } }\",
+            \"variables\": \"null\",
+            \"locale\": \"it-it\"
+        }" \
+        "https://classroom-content.udacity.com/api/v1/graphql"
+done
+

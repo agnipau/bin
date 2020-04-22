@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+check-requirements-wrapper curl fx
+
+ACCESS_TOKEN=707b381d0a91f2db2f87f270055f709caee5b929758296ae4bfa13354ca3339e
+ACCESS_TOKEN_2=e911239505a5687d0693325fa813cda38780b3be36068ee07d82bb3b3cc6d77f
+
+for post_id in "$@"; do
+    json_str="$(curl -s -X GET \
+        -H "Host:api.dribbble.com" \
+        -H "user-agent:okhttp/3.12.1" \
+        "https://api.dribbble.com/i1/shots/${post_id}?access_token=${ACCESS_TOKEN}")"
+    printf '%s\n' "$(fx 'Object.values(this.images)[0]' <<<"${json_str}")"
+    printf '%s\n' "$(fx '.attachments.map(x => x.url).join("\n")' <<<"${json_str}")"
+done
+

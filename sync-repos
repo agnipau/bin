@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 for repo in ~/progetti/*; do
-    (cd "${repo}"; printf '\n%s\n' "${repo}"; hub sync)
+    (cd "${repo}" || exit; printf '\n%s\n' "${repo}"; hub sync)
 done
 
