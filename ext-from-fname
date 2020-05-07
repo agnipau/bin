@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+check-requirements-wrapper rev cut printf
+
+while IFS= read -r url; do
+    printf '%s' "${url}" | rev | cut -d. -f1 | rev
+done < "${1:-/dev/stdin}"
+

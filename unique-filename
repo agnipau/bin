@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+printf '%s\n' "$(date '+%Y-%m-%d-%H-%M')-$(uuidgen -t | head -c 5)"
+

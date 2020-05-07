@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+VSCODE_OSS_PATH="${HOME}/.vscode-oss/extensions"
+VSCODE_PATH="${HOME}/.vscode/extensions"
+
+if [[ -d "${VSCODE_OSS_PATH}" ]]; then
+    vscode_path="${VSCODE_OSS_PATH}"
+elif [[ -d "${VSCODE_PATH}" ]]; then
+    vscode_path="${VSCODE_PATH}"
+else
+    exit 1
+fi
+
+themes=()
+for extension in "${vscode_path}/"*; do
+    if [[ -f "${extension}/package.json" ]]; then
+        if [[ "$(fx \
+            <<<"$(<"${extension}/package.json")" \
+            '.categories.includes("Themes")')" == true ]]; then
+            themes+=("${extension}")
+        fi
+    fi
+done
+
+parsed_themes="$(for theme in "${themes[@]}"; do
+    cd "${theme}" || exit
+
+    colors="$(for file in $(fd -a --extension json -E 'package.json' \
+        -E 'package-lock.json' \
+        -E 'tsconfig.json' \
+        -E 'tslint.json'); do
+        colors="$(rg -Io "(#[a-fA-F0-9]{6})|(#[a-fA-F0-9]{8})" -r "\"\$1\"" \
+            -g "$(printf '%s' "${file}" | rev | cut -d/ -f1 | rev)" \
+            | sort | uniq | tr '[:upper:]' '[:lower:]' | tr '\n' ',')"
+        [[ -n "${colors}" ]] && {
+            printf '%s' "\"${file}\":[${colors::-1}],"
+        }
+    done)"
+
+    printf '%s' "{\"${theme}\":{${colors::-1}}},"
+done)"
+printf '%s\n' "[${parsed_themes::-1}]"
+

@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper curl python
+check-requirements-wrapper curl python unique-filename fname-from-url ext-from-fname
 
 overwrite=false
 [[ "$1" == -o ]] && overwrite=true
+unique_filename=true
 
+commands=()
 while IFS= read -r url; do
-    file_name="$(printf '%s' "${url}" | fname-from-url)"
+    if [[ "${unique_filename}" == true ]]; then
+        file_name="$(unique-filename).$(printf '%s\n' "${url}" | fname-from-url | ext-from-fname)"
+    else
+        file_name="$(printf '%s' "${url}" | fname-from-url)"
+    fi
     [[ -f "${file_name}" && "${overwrite}" == false ]] && continue
-    curl -Lo "${file_name}" -C- "${url}"
+    commands+=("curl -sLo \"${file_name}\" -C- \"${url}\"; printf '%s\n' done")
 done < "${1:-/dev/stdin}"
+
+printf '%s\n' "${commands[@]}" | parallel --jobs 4 --tag bash -c {}
 
