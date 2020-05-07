@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+check-requirements-wrapper ffmpeg
+
+ranges="$(tr '\n' '+' <<<"$(for range in "${@:3}"; do
+    start="$(cut -d: -f1 <<<"${range}")"
+    end="$(cut -d: -f2 <<<"${range}")"
+    printf '%s\n' "between(t,${start},${end})"
+done)")"
+ranges="${ranges::-1}"
+
+
+ffmpeg -i "$1" \
+    -vf "select='${ranges}',setpts=N/FRAME_RATE/TB" \
+    -af "aselect='${ranges}',asetpts=N/SR/TB" \
+    "$2"
+
