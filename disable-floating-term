@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+bspc rule -r Alacritty state=floating center=true
+fish
+

@@ -2,5 +2,5 @@
 
 check-requirements-wrapper dunstify
 
-dunstify -r 991049 -u low "Volume" "$(vollevel)%"
+dunstify Volume "$(vollevel)%" -r 2
 

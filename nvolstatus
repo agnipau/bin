@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-dunstify -r 991050 -u low "$(volstatus)"
+dunstify "$(volstatus)" -r 1
 

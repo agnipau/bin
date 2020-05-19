@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper xdotool notify-send
+check-requirements-wrapper xdotool dunstify
 
-notify-send -u low "Active window" "$(xdotool getwindowname "$(xdotool getactivewindow)")"
+dunstify "Active window" \
+    "$(xdotool getwindowname "$(xdotool getactivewindow)")"
 

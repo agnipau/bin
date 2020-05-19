@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper notify-send awk rg
+check-requirements-wrapper dunstify awk rg
 
 cpu_usage="$(rg 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}')"
 
-notify-send -u low "CPU usage" "${cpu_usage}"
+dunstify "CPU usage" "${cpu_usage}"
 

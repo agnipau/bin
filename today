@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper date notify-send
+check-requirements-wrapper date dunstify
 
-notify-send -u low "$(date +"%A")" "$(date +"%d %B %Y - %H:%M:%S")"
+dunstify "$(date +"%A")" "$(date +"%d %B %Y - %H:%M:%S")"
 

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+bspc rule -a Alacritty state=floating center=true
+alacritty -e nmtui
+bspc rule -r Alacritty state=floating center=true
+

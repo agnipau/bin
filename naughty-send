@@ -1,0 +1,288 @@
+#!/usr/bin/env bash
+#
+# Create a naughty Awesome WM notification by title and message
+
+check-requirements-wrapper awesome-client
+
+show_help() {
+    cat >/dev/stdout <<EOF
+-t --text string
+    Text of the notification. (default "")
+-T --title string
+    Title of the notification. (optional)
+--timeout int
+    Time in seconds after which popup expires. Set 0 for no timeout. (default 5)
+--hover-timeout int
+    Delay in seconds after which hovered popup disappears. (optional)
+-s --screen integer or screen
+    Target screen for the notification. (default focused)
+-p --position string
+    Corner of the workarea displaying the popups. Values: "top_right", "top_left", "bottom_left", "bottom_right", "top_middle", "bottom_middle". (default "top_right")
+-o --ontop bool
+    Boolean forcing popups to display on top. (default true)
+-h --height int
+    Popup height. (default \`beautiful.notification_height\` or auto)
+-w --width int
+    Popup width. (default \`beautiful.notification_width\` or auto)
+-H --max-height int
+    Popup maximum height. (default \`beautiful.notification_max_height\` or auto)
+-W --max-width int
+    Popup maximum width. (default \`beautiful.notification_max_width\` or auto)
+-f --font string
+    Notification font. (default \`beautiful.notification_font\` or \`beautiful.font\` or \`awesome.font\`)
+-i --icon string
+    Path to icon. (optional)
+-I --icon-size int
+    Desired icon size in px. (optional)
+-F --fg string
+    Foreground color. (default \`beautiful.notification_fg\` or \`beautiful.fg_focus\` or \`'#ffffff'\`)
+-B --bg string
+    Background color. (default \`beautiful.notification_fg\` or \`beautiful.bg_focus\` or \`'#535d6c'\`)
+--border-width int
+    Border width. (default \`beautiful.notification_border_width\` or 1)
+--border-color string
+    Border color. (default \`beautiful.notification_border_color\` or \`beautiful.border_focus\` or \`'#535d6c'\`)
+--shape gears.shape
+    Widget shape. (default \`beautiful.notification_shape\`)
+-O --opacity gears.opacity
+    Widget opacity. (default \`beautiful.notification_opacity\`)
+-m --margin gears.margin
+    Widget margin. (default \`beautiful.notification_margin\`)
+-R --run func
+    Function to run on left click. The notification object will be passed to it as an argument. You need to call e.g. notification.die(naughty.notificationClosedReason.dismissedByUser) from there to dismiss the notification yourself. (optional)
+-d --destroy func
+    Function to run when notification is destroyed. (optional)
+-P --preset table
+    Table with any of the above parameters. Note: Any parameters specified directly in args will override ones defined in the preset. (optional)
+-r --replaces_id int
+    Replace the notification with the given ID. (optional)
+-c --callback func
+    Function that will be called with all arguments. The notification will only be displayed if the function returns true. Note: this function is only relevant to notifications sent via dbus. (optional)
+-a --actions table
+    Mapping that maps a string to a callback when this action is selected. (optional)
+--ignore-suspend bool
+    If set to true this notification will be shown even if notifications are suspended via naughty.suspend. (default false)
+EOF
+}
+
+text=nil
+title=nil
+timeout=nil
+hover_timeout=nil
+screen=nil
+position=nil
+ontop=nil
+height=nil
+width=nil
+max_height=nil
+max_width=nil
+font=nil
+icon=nil
+icon_size=nil
+foreground=nil
+background=nil
+border_width=nil
+border_color=nil
+shape=nil
+opacity=nil
+margin=nil
+run=nil
+destroy=nil
+preset=nil
+replaces_id=nil
+callback=nil
+actions=nil
+ignore_suspend=nil
+POSITIONAL=()
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case ${key} in
+        -t|--text)
+            text="'$2'"
+            shift
+            shift
+            ;;
+        -T|--title)
+            title="'$2'"
+            shift
+            shift
+            ;;
+        --timeout)
+            timeout="$2"
+            shift
+            shift
+            ;;
+        --hover-timeout)
+            hover_timeout="$2"
+            shift
+            shift
+            ;;
+        -s|--screen)
+            screen="$2"
+            shift
+            shift
+            ;;
+        -p|--position)
+            position="'$2'"
+            shift
+            shift
+            ;;
+        -o|--ontop)
+            ontop=true
+            shift
+            shift
+            ;;
+        -h|--height)
+            height="$2"
+            shift
+            shift
+            ;;
+        -w|--width)
+            width="$2"
+            shift
+            shift
+            ;;
+        -H|--max-height)
+            max_height="$2"
+            shift
+            shift
+            ;;
+        -W|--max-width)
+            max_width="$2"
+            shift
+            shift
+            ;;
+        -f|--font)
+            font="'$2'"
+            shift
+            shift
+            ;;
+        -i|--icon)
+            icon="'$2'"
+            shift
+            shift
+            ;;
+        -I|--icon-size)
+            icon_size="$2"
+            shift
+            shift
+            ;;
+        -F|--fg)
+            foreground="'$2'"
+            shift
+            shift
+            ;;
+        -B|--bg)
+            background="'$2'"
+            shift
+            shift
+            ;;
+        --border-width)
+            border_width="$2"
+            shift
+            shift
+            ;;
+        --border-color)
+            border_color="'$2'"
+            shift
+            shift
+            ;;
+        --shape)
+            shape="$2"
+            shift
+            shift
+            ;;
+        -O|--opacity)
+            opacity="$2"
+            shift
+            shift
+            ;;
+        -m|--margin)
+            margin="$2"
+            shift
+            shift
+            ;;
+        -R|--run)
+            run="$2"
+            shift
+            shift
+            ;;
+        -d|--destroy)
+            destroy="$2"
+            shift
+            shift
+            ;;
+        -P|--preset)
+            preset="$2"
+            shift
+            shift
+            ;;
+        -r|--replaces-id)
+            replaces_id="$2"
+            shift
+            shift
+            ;;
+        -c|--callback)
+            callback="$2"
+            shift
+            shift
+            ;;
+        -a|--actions)
+            actions="$2"
+            shift
+            shift
+            ;;
+        --ignore-suspend)
+            ignore_suspend="$2"
+            shift
+            shift
+            ;;
+        --help)
+            show_help
+            exit
+            ;;
+        *)
+            POSITIONAL+=("${key}")
+            shift
+            ;;
+    esac
+done
+# Restore positional parameters
+set -- "${POSITIONAL[@]}"
+
+printf '%s\n%s\n%s\n' \
+    "local naughty = require('naughty')" \
+    "local notification = naughty.notify({
+    text = ${text},
+    title = ${title},
+    timeout = ${timeout},
+    hover_timeout = ${hover_timeout},
+    screen = ${screen},
+    position = ${position},
+    ontop = ${ontop},
+    height = ${height},
+    width = ${width},
+    max_height = ${max_height},
+    max_width = ${max_width},
+    font = ${font},
+    icon = ${icon},
+    icon_size = ${icon_size},
+    fg = ${foreground},
+    bg = ${background},
+    border_width = ${border_width},
+    border_color = ${border_color},
+    shape = ${shape},
+    opacity = ${opacity},
+    margin = ${margin},
+    run = ${run},
+    destroy = ${destroy},
+    preset = ${preset},
+    replaces_id = ${replaces_id},
+    callback = ${callback},
+    actions = ${actions},
+    ignore_suspend = ${ignore_suspend}
+})" \
+    "return notification.id"\
+    | awesome-client \
+    | cut -d' ' -f5
+

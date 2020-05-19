@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper notify-send
+check-requirements-wrapper dunstify
 
 FULL_AT=87
 
@@ -9,5 +9,5 @@ full="$(</sys/class/power_supply/BAT0/energy_full)"
 percentage="$((now * 100 / full))"
 relative_percentage="$((percentage * 100 / FULL_AT))"
 
-notify-send -u low "Battery" "${relative_percentage}%"
+dunstify Battery "${relative_percentage}%"
 

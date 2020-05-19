@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+check-requirements-wrapper find entr
+
+while :; do
+    find lib/ -name '*.dart' | \
+        entr -d -p kill -USR1 "$(</tmp/flutter.pid)"
+done
+

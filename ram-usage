@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper free rg awk notify-send
+check-requirements-wrapper free rg awk dunstify
 
 ram_usage="$(free | rg Mem | awk '{print $3/$2 * 100.0}')%"
 
-notify-send -u low "RAM usage" "${ram_usage}"
+dunstify "RAM usage" "${ram_usage}"
 
