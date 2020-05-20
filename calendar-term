@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
 bspc rule -a Alacritty state=floating center=true
-alacritty -e disable-floating-term-fish
+alacritty -d 70 34 -e calendar
+disable-floating-term
 

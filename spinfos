@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+spotify_infos=/home/matte/progetti/spotify-infos/target/release/spotify-infos
+
+cmd_output="$("${spotify_infos}" '%playback_status%^%artists% - %title%' 2>/dev/null)"
+
+[[ -z "${cmd_output}" ]] && {
+    printf '%s\n' "No songs playing"
+    exit
+}
+
+IFS=^ read -r playback_status infos_text <<<"${cmd_output}"
+
+if [[ "${playback_status}" == Paused ]]; then
+    printf '%s\n' "${infos_text}"
+else
+    printf '%s\n' "%{F#17ff93}${infos_text}%{F-}"
+fi
+

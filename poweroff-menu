@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+choice="$(printf '%s\n%s\n%s\n%s\n%s' "Suspend" "Reboot" "Shutdown" "Exit Xorg" "Nothing" \
+    | rofi -dmenu)"
+
+case "${choice}" in
+    Suspend)
+        systemctl suspend
+        ;;
+    Reboot)
+        systemctl reboot
+        ;;
+    Shutdown)
+        systemctl poweroff
+        ;;
+    "Exit Xorg")
+        killall Xorg
+        ;;
+    *)
+        exit
+        ;;
+esac
+

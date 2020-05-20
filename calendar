@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cal --color=always -Y
+read -rn1
+
