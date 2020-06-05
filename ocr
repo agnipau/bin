@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+tmpfile_in="$(mktemp -u).png"
+tmpfile_out="$(mktemp -u)"
+flameshot gui -r >"${tmpfile_in}"
+tesseract "${tmpfile_in}" "${tmpfile_out}"
+xsel -ib <"${tmpfile_out}.txt"
+rm "${tmpfile_in}" "${tmpfile_out}.txt"
+

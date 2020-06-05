@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+# Notification progress
+
+seconds="${1:-60}"
+start_time="$(date '+%H:%M:%S')"
+end_time="$(date '+%H:%M:%S' -d "+ ${seconds} seconds")"
+elapsed_seconds=0
+while :; do
+    dunstify -r 99897 -u low "Task progress" "\n${start_time} -> ${end_time}\n\n$((100 * elapsed_seconds / seconds))%"
+    sleep 1
+    elapsed_seconds="$((elapsed_seconds + 1))"
+done
+
