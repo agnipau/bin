@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+output="$(fd -t f --exec du -b 2>/dev/null | sort -n)"
+first_col="$(awk '{ print $1 }' <<<"${output}" | numfmt --to=iec-i --suffix=B)"
+second_col="$(awk '{ for (i = 2; i <= NF; ++i) { if (i == NF) { print $i } else { printf $i " " } } }' <<<"${output}")"
+paste -d ' ' <(printf '%s\n' "${first_col}") <(printf '%s\n' "${second_col}")
+
