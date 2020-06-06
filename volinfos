@@ -2,5 +2,5 @@
 
 check-requirements-wrapper dunstify
 
-dunstify "$(volstatus)" "$(vollevel)%" -r 0
+dunstify "$(volstatus)" "$(vollevel)" -r 0
 

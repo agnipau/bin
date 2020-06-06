@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper free rg awk dunstify
+check-requirements-wrapper free awk
 
-ram_usage="$(free | rg Mem | awk '{print $3/$2 * 100.0}')%"
-
-dunstify "RAM usage" "${ram_usage}"
+printf '%s\n' "$(free | awk '{ if ($1 == "Mem:") print $3 / $2 * 100.0 }')%"
 

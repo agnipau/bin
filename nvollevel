@@ -2,5 +2,5 @@
 
 check-requirements-wrapper dunstify
 
-dunstify Volume "$(vollevel)%" -r 2
+dunstify Volume "$(vollevel)" -r 2
 

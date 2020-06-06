@@ -37,7 +37,7 @@ window_title() {
 ram_usage() {
     printf '%s %s%s' \
         "%{F#665c54}RAM" \
-        "%{F#ebdbb2}$(free | rg Mem | awk '{print $3/$2 * 100.0}' | cut -c1-4)%" \
+        "%{F#ebdbb2}$(free | rg Mem | awk '{ print $3 / $2 * 100.0 }' | cut -c1-4)%" \
         "%{F-}"
 }
 
@@ -45,7 +45,7 @@ cpu_usage() {
     printf '%s %s%s' \
         "%{F#665c54}CPU" \
         "%{F#ebdbb2}$(rg 'cpu ' /proc/stat \
-            | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}' \
+            | awk '{ usage = ($2 + $4) * 100 / ($2 + $4 + $5) } END { print usage "%" }' \
             | cut -c1-4)%" \
         "%{F-}"
 }
@@ -55,7 +55,7 @@ volume_level() {
         "%{F#665c54}Volume" \
         "%{F#ebdbb2}$(pacmd list-sinks \
             | grep -A 15 '* index' \
-            | awk '/volume: front/{ print $5 }' \
+            | awk '/volume: front/ { print $5 }' \
             | sed 's/[%|,]//g')%" \
         "%{F-}"
 }
