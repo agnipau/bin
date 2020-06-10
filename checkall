@@ -3,5 +3,5 @@
 check-requirements-wrapper shellcheck fd rg
 
 # shellcheck disable=SC2016,SC2046
-fd --exclude .git -tx -H -X head -1 \
-    | rg '==> ([^ ]+) <==\n.+(?:bash|sh|dash|ksh)$' -r '$1' -oUa
+shellcheck --enable=all $(fd --exclude .git -tx -H -X head -1 \
+    | rg '==> ([^ ]+) <==\n.+(?:bash|sh|dash|ksh)$' -r '$1' -oUa)
