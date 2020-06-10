@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# shellcheck disable=SC2015
+ping -q -w 1 -c 1 "$(ip r | grep default | cut -d' ' -f3)" >/dev/null \
+    && true || false
+

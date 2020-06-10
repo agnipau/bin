@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# els - executable ls
+# List all executables in PATH
+
+# shellcheck disable=SC2086
+fd -tx -d1 . ${PATH//:/ } 2>/dev/null | rev | cut -d/ -f1 | rev
+

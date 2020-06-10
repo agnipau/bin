@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+bspc rule -a Alacritty state=fullscreen center=true
+alacritty -e tmux new-session -s tfzfrofi fzfrofi "$1"
+bspc rule -r Alacritty state=fullscreen center=true
+

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+FZF_DEFAULT_OPTS=""
+cmd="$("${1:-els}" | fzf \
+    --preview : \
+    --preview-window left:33%:noborder \
+    --multi --inline-info \
+    --color fg:8,hl:7,fg+:6,bg+:0,hl+:7 \
+    --color info:0,prompt:6,spinner:6,pointer:6,marker:6)"
+[[ -n "${cmd}" ]] && setsid -f "${cmd}"
+
