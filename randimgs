@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Outputs links to random images
+
+curl -s "https://unsplash.com/napi/photos?page=${1:-1}&per_page=12" \
+    -H 'authority: unsplash.com' \
+    -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36' \
+    -H 'accept: */*' \
+    -H 'sec-fetch-site: same-origin' \
+    -H 'sec-fetch-mode: cors' \
+    -H 'sec-fetch-dest: empty' \
+    -H 'referer: https://unsplash.com/' \
+    -H 'accept-language: it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7' \
+    | fx '.map(x => x.urls.full).join("\n")'
+
