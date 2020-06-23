@@ -8,7 +8,7 @@ github_username="${2:-matgua}"
 for repo in "${repos_path}/"*; do
     [[ -d "${repo}" ]] && {
         (
-            cd -- "${repo}/" || exit
+            cd -- "${repo}/" || exit 1
             git remote set-url origin \
                 "git@github.com:${github_username}/$(basename "${repo}").git"
         )

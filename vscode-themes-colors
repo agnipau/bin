@@ -23,7 +23,7 @@ for extension in "${vscode_path}/"*; do
 done
 
 parsed_themes="$(for theme in "${themes[@]}"; do
-    cd "${theme}" || exit
+    cd "${theme}" || exit 1
 
     colors="$(for file in $(fd -a --extension json -E 'package.json' \
         -E 'package-lock.json' \

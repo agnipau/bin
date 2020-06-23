@@ -3,6 +3,7 @@
 check-requirements-wrapper curl fx
 
 ACCESS_TOKEN=707b381d0a91f2db2f87f270055f709caee5b929758296ae4bfa13354ca3339e
+# shellcheck disable=SC2034
 ACCESS_TOKEN_2=e911239505a5687d0693325fa813cda38780b3be36068ee07d82bb3b3cc6d77f
 
 for post_id in "$@"; do

@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+#
+# Credits to 'https://github.com/salman-abedin/devour'
+
+id="$(xdo id)"
+xdo hide
+("$@")
+xdo show "${id}"
+

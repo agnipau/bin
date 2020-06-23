@@ -7,5 +7,5 @@ for not_installed_program in $(check-requirements "$@"); do
     printf "%s\n" "'${not_installed_program}' is required but not installed"
 done
 
-[[ "${successful}" == false ]] && exit 1 || exit 0
+[[ "${successful}" == false ]] && exit 1 || exit
 

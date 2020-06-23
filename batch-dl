@@ -2,7 +2,7 @@
 
 check-requirements-wrapper curl python fname-from-url xargs
 
-self_path="$(cd "$(dirname "$0")" >/dev/null 2>&1; pwd -P)"
+self_path="$(cd "$(dirname "$0")" >/dev/null 2>&1 || exit 1; pwd -P)"
 
 urls=""
 while IFS= read -r url; do
@@ -10,6 +10,7 @@ while IFS= read -r url; do
   urls=$"${urls}\n${url} ${fname}"
 done < "${1:-/dev/stdin}"
 
+# shellcheck disable=SC2016
 echo -e "${urls}" \
   | xargs -I{} sh -c 'curl -Lo "$(cut -d" " -f2 <<<"$1")" -C- "$(cut -d" " -f1 <<<"$1")"' -- {}
 

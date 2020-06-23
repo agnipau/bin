@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
+count=1
 while :; do
     sleep 1
-    ping google.com -c3 2>/dev/stderr || continue
+    ping google.com -c3 2>/dev/null || {
+        printf '%s\r' "Attempt failed ${count}"
+        count="$((count+1))"
+        continue
+    }
     exit
 done
 

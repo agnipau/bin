@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cat >tsconfig.json <<EOF
+{
+    "compilerOptions": {
+    "outDir": "dist",
+    "strict": true,
+    "lib": ["ESNext", "DOM"],
+    "sourceMap": true
+}
+EOF
