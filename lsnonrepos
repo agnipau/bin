@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+for repo in "${HOME}/progetti/"*; do
+    cd "${repo}" || exit 1
+    [[ -d "${repo}/.git" ]] || {
+        printf '%s\n' "${repo}"
+    }
+done
+
