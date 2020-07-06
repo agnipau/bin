@@ -3,7 +3,7 @@
 page=1
 while :; do
     data="$(curl -s -X GET \
-        -u "matgua:$1" \
+        -u "agnipau:$1" \
     "https://api.github.com/user/repos?page=${page}&per_page100&type=all")"
     [[ "$(printf '%s\n' "${data}" | fx .length)" == 0 ]] && break
     printf '%s\n' "${data}"

@@ -3,7 +3,7 @@
 check-requirements-wrapper git basename
 
 repos_path="${1:-/home/matte/progetti}"
-github_username="${2:-matgua}"
+github_username="${2:-agnipau}"
 
 for repo in "${repos_path}/"*; do
     [[ -d "${repo}" ]] && {
