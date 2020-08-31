@@ -1,0 +1,4 @@
+#!/bin/sh
+
+xcolor | tr -d '\n' | xclip -sel clipboard
+

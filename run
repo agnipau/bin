@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
+[[ "$1" == rm ]] && {
+    printf '%s\n' "Use trash instead"
+    exit
+}
+
 $1 "${@:2}"
 
