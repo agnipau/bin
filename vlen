@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2154
+
+eval "$(slap bash parse _ -- "$@" <<-EOF
+name: vlen
+version: "1.0"
+author: Matteo G. <matteoguarda@tutanota.com>
+about: Searches for all videos starting from a given directory and outputs the cumulative duration.
+
+settings:
+    - ArgRequiredElseHelp
+    - ColoredHelp
+
+args:
+    - dir:
+        help: the dir where to start searching from
+        default_value: .
+EOF
+)"; [[ -z "${_success}" ]] && exit 1
+
+check-requirements-wrapper fd ffprobe paste bc
+
+fd "${_dir_vals}" -e mkv -e mp4 -e webm -x \
+    ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \; \
+    | paste -sd+ - \
+    | bc
+

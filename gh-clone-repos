@@ -1,6 +1,37 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2154
 
-for repo in $(gh-repo-list "$1" | fx '.map(x => x.ssh_url).join("\n")'); do
-    git clone "${@:2}" "${repo}"
+eval "$(slap bash parse _ -- "$@" <<-EOF
+name: gh-clone-repos
+version: "1.0"
+author: Matteo G. <matteoguarda@tutanota.com>
+about: Uses 'gh-repo-list' to clone all your GitHub repos.
+
+settings:
+    - ArgRequiredElseHelp
+
+args:
+    - username:
+        help: your GitHub username
+        required: true
+    - password:
+        help: your GitHub password
+        required: true
+    - git_options:
+        help: "additional Git options (for example: --git-options '--depth 1')"
+        long: git-options
+        takes_value: true
+        short: o
+        allow_hyphen_values: true
+EOF
+)"; [[ -z "${_success}" ]] && exit 1
+
+for repo in $(gh-repo-list "${_username_vals}" "${_password_vals}" \
+    | jq -r "map(.ssh_url) | join(\"\n\")"); do
+    if [[ -n "${_git_options_occurs}" ]]; then
+        eval "git clone ${_git_options_vals} ${repo}"
+    else
+        git clone "${repo}"
+    fi
 done
 

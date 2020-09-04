@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-check-requirements-wrapper find ffprobe paste bc
-
-find "$1" -iname '*.mp4' -exec \
-    ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \; \
-    | paste -sd+ - \
-    | bc
-

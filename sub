@@ -1,6 +1,35 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2154
+
+eval "$(slap bash parse _ -- "$@" <<-EOF
+name: sub
+version: "1.0"
+author: Matteo G. <matteoguarda@tutanota.com>
+about: Searches for a pattern using ripgrep and substitutes all occurrences with a string.
+
+settings:
+    - ArgRequiredElseHelp
+
+args:
+    - pattern:
+        help: the pattern to search for
+        required: true
+    - substitute:
+        help: the text to substitute the matches with
+        required: true
+    - dry_run:
+        help: instead of modifying the files right away it shows you a preview of the changes
+        short: d
+        long: dry-run
+EOF
+)"; [[ -z "${_success}" ]] && exit 1
 
 check-requirements-wrapper rg xargs sed
 
-rg "$1" --files-with-matches | xargs sed -i "s/$1/$2/g"
+if [[ -n "${_dry_run_occurs}" ]]; then
+    rg "${_pattern_vals}" | sed "s/${_pattern_vals}/${_substitute_vals}/g"
+else
+    rg "${_pattern_vals}" --files-with-matches \
+        | xargs sed -i "s/${_pattern_vals}/${_substitute_vals}/g"
+fi
 

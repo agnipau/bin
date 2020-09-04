@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-check-requirements-wrapper fd wc
-
-fd -t f --exec-batch wc -l
-

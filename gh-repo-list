@@ -1,12 +1,39 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2154
+
+eval "$(slap bash parse _ -- "$@" <<-EOF
+name: gh-repo-list
+version: "1.0"
+author: Matteo G. <matteoguarda@tutanota.com>
+about: Outputs JSON containing useful informations about your GitHub repos.
+
+settings:
+    - ArgRequiredElseHelp
+
+args:
+    - username:
+        help: your GitHub username
+        required: true
+    - password:
+        help: your GitHub password
+        required: true
+    - iterations:
+        help: the number of iterations to do. 0 means there is no limit
+        long: iterations
+        short: i
+        default_value: "0"
+EOF
+)"; [[ -z "${_success}" ]] && exit 1
 
 page=1
 while :; do
     data="$(curl -s -X GET \
-        -u "agnipau:$1" \
+        -u "${_username_vals}:${_password_vals}" \
     "https://api.github.com/user/repos?page=${page}&per_page100&type=all")"
-    [[ "$(printf '%s\n' "${data}" | fx .length)" == 0 ]] && break
+    len="$(printf '%s\n' "${data}" | jq '. | length')"
+    [[ "${_iterations_vals}" == "0" && "${len}" == 0 ]] && break
     printf '%s\n' "${data}"
+    [[ "${page}" == "${_iterations_vals}" ]] && break
     page="$((page + 1))"
 done
 
