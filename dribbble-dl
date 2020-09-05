@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper curl fx
+slap deps curl fx || exit 1
 
 ACCESS_TOKEN=707b381d0a91f2db2f87f270055f709caee5b929758296ae4bfa13354ca3339e
 # shellcheck disable=SC2034

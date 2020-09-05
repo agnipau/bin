@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper grep awk pacmd
+slap deps grep awk pacmd || exit 1
 
 printf '%s\n' "$(pacmd list-sinks \
     | grep -A 15 '* index' \

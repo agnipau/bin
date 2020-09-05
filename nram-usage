@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper ram-usage dunstify
+slap deps ram-usage dunstify || exit 1
 
 dunstify "RAM usage" "$(ram-usage)"
 

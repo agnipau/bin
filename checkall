@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper shellcheck fd rg
+slap deps shellcheck fd rg || exit 1
 
 # shellcheck disable=SC2016,SC2046
 shellcheck --enable=all $(fd --exclude .git -tx -H -X head -1 \

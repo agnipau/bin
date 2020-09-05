@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper ffmpeg
+slap deps ffmpeg || exit 1
 
 ranges="$(tr '\n' '+' <<<"$(for range in "${@:3}"; do
     start="$(cut -d: -f1 <<<"${range}")"

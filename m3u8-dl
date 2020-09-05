@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper ffmpeg rev cut
+slap deps ffmpeg rev cut || exit 1
 
 ffmpeg -n \
     -protocol_whitelist file,http,https,tcp,tls,crypto \

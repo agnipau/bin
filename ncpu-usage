@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper dunstify cpu-usage
+slap deps dunstify cpu-usage || exit 1
 
 dunstify "CPU usage" "$(cpu-usage)"
 

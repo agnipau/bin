@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
 
-eval "$(slap bash parse _ -- "$@" <<-EOF
+eval "$(slap parse bash _ -- "$@" <<-EOF
 name: gh-clone-repos
 version: "1.0"
 author: Matteo G. <matteoguarda@tutanota.com>

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper curl
+slap deps curl || exit 1
 
 for course_id in "$@"; do
     curl -X POST \

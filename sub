@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
 
-eval "$(slap bash parse _ -- "$@" <<-EOF
+slap deps rg xargs sed || exit 1
+
+eval "$(slap parse bash _ -- "$@" <<-EOF
 name: sub
 version: "1.0"
 author: Matteo G. <matteoguarda@tutanota.com>
@@ -23,8 +25,6 @@ args:
         long: dry-run
 EOF
 )"; [[ -z "${_success}" ]] && exit 1
-
-check-requirements-wrapper rg xargs sed
 
 if [[ -n "${_dry_run_occurs}" ]]; then
     rg "${_pattern_vals}" | sed "s/${_pattern_vals}/${_substitute_vals}/g"

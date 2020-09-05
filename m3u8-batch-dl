@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper fd xargs
+slap deps fd xargs || exit 1
 
 fd . "$1" --extension m3u8 | xargs m3u8-dl
 

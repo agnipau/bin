@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
 
-eval "$(slap bash parse _ -- "$@" <<-EOF
+slap deps fd ffprobe paste bc || exit 1
+
+eval "$(slap parse bash _ -- "$@" <<-EOF
 name: vlen
 version: "1.0"
 author: Matteo G. <matteoguarda@tutanota.com>
@@ -17,8 +19,6 @@ args:
         default_value: .
 EOF
 )"; [[ -z "${_success}" ]] && exit 1
-
-check-requirements-wrapper fd ffprobe paste bc
 
 fd "${_dir_vals}" -e mkv -e mp4 -e webm -x \
     ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \; \

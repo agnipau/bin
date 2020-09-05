@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # See: https://awesomewm.org/doc/api/libraries/naughty.html
 
-eval "$(slap bash parse _ -- "$@" <<-EOF
+slap deps awesome-client || exit 1
+
+eval "$(slap parse bash _ -- "$@" <<-EOF
 name: naughty-send
 version: "1.0"
 author: Matteo G. <matteoguarda@tutanota.com>
@@ -111,8 +113,6 @@ args:
         default_value: "false"
 EOF
 )"; [[ -z "${_success}" ]] && exit 1
-
-# check-requirements-wrapper awesome-client
 
 quote_or_nil() {
     occurs="_$1_occurs"

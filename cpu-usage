@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper awk 
+slap deps awk || exit 1
 
 printf '%s\n' "$(awk '{ if ($1 == "cpu") print ($2 + $4) * 100 / ($2 + $4 + $5) "%" }' </proc/stat)"
 

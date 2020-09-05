@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-check-requirements-wrapper xdotool date rg free awk cut pacmd grep sed
+slap deps xdotool date rg free awk cut pacmd grep sed || exit 1
 
 desktops() {
     focused_desktop="$(xdotool get_desktop)"

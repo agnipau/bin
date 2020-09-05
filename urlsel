@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 browser="${BROWSER:-chromium}"
-check-requirements-wrapper "${browser}" rofi rg
+slap deps "${browser}" rofi rg || exit 1
 
 re='https?://(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)'
 selected_url="$(rg -o "${re}" "$@" | rofi -dmenu -prompt urlsel)"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper date dunstify
+slap deps date dunstify || exit 1
 
 dunstify "$(date +"%A")" "$(date +"%d %B %Y - %H:%M:%S")"
 

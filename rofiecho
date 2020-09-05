@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper rofi
+slap deps rofi || exit 1
 
 trim_string() {
     : "${1#"${1%%[![:space:]]*}"}"

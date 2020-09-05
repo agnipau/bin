@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper pactl
+slap deps pactl || exit 1
 
 pactl set-sink-mute @DEFAULT_SINK@ toggle
 nvolstatus

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check-requirements-wrapper simplescreenrecorder picom
+slap deps simplescreenrecorder picom || exit 1
 
 killall -9 picom
 simplescreenrecorder
