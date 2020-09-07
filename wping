@@ -4,7 +4,7 @@ count=1
 while :; do
     sleep 1
     ping google.com -c3 2>/dev/null || {
-        printf '%s\r' "Attempt failed ${count}"
+        printf '%s\n' "Attempt failed ${count}"
         count="$((count+1))"
         continue
     }

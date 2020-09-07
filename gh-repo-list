@@ -9,6 +9,8 @@ about: Outputs JSON containing useful informations about your GitHub repos.
 
 settings:
     - ArgRequiredElseHelp
+    - ColoredHelp
+    - ColorAuto
 
 args:
     - username:

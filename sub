@@ -11,6 +11,8 @@ about: Searches for a pattern using ripgrep and substitutes all occurrences with
 
 settings:
     - ArgRequiredElseHelp
+    - ColoredHelp
+    - ColorAuto
 
 args:
     - pattern:

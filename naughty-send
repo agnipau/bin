@@ -12,6 +12,7 @@ about: "CLI similiar to notify-send that sends notifications to Awesome WM using
 settings:
     - ArgRequiredElseHelp
     - ColoredHelp
+    - ColorAuto
 
 args:
     - text:
