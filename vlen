@@ -21,7 +21,7 @@ args:
 EOF
 )"; [[ -z "${_success}" ]] && exit 1
 
-fd "${_dir_vals}" -e mkv -e mp4 -e webm -x \
+fd . "${_dir_vals}" -e mkv -e mp4 -e webm -x \
     ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \; \
     | paste -sd+ - \
     | bc
