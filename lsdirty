@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 for repo in "${HOME}/progetti/"*; do
-    [[ -d "${repo}" ]] && {
+    if [[ -d "${repo}" ]]; then
         cd "${repo}" || exit 1
         [[ -n "$(git status --porcelain --ignore-submodules)" ]] && {
             printf '%s\n' "${repo}"
         }
         cd .. || exit 1
-    }
+    else
+        printf '%s\n' "${repo} is not a repo"
+    fi
 done
 
