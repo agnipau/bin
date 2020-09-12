@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+slap deps curl || exit 1
+
+path="$(mktemp)"
+curl "$1" -o "${path}"
+printf '%s\n' "${path}"
+
