@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-neovide --clean --cmd ':q' && neovide
+alacritty -e start-neovide-wrapper
 
