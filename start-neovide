@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+neovide --clean --cmd ':q' && neovide
+
