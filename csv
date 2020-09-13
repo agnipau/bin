@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+slap deps column less || exit 1
+
+column -s, -t <"$1" | less -#2 -N -S
+
