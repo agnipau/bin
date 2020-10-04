@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+pygmentize -O "font_name=JetBrainsMono,font_size=48,style=gruvbox,line_numbers=False" -f png -o screen.png "$1"
+
