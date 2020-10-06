@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env dash
 
 rofi -show run -theme-str 'entry { placeholder: ""; } inputbar { children: [prompt, textbox-prompt-colon, entry]; }'
 
