@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env dash
 
 git add . && git commit -m "${1:-Update}" && git push origin master
 
