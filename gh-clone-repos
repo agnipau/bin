@@ -29,7 +29,7 @@ EOF
 )"; [[ -z "${_success}" ]] && exit 1
 
 for repo in $(gh-repo-list "${_username_vals}" "${_password_vals}" \
-    | jq -r "map(.ssh_url) | join(\"\n\")"); do
+    | jq -r "[.[] | select(.fork == false) | .ssh_url] | join(\"\n\")"); do
     if [[ -n "${_git_options_occurs}" ]]; then
         eval "git clone ${_git_options_vals} ${repo}"
     else
