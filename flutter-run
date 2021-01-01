@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+slap deps flutter fd entr
+
+pid_path=/tmp/flutter.pid
+rm -f "${pid_path}"
+
+cleanup() {
+    killall -9 "$(cat "${pid_path}")" >/dev/null 2>&1
+    rm -f "${pid_path}"
+    exit
+}
+trap cleanup SIGINT
+
+flutter run --pid-file "${pid_path}" &
+sleep 1
+while :; do
+    fd '.*' lib --extension dart \
+        | entr -d -p kill -USR1 "$(cat "${pid_path}")"
+done
+
