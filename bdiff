@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+#
+# bdiff - Binary diff.
+
+slap deps nvim xxd
+xxdfiles=()
+for file in "$@"; do
+    xxd -g 1 "${file}" >"${file}.xxd"
+    xxdfiles+=("${file}.xxd")
+done
+nvim -c "windo set ft=xxd" -d "${xxdfiles[@]}"
+
