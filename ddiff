@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+#
+# ddiff - Directory diff.
+
+slap deps nvim tree
+dirs=()
+for dir in "$@"; do
+    tree "${dir}" >"${dir}.dir"
+    dirs+=("${dir}.dir")
+done
+nvim -d "${dirs[@]}"
+
