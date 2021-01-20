@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+for f in $@; do
+    unzip -d "${f%*.zip}" "$f"
+done
+
