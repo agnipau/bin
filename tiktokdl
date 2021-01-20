@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+USERNAME=$1
+[ -z "$USERNAME" ] && {
+    echo 'No username specified as $1'
+    exit 1
+}
+
+COOKIE_FILE=$(mktemp)
+
+DOWNLOADED_LINK_IDX=0
+download_links() {
+    for link in $@; do
+        local file="${USERNAME}_${DOWNLOADED_LINK_IDX}.mp4"
+        curl -s -b $COOKIE_FILE -c $COOKIE_FILE "$link" -L -o "$file" \
+            -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0' \
+            -H "Referer: https://www.tiktok.com/@$USERNAME?lang=en"
+        echo "$file"
+        DOWNLOADED_LINK_IDX=$(( DOWNLOADED_LINK_IDX + 1 ))
+    done
+}
+
+main() {
+    local user_infos=$(curl -b $COOKIE_FILE -c $COOKIE_FILE -s "https://www.tiktok.com/@$USERNAME?lang=en" \
+        -H 'authority: www.tiktok.com' \
+        -H 'cache-control: max-age=0' \
+        -H 'upgrade-insecure-requests: 1' \
+        -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36' \
+        -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
+        -H 'sec-fetch-site: same-origin' \
+        -H 'sec-fetch-mode: navigate' \
+        -H 'sec-fetch-user: ?1' \
+        -H 'sec-fetch-dest: document' \
+        -H 'accept-language: it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7' \
+        --compressed \
+        | rg '<script id="__NEXT_DATA__" type="application/json" crossorigin="anonymous">(.*?)</script>' -o -r '$1')
+    id=$(fx '.props.pageProps.userInfo.user.id' <<<"$user_infos")
+
+    local max_cursor=0
+    while :; do
+        local video_infos=$(curl -b $COOKIE_FILE -c $COOKIE_FILE -s "https://m.tiktok.com/api/item_list/?app_name=tiktok_web&device_platform=web&referer=&root_referer=&user_agent=Mozilla%2F5.0+(X11%3B+Linux+x86_64%3B+rv:84.0)+Gecko%2F20100101+Firefox%2F84.0&cookie_enabled=true&screen_width=2048&screen_height=1152&browser_language=en-US&browser_platform=Linux+x86_64&browser_name=Mozilla&browser_version=5.0+(X11)&browser_online=true&ac=&timezone_name=Europe%2FRome&priority_region=&appId=1233&region=IT&appType=m&isAndroid=false&isMobile=false&isIOS=false&OS=linux&count=30&id=$id&maxCursor=$max_cursor&minCursor=0&sourceType=8&language=en" \
+            -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0' \
+            -H 'Accept: application/json, text/plain, */*' \
+            -H 'Accept-Language: en-US,en;q=0.5' \
+            --compressed \
+            -H 'Origin: https://www.tiktok.com' \
+            -H "Referer: https://www.tiktok.com/@$USERNAME?lang=en" \
+            -H 'Connection: keep-alive')
+        max_cursor=$(fx '.maxCursor' <<<"$video_infos")
+        local hasMore=$(fx '.hasMore' <<<"$video_infos")
+        local links=$(fx '.items.map(x => x.video.downloadAddr).join("\n")' <<<"$video_infos")
+        download_links $links
+        [[ "$hasMore" == false ]] && break
+    done
+}
+main
