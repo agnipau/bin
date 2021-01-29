@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+i=0
+for file in "$@"; do
+  [ $i -gt 0 ] && {
+    echo -e "\n"
+  }
+  echo "$file:"
+  tar tvf "$file"
+  i=$(( i + 1 ))
+done
+
+[ $i -gt 0 ] && {
+    exit
+}
+
+for file in *.tar; do
+  [ $i -gt 0 ] && {
+    echo -e "\n"
+  }
+  echo "$file:"
+  tar tvf "$file"
+  i=$(( i + 1 ))
+done
+
