@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+for file in "$@"; do
+    result="$(ffprobe -v error -show_entries stream=width,height -of csv=p=0:s=x "$file" | tr -d '\n')"
+    width="$(cut -dx -f1 <<<"$result")"
+    height="$(cut -dx -f2 <<<"$result")"
+    if [ "$width" -le "$height" ]; then
+        aspect_ratio="$(bc -l <<<"scale=2; $height / $width")"
+        echo -e "${width}x$height\t$aspect_ratio"
+        # case "$aspect_ratio" in
+        #     1.77)
+        #         # echo "$file"
+        #         ;;
+        #     *)
+        #         echo -e "$file\t($aspect_ratio)"
+        #         ;;
+        # esac
+    fi
+done
+
