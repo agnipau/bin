@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+video_id="$1"
+if [ -z "$video_id" ]; then
+    echo 'Usage: rpandl <VIDEO_ID>'
+    exit 1
+fi
+
+i=0
+while :; do
+    curl -s "https://www.reddit.com/rpan/r/RedditSessions/$video_id" -o "${video_id}_$i.ts" || exit 0
+    echo "[$video_id]: $i done"
+    i=$((i + 1))
+done
+
+ls -r -t "$video_id"_*.ts >"$video_id.ts"
+ffmpeg -i "$video_id.ts" -acodec copy -vcodec copy "$video_id.mp4"
+rm "$video_id"*.ts
+
