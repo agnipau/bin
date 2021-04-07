@@ -6,14 +6,22 @@ if [ -z "$video_id" ]; then
     exit 1
 fi
 
+m3u8_id="$(curl -s "https://www.reddit.com/rpan/r/RedditSessions/$video_id" \
+    | rg 'https://watch.redd.it/hls/([^/]+)' -r '$1' -o \
+    | head -n1)"
+
 i=0
 while :; do
-    curl -s "https://www.reddit.com/rpan/r/RedditSessions/$video_id" -o "${video_id}_$i.ts" || exit 0
+    curl -s "https://watch.redd.it/hls/$m3u8_id/segment$i.ts?flagset=source" -o "${video_id}_$i.ts"
+    if [ "$(diskus "${video_id}_$i.ts")" -eq 0 ]; then
+        rm -f "${video_id}_$i.ts"
+        break
+    fi
     echo "[$video_id]: $i done"
     i=$((i + 1))
 done
 
-ls -r -t "$video_id"_*.ts >"$video_id.ts"
+cat $(ls -r -t "$video_id"_*.ts) >"$video_id.ts"
 ffmpeg -i "$video_id.ts" -acodec copy -vcodec copy "$video_id.mp4"
 rm "$video_id"*.ts
 
